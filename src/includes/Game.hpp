@@ -49,7 +49,7 @@ struct Game
 	Fish &getFishById(int fishId);
 	Drone &getDroneById(int droneId);
 
-	void Debug( void );
 
+	void debug();
 	void solution();
 };

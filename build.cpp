@@ -21,8 +21,8 @@ vector<string> files =
 {
 	"src/header.hpp",
 
-	"src/includes/Fish.hpp",
 	"src/includes/Drone.hpp",
+	"src/includes/Fish.hpp",
 	"src/includes/Game.hpp",
 
 	"src/classes/Drone.cpp",
@@ -36,7 +36,6 @@ vector<string> files =
 int main()
 {
 	ofstream out("./prod/code.cpp");
-
 
 	for (auto &file : files)
 	{

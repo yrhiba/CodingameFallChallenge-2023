@@ -74,7 +74,7 @@ void Game::readDrones( void )
 		// My Drones Status
 		cin >> this->my_drone_count; cin.ignore();
 		for (int i = 0; i < this->my_drone_count; i++)
-		{    
+		{
 			Drone drone; cin >> drone;
 
 			Drone &rDrone = this->getDroneById(drone.id);
@@ -183,7 +183,7 @@ void Game::readRadarInfo( void )
 	}
 }
 
-void Game::Debug( void )
+void Game::debug( void )
 {
 	cerr << "Turn: " << this->game_turn << endl;
 	cerr << "Creaturs-Count: " << this->creature_count << endl;
