@@ -19,10 +19,16 @@ using namespace std;
 
 vector<string> files =
 {
-	"src/include.hpp",
+	"src/header.hpp",
+
+	"src/includes/Drone.hpp",
+	"src/includes/Fish.hpp",
+	"src/includes/Game.hpp",
+
 	"src/classes/Drone.cpp",
 	"src/classes/Fish.cpp",
 	"src/classes/Game.cpp",
+
 	"src/main.cpp"
 };
 

@@ -1,7 +1,7 @@
-#include "include.hpp"
-#include "classes/Drone.cpp"
-#include "classes/Fish.cpp"
-#include "classes/Game.cpp"
+#include "header.hpp"
+#include "includes/Drone.hpp"
+#include "includes/Fish.hpp"
+#include "includes/Game.hpp"
 
 /*start*/
 

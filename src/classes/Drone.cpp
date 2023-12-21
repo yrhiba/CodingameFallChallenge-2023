@@ -1,49 +1,39 @@
-
+#include "../header.hpp"
+#include "../includes/Drone.hpp"
 
 /*start*/
 
-struct Drone 
+Drone::Drone()
 {
-	int id;
-	int x;
-	int y;
-	int battery;
-	int emergency;
-	int myDrone; // 0 (oponnets-drone) or 1 (my-drone)
-	int opDrone;
+	this->direction = ((rand()%1) ? "BL" : "BR");
+}
 
-	string						direction;
+/* Drone Comparison Operators OverLoads */
+bool Drone::operator<(const Drone &other) const
+{
+	return (this->id < other.id);
+}
 
-	vector<int>					scannedCreatures;
-	vector<pair<int, string>>	creaturesDirection; // creatureID : Direction
+bool Drone::operator<=(const Drone &other) const
+{
+	return (this->id <= other.id);
+}
 
-	Drone()
-	{
-		this->direction = ((rand()%1) ? "BL" : "BR");
-	}
+bool Drone::operator>(const Drone &other) const
+{
+	return (this->id > other.id);
+}
 
-	/* Drone Comparison Operators OverLoads */
-	bool operator<(const Drone &other)
-	{
-		return (this->id < other.id);
-	}
-	bool operator<=(const Drone &other)
-	{
-		return (this->id <= other.id);
-	}
-	bool operator>(const Drone &other)
-	{
-		return (this->id > other.id);
-	}
-	bool operator>=(const Drone &other)
-	{
-		return (this->id >= other.id);
-	}
-	bool operator==(const Drone &other)
-	{
-		return (this->id == other.id);
-	}
-};
+bool Drone::operator>=(const Drone &other) const
+{
+	return (this->id >= other.id);
+}
+
+bool Drone::operator==(const Drone &other) const
+{
+	return (this->id == other.id);
+}
+
 
 istream &operator>>(istream &is, Drone &drone)
 {
