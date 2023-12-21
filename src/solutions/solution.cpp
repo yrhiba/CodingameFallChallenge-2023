@@ -10,16 +10,25 @@ void Game::solution()
 {
 	Actions actions;
 
-	// this->debug();
+	this->debug();
 
 	for (auto &droneId : this->myDrones)
 	{
 		Drone &drone = this->getDroneById(droneId);
 		Fish &fish = this->allFishes.front();
 
-		cerr << drone << endl;
-		cerr << fish << endl;
+		// cerr << drone << endl;
+		// cerr << fish << endl;
 
-		actions.moveToPos(fish.x, fish.y, drone.battery >= 5);
+		pair<int, int> vec = {(rand() % 2 ? 1 : -1), (rand() % 2 ? 1 : -1)};
+
+		actions.moveToPos
+		(
+			fish.x + (vec.first * 1e3),
+			fish.y + (vec.second * 1e3),
+			drone.battery >= 5
+		);
 	}
+
+	return ;
 }
