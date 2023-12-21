@@ -1,4 +1,24 @@
 #pragma once
+#include <iostream>
+#include <vector>
+#include <string>
+#include <set>
+#include <map>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <utility>
+#include <iomanip>
+#include <algorithm>
+#include <cmath>
+#include <climits>
+#include <cstdlib>
+#include <fstream>
+#include "includes/Actions.hpp"
+#include "includes/EVector.hpp"
+#include "includes/Drone.hpp"
+#include "includes/Fish.hpp"
+#include "includes/Game.hpp"
 
 /*start*/
 #include <iostream>

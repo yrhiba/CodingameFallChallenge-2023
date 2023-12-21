@@ -21,6 +21,8 @@ vector<string> files =
 {
 	"src/header.hpp",
 
+	"src/includes/EVector.hpp",
+
 	"src/includes/Drone.hpp",
 
 	"src/includes/Fish.hpp",
@@ -30,6 +32,8 @@ vector<string> files =
 	"src/includes/Actions.hpp",
 
 	"src/classes/Drone.cpp",
+
+	"src/classes/EVector.cpp",
 
 	"src/classes/Fish.cpp",
 
