@@ -37,7 +37,7 @@ bool Drone::operator==(const Drone &other) const
 
 istream &operator>>(istream &is, Drone &drone)
 {
-	is >> drone.id >> drone.x >> drone.y >> drone.emergency >> drone.battery;
+	is >> drone.id >> drone.pos >> drone.emergency >> drone.battery;
 	cin.ignore();
 	return (is);
 }
@@ -49,7 +49,7 @@ ostream &operator<<(ostream &os, const Drone &drone)
 	os << " | Emergency: " << drone.emergency;
 	os << " | MyDrone: " << drone.myDrone;
 	os << " | OpDrone: " << drone.opDrone;
-	os << " | (" << drone.x << "," << drone.y << ")";
+	os << " | " << drone.pos;
 	os << " | ScannedCreaturesIDs: ";
 	for (auto &id : drone.scannedCreatures)
 		os << id << " ";

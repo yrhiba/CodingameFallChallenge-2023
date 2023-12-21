@@ -8,6 +8,7 @@ struct EVector
 	int	x;
 	int	y;
 
+	EVector();
 	EVector(int _x, int _y);
 	EVector(const EVector &other);
 

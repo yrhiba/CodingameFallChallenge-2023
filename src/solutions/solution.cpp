@@ -12,14 +12,6 @@ void Game::solution()
 
 	// this->debug();
 
-	EVector vect1(100, 100), vect2(200, 200);
-
-	cerr << vect1 << " " << vect2 << endl;
-	
-	vect1 += vect2;
-
-	cerr << vect1 << endl;
-
 	for (auto &droneId : this->myDrones)
 	{
 		Drone &drone = this->getDroneById(droneId);

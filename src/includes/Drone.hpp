@@ -6,13 +6,12 @@
 
 struct Drone 
 {
-	int id;
-	int x;
-	int y;
-	int battery;
-	int emergency;
-	int myDrone;
-	int opDrone;
+	int		id;
+	EVector	pos;
+	int		battery;
+	int		emergency;
+	int		myDrone;
+	int		opDrone;
 
 	string	direction;
 
