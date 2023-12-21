@@ -32,6 +32,13 @@ EVector &EVector::operator+=(const EVector &vect)
 	return (*this);
 }
 
+EVector &EVector::operator*=(int value)
+{
+	this->x *= value;
+	this->y *= value;
+	return (*this);
+}
+
 istream &operator>>(istream &is, EVector &vect)
 {
 	is >> vect.x >> vect.y;

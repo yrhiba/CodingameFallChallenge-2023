@@ -14,6 +14,7 @@ struct EVector
 
 	EVector &operator=(const EVector &vect);
 	EVector &operator+=(const EVector &vect);
+	EVector &operator*=(int value);
 };
 
 istream &operator>>(istream &is, EVector &vect);
