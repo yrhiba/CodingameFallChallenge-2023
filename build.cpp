@@ -27,7 +27,9 @@ vector<string> files =
 
 	"src/classes/Drone.cpp",
 	"src/classes/Fish.cpp",
+
 	"src/classes/Game.cpp",
+	"src/solution/solution.cpp",
 
 	"src/main.cpp"
 };
@@ -44,6 +46,10 @@ int main()
 
 		while (content != "/*start*/")
 			getline(fin, content);
+
+		out << "// ########################" << endl;
+		out << "// file-Name: " << file << endl;
+		out << "// ########################" << endl;
 
 		getline(fin, content, '\0');
 

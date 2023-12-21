@@ -108,7 +108,7 @@ void Game::readDrones( void )
 		// My Drones Status
 		cin >> this->my_drone_count; cin.ignore();
 		for (int i = 0; i < this->my_drone_count; i++)
-		{    
+		{
 			Drone drone; cin >> drone;
 			drone.myDrone = 1;
 			drone.opDrone = 0;
@@ -260,14 +260,3 @@ Drone &Game::getDroneById(int droneId)
 	return this->allDrones.back();
 }
 
-void Game::solution()
-{
-	this->Debug();
-
-	for (auto &droneId : this->myDrones)
-	{
-		Drone &drone = this->getDroneById(droneId);
-
-		cout << "WAIT 0 That's Work Fine" << endl;
-	}
-}
