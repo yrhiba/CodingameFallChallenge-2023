@@ -6,29 +6,25 @@
 #    By: yrhiba <yrhiba@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 16:59:00 by yrhiba            #+#    #+#              #
-#    Updated: 2023/12/21 17:00:56 by yrhiba           ###   ########.fr        #
+#    Updated: 2023/12/21 17:06:16 by yrhiba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SCRIPT : makeCodingameFile
+SCRIPT = makeCodingameFile
 
-FILES : build.cpp
+FILES = build.cpp
 
-$(SCRIPT) : build
+$(SCRIPT) : $(FILES)
+	@make build
 
-build: $(FILES)
+build :
 	g++ -std=c++17 $(FILES) -o $(SCRIPT)
 
 run : $(SCRIPT)
 	./$(SCRIPT)
 
 clean:
-	rm -rf ./prod/*
-	rm -rf ./prod/.*
-	rm -rf ./src/.*
-	rm -rf ./src/includes/.*
-	rm -rf ./src/classes/.*
-	rm -rf ./src/solutions/.*
+	@rm -rf ./prod/* $(SCRIPT)
 
 re : clean build
 
