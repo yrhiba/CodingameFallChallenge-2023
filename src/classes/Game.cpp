@@ -79,8 +79,7 @@ void Game::readDrones( void )
 
 			Drone &rDrone = this->getDroneById(drone.id);
 			
-			rDrone.x = drone.x;
-			rDrone.y = drone.y;
+			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;
 			rDrone.scannedCreatures.clear();
@@ -95,8 +94,7 @@ void Game::readDrones( void )
 			
 			Drone &rDrone = this->getDroneById(drone.id);
 			
-			rDrone.x = drone.x;
-			rDrone.y = drone.y;
+			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;
 			rDrone.scannedCreatures.clear();
@@ -159,14 +157,16 @@ void Game::readVisibleCreatures( void )
 		Fish &fish = this->getFishById(creature_id);
 
 		fish.isVisible = true;
-		fish.prev_x = fish.x;
-		fish.prev_y = fish.y;
-		fish.x = creature_x;
-		fish.y = creature_y;
-		fish.prev_vx = fish.vx;
-		fish.prev_vy = fish.vy;
-		fish.vx = creature_vx;
-		fish.vy = creature_vy;
+
+		fish.prevPos = fish.pos;
+
+		fish.pos.x = creature_x;
+		fish.pos.y = creature_y;
+
+		fish.prevVelocty = fish.velocty;
+
+		fish.velocty.x = creature_vx;
+		fish.velocty.y = creature_vy;
 	}
 }
 

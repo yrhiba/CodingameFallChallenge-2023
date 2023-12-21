@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -14,6 +15,7 @@
 #include <climits>
 #include <cstdlib>
 #include <fstream>
+
 #include "includes/Actions.hpp"
 #include "includes/EVector.hpp"
 #include "includes/Drone.hpp"

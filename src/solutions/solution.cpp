@@ -24,8 +24,8 @@ void Game::solution()
 
 		actions.moveToPos
 		(
-			fish.x + (vec.first * 1e3),
-			fish.y + (vec.second * 1e3),
+			fish.pos.x + (vec.first * 1e3),
+			fish.pos.y + (vec.second * 1e3),
 			drone.battery >= 5
 		);
 	}
