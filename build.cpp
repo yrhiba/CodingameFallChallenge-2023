@@ -29,7 +29,7 @@ vector<string> files =
 	"src/classes/Fish.cpp",
 
 	"src/classes/Game.cpp",
-	"src/solution/solution.cpp",
+	"src/solutions/solution.cpp",
 
 	"src/main.cpp"
 };
