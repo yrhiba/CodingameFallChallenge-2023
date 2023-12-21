@@ -12,8 +12,12 @@ struct EVector
 	EVector(int _x, int _y);
 	EVector(const EVector &other);
 
+	double	magnitude() const;
+	void	normalize();
+
 	EVector &operator=(const EVector &vect);
 	EVector &operator+=(const EVector &vect);
+	EVector &operator-=(const EVector &vect);
 	EVector &operator*=(int value);
 };
 

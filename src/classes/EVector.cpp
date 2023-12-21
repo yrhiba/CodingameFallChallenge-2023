@@ -18,6 +18,19 @@ EVector::EVector(const EVector &other)
 {
 }
 
+double EVector::magnitude() const
+{
+	return sqrt((this->x * this->x) + (this->y * this->y));
+}
+
+void	EVector::normalize()
+{
+	double mag = this->magnitude();
+
+	this->x = round(this->x / mag);
+	this->y = round(this->x / mag);
+}
+
 EVector &EVector::operator=(const EVector &vect)
 {
 	this->x = vect.x;
@@ -29,6 +42,13 @@ EVector &EVector::operator+=(const EVector &vect)
 {
 	this->x += vect.x;
 	this->y += vect.y;
+	return (*this);
+}
+
+EVector &EVector::operator-=(const EVector &vect)
+{
+	this->x -= vect.x;
+	this->y -= vect.y;
 	return (*this);
 }
 

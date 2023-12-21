@@ -17,15 +17,20 @@ void Game::solution()
 		Drone &drone = this->getDroneById(droneId);
 		Fish &fish = this->allFishes.front();
 
-		// cerr << drone << endl;
-		// cerr << fish << endl;
+		EVector dronePos = drone.pos;
+		EVector fishPos = fish.pos;
 
-		pair<int, int> vec = {(rand() % 2 ? 1 : -1), (rand() % 2 ? 1 : -1)};
+		fishPos -= dronePos;
+
+		fishPos.normalize();
+		fishPos *= 100;
+
+		cerr << fishPos << " " << fishPos.magnitude() <<  endl;
 
 		actions.moveToPos
 		(
-			fish.pos.x + (vec.first * 1e3),
-			fish.pos.y + (vec.second * 1e3),
+			drone.pos.x + fishPos.x,
+			drone.pos.y + fishPos.y,
 			drone.battery >= 5
 		);
 	}
