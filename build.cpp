@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <set>
+#include <map>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <utility>
+#include <iomanip>
+#include <algorithm>
+#include <cmath>
+#include <climits>
+#include <cstdlib>
+#include <fstream>
+
+using namespace std;
+
+
+vector<string> files =
+{
+	"src/include.hpp",
+	"src/classes/Drone.cpp",
+	"src/classes/Fish.cpp",
+	"src/classes/Game.cpp",
+	"src/main.cpp"
+};
+
+
+int main()
+{
+	ofstream out("./prod/code.cpp");
+
+
+	for (auto &file : files)
+	{
+		ifstream	fin(file);
+		string		content;
+
+		while (content != "/*start*/")
+			getline(fin, content);
+
+		getline(fin, content, '\0');
+
+		out << content << endl;
+	}
+
+	out.close();
+
+	return (0);
+}
