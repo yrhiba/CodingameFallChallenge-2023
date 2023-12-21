@@ -117,6 +117,7 @@ struct Fish
 
 istream &operator>>(istream &is, Fish &fish);
 ostream &operator<<(ostream &os, const Fish &fish);
+
 // ########################
 // file-Name: src/includes/Game.hpp
 // ########################
@@ -169,6 +170,7 @@ struct Game
 	void debug();
 	void solution();
 };
+
 // ########################
 // file-Name: src/classes/Drone.cpp
 // ########################
@@ -226,6 +228,7 @@ ostream &operator<<(ostream &os, const Drone &drone)
 	os << " | Direction: " << drone.direction;
 	return (os);
 }
+
 // ########################
 // file-Name: src/classes/Fish.cpp
 // ########################
@@ -617,3 +620,4 @@ int main()
 
 	return (0);
 }
+
