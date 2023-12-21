@@ -22,13 +22,21 @@ vector<string> files =
 	"src/header.hpp",
 
 	"src/includes/Drone.hpp",
+
 	"src/includes/Fish.hpp",
+
 	"src/includes/Game.hpp",
 
+	"src/includes/Actions.hpp",
+
 	"src/classes/Drone.cpp",
+
 	"src/classes/Fish.cpp",
 
 	"src/classes/Game.cpp",
+
+	"src/classes/Actions.cpp",
+
 	"src/solutions/solution.cpp",
 
 	"src/main.cpp"

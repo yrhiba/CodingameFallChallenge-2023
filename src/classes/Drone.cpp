@@ -53,6 +53,6 @@ ostream &operator<<(ostream &os, const Drone &drone)
 	os << " | ScannedCreaturesIDs: ";
 	for (auto &id : drone.scannedCreatures)
 		os << id << " ";
-	os << " | Direction: " << drone.direction;
+	// os << " | Direction: " << drone.direction;
 	return (os);
 }

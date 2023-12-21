@@ -172,6 +172,16 @@ struct Game
 };
 
 // ########################
+// file-Name: src/includes/Actions.hpp
+// ########################
+
+struct Actions
+{
+	void moveToPos(int _x, int _y, int _lighStat);
+	void wait(int _lightStat);
+};
+
+// ########################
 // file-Name: src/classes/Drone.cpp
 // ########################
 
@@ -225,7 +235,7 @@ ostream &operator<<(ostream &os, const Drone &drone)
 	os << " | ScannedCreaturesIDs: ";
 	for (auto &id : drone.scannedCreatures)
 		os << id << " ";
-	os << " | Direction: " << drone.direction;
+	// os << " | Direction: " << drone.direction;
 	return (os);
 }
 
@@ -558,20 +568,38 @@ Drone &Game::getDroneById(int droneId)
 
 
 // ########################
+// file-Name: src/classes/Actions.cpp
+// ########################
+
+void Actions::moveToPos(int _x, int _y, int _lighStat)
+{
+	cout << "MOVE " << _x << " " << _y << " " << _lighStat << endl;
+}
+
+void Actions::wait(int _lightStat)
+{
+	cout << "WAIT " << _lightStat << endl;
+}
+
+// ########################
 // file-Name: src/solutions/solution.cpp
 // ########################
 
 void Game::solution()
 {
+	Actions actions;
+
 	// this->debug();
 
 	for (auto &droneId : this->myDrones)
 	{
 		Drone &drone = this->getDroneById(droneId);
+		Fish &fish = this->allFishes.front();
 
 		cerr << drone << endl;
+		cerr << fish << endl;
 
-		cout << "WAIT 0 That's Work Fine" << endl;
+		actions.moveToPos(fish.x, fish.y, drone.battery >= 5);
 	}
 }
 
