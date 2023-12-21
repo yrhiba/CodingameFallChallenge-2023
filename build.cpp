@@ -21,8 +21,8 @@ vector<string> files =
 {
 	"src/header.hpp",
 
-	"src/includes/Drone.hpp",
 	"src/includes/Fish.hpp",
+	"src/includes/Drone.hpp",
 	"src/includes/Game.hpp",
 
 	"src/classes/Drone.cpp",

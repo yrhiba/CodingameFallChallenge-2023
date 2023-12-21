@@ -43,4 +43,6 @@ int main()
 		/* puts the solution */
 		game.solution();
 	}
+
+	return (0);
 }
