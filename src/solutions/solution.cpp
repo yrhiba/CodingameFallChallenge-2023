@@ -8,9 +8,9 @@
 
 void Game::solution()
 {
-	cerr << "Visible Creatures: " << this->creature_visible_count << endl;
-	cerr << "Visible Fishes: " << this->fishes_visible_count << endl;
-	cerr << "Visible Uglys: " << this->uglys_visible_count << endl;
+	// cerr << "Visible Creatures: " << this->creature_visible_count << endl;
+	// cerr << "Visible Fishes: " << this->fishes_visible_count << endl;
+	// cerr << "Visible Uglys: " << this->uglys_visible_count << endl;
 
 	Actions actions;
 
@@ -18,34 +18,29 @@ void Game::solution()
 	{
 		Drone &curDrone = this->getDroneById(droneId);
 
+
 		cerr << curDrone << endl;
+		cerr << "Pos: " << curDrone.pos << " " << curDrone.pos.magnitude() << endl;
+		cerr << "Vel: " << curDrone.velocty << " " << curDrone.velocty.magnitude() << endl;
+		cerr << "Acc: " << curDrone.acceleration << " " << curDrone.acceleration.magnitude() << endl;
 
-		cerr << "Pos: " << curDrone.pos << endl;
-		cerr << "Vel: " << curDrone.velocty << endl;
-		cerr << "Acc: " << curDrone.acceleration << endl;
-
-		if (this->creature_visible_count == 0 || true)
+		// EXPLORE MODE
+		if (curDrone.pos.x < 200 || curDrone.pos.x > 9800)
 		{
-			// EXPLORE MODE
-			curDrone.velocty += curDrone.acceleration;
-			curDrone.pos += curDrone.velocty;
-
-			if (curDrone.pos.x < 200 || curDrone.pos.x > 9800)
-			{
-				curDrone.velocty.x *= -1;
-			}
-
-			if (curDrone.pos.y < 200 || curDrone.pos.y > 9800)
-			{
-				curDrone.velocty.y *= -1;
-			}
-
-			actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
+			curDrone.velocty.x *= -1;
 		}
-		else
+
+		if (curDrone.pos.y < 200 || curDrone.pos.y > 9800)
 		{
-			cout << "WAIT 0 Visible-Creatures" << endl;
+			curDrone.velocty.y *= -1;
 		}
+
+		curDrone.velocty += curDrone.acceleration;
+		curDrone.pos += curDrone.velocty;
+
+		actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
+
+		cerr << endl;
 	}
 
 	return ;

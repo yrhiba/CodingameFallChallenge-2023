@@ -5,8 +5,8 @@
 
 Drone::Drone()
 {
-	this->light = 0;
-	this->velocty = EVector(rand()%1000 - 500, rand()%1000);
+	this->light = 1;
+	this->velocty = EVector(rand()%2000 - 1000, rand()%1000);
 	this->velocty.setMag(600);
 	this->acceleration = EVector(0, 0);
 	this->maxSpeed = 600;
@@ -52,12 +52,9 @@ ostream &operator<<(ostream &os, const Drone &drone)
 	os << "DroneId: " << drone.id;
 	os << " | Battery: " << drone.battery;
 	os << " | Emergency: " << drone.emergency;
-	os << " | MyDrone: " << drone.myDrone;
-	os << " | OpDrone: " << drone.opDrone;
 	os << " | " << drone.pos;
 	os << " | ScannedCreaturesIDs: ";
 	for (auto &id : drone.scannedCreatures)
 		os << id << " ";
-	// os << " | Direction: " << drone.direction;
 	return (os);
 }
