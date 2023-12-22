@@ -82,7 +82,7 @@ void Game::readDrones( void )
 			Drone drone; cin >> drone;
 
 			Drone &rDrone = this->getDroneById(drone.id);
-			
+
 			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;
@@ -220,14 +220,14 @@ Fish &Game::getFishById(int fishId)
 
 	while (start <= end)
 	{
-		mid = start + ((end - start) / 2);
+		mid = start + (end - start) / 2;
 
 		if (this->allFishes[mid].id == fishId)
 			return this->allFishes[mid];
 
 		if (this->allFishes[mid].id < fishId)
 		{
-			start = mid + 1;   
+			start = mid + 1;
 		}
 		else
 		{
@@ -235,6 +235,7 @@ Fish &Game::getFishById(int fishId)
 		}
 	}
 
+	cerr << "Doe's not find fish with id: " << fishId << endl;
 	return this->allFishes.back();
 }
 
@@ -246,12 +247,12 @@ Drone &Game::getDroneById(int droneId)
 
 	while (start <= end)
 	{
-		mid = start + ((end - start) / 2);
+		mid = start + (end - start) / 2;
 
 		if (this->allDrones[mid].id == droneId)
 			return this->allDrones[mid];
 
-		if (this->allFishes[mid].id < droneId)
+		if (this->allDrones[mid].id < droneId)
 		{
 			start = mid + 1;
 		}
@@ -261,6 +262,7 @@ Drone &Game::getDroneById(int droneId)
 		}
 	}
 
+	cerr << "Doe's not find drone with id: " << droneId << endl;
 	return this->allDrones.back();
 }
 
