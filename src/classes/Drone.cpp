@@ -6,7 +6,8 @@
 Drone::Drone()
 {
 	this->light = 0;
-	this->velocty = EVector(0, 0);
+	this->velocty = EVector(rand()%1000 - 500, rand()%1000);
+	this->velocty.setMag(600);
 	this->acceleration = EVector(0, 0);
 	this->maxSpeed = 600;
 	this->direction = ((rand()%1) ? "BL" : "BR");

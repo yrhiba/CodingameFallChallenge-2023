@@ -24,11 +24,21 @@ void Game::solution()
 		cerr << "Vel: " << curDrone.velocty << endl;
 		cerr << "Acc: " << curDrone.acceleration << endl;
 
-		if (this->creature_visible_count == 0)
+		if (this->creature_visible_count == 0 || true)
 		{
 			// EXPLORE MODE
 			curDrone.velocty += curDrone.acceleration;
 			curDrone.pos += curDrone.velocty;
+
+			if (curDrone.pos.x < 200 || curDrone.pos.x > 9800)
+			{
+				curDrone.velocty.x *= -1;
+			}
+
+			if (curDrone.pos.y < 200 || curDrone.pos.y > 9800)
+			{
+				curDrone.velocty.y *= -1;
+			}
 
 			actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
 		}

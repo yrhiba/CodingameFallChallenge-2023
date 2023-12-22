@@ -4,7 +4,7 @@
 
 /*start*/
 
-struct Drone 
+struct Drone
 {
 	int		id;
 
