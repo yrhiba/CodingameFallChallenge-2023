@@ -8,7 +8,7 @@ EVector::EVector()
 {
 }
 
-EVector::EVector(int _x, int _y)
+EVector::EVector(double _x, double _y)
 	: x(_x), y(_y)
 {
 }
@@ -27,8 +27,14 @@ void	EVector::normalize()
 {
 	double mag = this->magnitude();
 
-	this->x = round(this->x / mag);
-	this->y = round(this->x / mag);
+	this->x /= mag;
+	this->y /= mag;
+}
+
+void	EVector::setMag(double _magnitude)
+{
+	this->normalize();
+	(*this) *= _magnitude;
 }
 
 EVector &EVector::operator=(const EVector &vect)
@@ -36,6 +42,16 @@ EVector &EVector::operator=(const EVector &vect)
 	this->x = vect.x;
 	this->y = vect.y;
 	return (*this);
+}
+
+EVector EVector::operator+(const EVector &vect)
+{
+	return EVector(this->x + vect.x, this->y + vect.y);
+}
+
+EVector EVector::operator-(const EVector &vect)
+{
+	return EVector(this->x - vect.x, this->y - vect.y);
 }
 
 EVector &EVector::operator+=(const EVector &vect)
@@ -49,6 +65,13 @@ EVector &EVector::operator-=(const EVector &vect)
 {
 	this->x -= vect.x;
 	this->y -= vect.y;
+	return (*this);
+}
+
+EVector &EVector::operator*=(double value)
+{
+	this->x *= value;
+	this->y *= value;
 	return (*this);
 }
 
