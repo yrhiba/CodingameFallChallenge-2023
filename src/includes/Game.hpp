@@ -11,6 +11,9 @@ struct Game
 	int	game_turn;
 
 	int	creature_count;
+	int	creature_visible_count;
+	int	fishes_visible_count;
+	int	uglys_visible_count;
 
 	int	my_score;
 	int	my_scan_count;

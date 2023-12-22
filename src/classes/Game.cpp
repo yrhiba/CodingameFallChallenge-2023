@@ -26,6 +26,10 @@ void Game::initTurn( void )
 	this->isScannedByOpFish.clear();
 	this->isDeadFish.clear();
 
+	this->creature_visible_count = 0;
+	this->fishes_visible_count = 0;
+	this->uglys_visible_count = 0;
+
 	this->game_turn += 1;
 }
 
@@ -147,9 +151,8 @@ void Game::readDronesCurrentScan( void )
 void Game::readVisibleCreatures( void )
 {
 	/* Creatures (fishes) positions */
-	int visible_creature_count;
-	cin >> visible_creature_count; cin.ignore();
-	for (int i = 0; i < visible_creature_count; i++)
+	cin >> this->creature_visible_count; cin.ignore();
+	for (int i = 0; i < this->creature_visible_count; i++)
 	{
 		int creature_id, creature_x, creature_y, creature_vx, creature_vy;
 		cin >> creature_id >> creature_x >> creature_y >> creature_vx >> creature_vy; cin.ignore();
@@ -165,6 +168,9 @@ void Game::readVisibleCreatures( void )
 		fish.prevVelocty = fish.velocty;
 
 		fish.velocty = EVector(creature_vx, creature_vy);
+
+		this->fishes_visible_count += (fish.type >= 0);
+		this->uglys_visible_count += (fish.type == -1);
 	}
 }
 
