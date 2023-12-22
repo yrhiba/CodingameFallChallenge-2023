@@ -9,6 +9,10 @@
 void Game::solution()
 {
 
+	cerr << "Visible Creatures: " << this->creature_visible_count << endl;
+	cerr << "Visible Fishes: " << this->fishes_visible_count << endl;
+	cerr << "Visible Uglys: " << this->uglys_visible_count << endl;
+
 	/*
 		PART ZERO:
 			- calculate all the visible fishes and uglys for all my drones.
@@ -26,7 +30,9 @@ void Game::solution()
 		Drone &curDrone = this->getDroneById(droneId);
 
 		/*
-			- mark the visible creatures
+			- see if the drone is in danger with the visible uglys positon.
+
+			- mark the visible creatures : done.
 
 			- count the visible fishes | the visible Uglys
 
@@ -70,7 +76,8 @@ void Game::solution()
 		*/
 
 		/* add to actions the final descion */
-		actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
+		// actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
+		actions.wait(curDrone.light);
 	}
 
 	return ;

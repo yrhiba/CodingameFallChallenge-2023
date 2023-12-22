@@ -161,6 +161,9 @@ struct Game
 	int	game_turn;
 
 	int	creature_count;
+	int	creature_visible_count;
+	int	fishes_visible_count;
+	int	uglys_visible_count;
 
 	int	my_score;
 	int	my_scan_count;
@@ -470,6 +473,10 @@ void Game::initTurn( void )
 	this->isScannedByOpFish.clear();
 	this->isDeadFish.clear();
 
+	this->creature_visible_count = 0;
+	this->fishes_visible_count = 0;
+	this->uglys_visible_count = 0;
+
 	this->game_turn += 1;
 }
 
@@ -591,9 +598,8 @@ void Game::readDronesCurrentScan( void )
 void Game::readVisibleCreatures( void )
 {
 	/* Creatures (fishes) positions */
-	int visible_creature_count;
-	cin >> visible_creature_count; cin.ignore();
-	for (int i = 0; i < visible_creature_count; i++)
+	cin >> this->creature_visible_count; cin.ignore();
+	for (int i = 0; i < this->creature_visible_count; i++)
 	{
 		int creature_id, creature_x, creature_y, creature_vx, creature_vy;
 		cin >> creature_id >> creature_x >> creature_y >> creature_vx >> creature_vy; cin.ignore();
@@ -609,6 +615,9 @@ void Game::readVisibleCreatures( void )
 		fish.prevVelocty = fish.velocty;
 
 		fish.velocty = EVector(creature_vx, creature_vy);
+
+		this->fishes_visible_count += (fish.type >= 0);
+		this->uglys_visible_count += (fish.type == -1);
 	}
 }
 
@@ -724,6 +733,10 @@ void Actions::wait(int _lightStat)
 void Game::solution()
 {
 
+	cerr << "Visible Creatures: " << this->creature_visible_count << endl;
+	cerr << "Visible Fishes: " << this->fishes_visible_count << endl;
+	cerr << "Visible Uglys: " << this->uglys_visible_count << endl;
+
 	/*
 		PART ZERO:
 			- calculate all the visible fishes and uglys for all my drones.
@@ -785,7 +798,8 @@ void Game::solution()
 		*/
 
 		/* add to actions the final descion */
-		actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
+		// actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
+		actions.wait(curDrone.light);
 	}
 
 	return ;
