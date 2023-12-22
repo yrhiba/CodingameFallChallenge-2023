@@ -15,6 +15,7 @@ struct Drone
 	int		myDrone;
 	int		opDrone;
 	int		maxSpeed;
+	int		light;
 
 	string	direction;
 
