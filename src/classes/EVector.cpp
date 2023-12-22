@@ -37,6 +37,14 @@ void	EVector::setMag(double _magnitude)
 	(*this) *= _magnitude;
 }
 
+void	EVector::limit(double _magnitude)
+{
+	if (this->magnitude() > _magnitude)
+	{
+		this->setMag(_magnitude);
+	}
+}
+
 EVector &EVector::operator=(const EVector &vect)
 {
 	this->x = vect.x;

@@ -15,6 +15,7 @@ struct EVector
 	double	magnitude() const;
 	void	normalize();
 	void	setMag(double _magnitude);
+	void	limit(double _magnitude);
 
 	EVector &operator=(const EVector &vect);
 

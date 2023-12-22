@@ -8,10 +8,13 @@ struct Drone
 {
 	int		id;
 	EVector	pos;
+	EVector	velocty;
+	EVector	acceleration;
 	int		battery;
 	int		emergency;
 	int		myDrone;
 	int		opDrone;
+	int		maxSpeed;
 
 	string	direction;
 

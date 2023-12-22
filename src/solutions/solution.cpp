@@ -11,27 +11,23 @@ void Game::solution()
 	Actions actions;
 
 	// this->debug();
+	cerr << "turn: " << this->game_turn << endl;
 
 	for (auto &droneId : this->myDrones)
 	{
 		Drone &drone = this->getDroneById(droneId);
-		Fish &fish = this->allFishes.front();
+		EVector target(5e3, 5e3);
 
-		cerr << drone << endl;
-		cerr << fish << endl << endl;
+		EVector acc = target - drone.pos;
+		acc.setMag(100);
 
-		EVector vect = drone.pos - fish.pos;
+		drone.velocty += acc;
+		
+		cerr << drone.velocty << " | " << drone.velocty.magnitude() << endl;
 
-		vect.setMag(600);
+		drone.pos += drone.velocty;
 
-		cerr << "vect: " << vect << " | " << vect.magnitude() << endl;
-
-		actions.moveToPos
-		(
-			drone.pos.x + vect.x,
-			drone.pos.y + vect.y,
-			drone.battery >= 5
-		);
+		actions.moveToPos(drone.pos.x, drone.pos.y, 0);
 	}
 
 	return ;
