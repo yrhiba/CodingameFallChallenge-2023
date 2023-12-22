@@ -15,19 +15,9 @@ void Game::solution()
 
 	for (auto &droneId : this->myDrones)
 	{
-		Drone &drone = this->getDroneById(droneId);
-		EVector target(5e3, 5e3);
+		Drone &curDrone = this->getDroneById(droneId);
 
-		EVector acc = target - drone.pos;
-		acc.setMag(100);
-
-		drone.velocty += acc;
-		
-		cerr << drone.velocty << " | " << drone.velocty.magnitude() << endl;
-
-		drone.pos += drone.velocty;
-
-		actions.moveToPos(drone.pos.x, drone.pos.y, 0);
+		actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.battery >= 5 ? rand()%2 : 0);
 	}
 
 	return ;

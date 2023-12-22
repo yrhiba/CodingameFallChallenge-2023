@@ -7,16 +7,6 @@ Game::Game()
 {
 }
 
-void Game::initTurn( void )
-{
-	this->isScannedFish.clear();
-	this->isScannedByMeFish.clear();
-	this->isScannedByOpFish.clear();
-	this->isDeadFish.clear();
-
-	this->game_turn += 1;
-}
-
 void Game::readCreatures( void )
 {
 	cin >> this->creature_count;
@@ -27,6 +17,16 @@ void Game::readCreatures( void )
 		this->typeFishes[fish.type].push_back(fish.id);
 	}
 	sort(this->allFishes.begin(), this->allFishes.end());
+}
+
+void Game::initTurn( void )
+{
+	this->isScannedFish.clear();
+	this->isScannedByMeFish.clear();
+	this->isScannedByOpFish.clear();
+	this->isDeadFish.clear();
+
+	this->game_turn += 1;
 }
 
 void Game::readScores( void )
@@ -160,13 +160,11 @@ void Game::readVisibleCreatures( void )
 
 		fish.prevPos = fish.pos;
 
-		fish.pos.x = creature_x;
-		fish.pos.y = creature_y;
+		fish.pos = EVector(creature_x, creature_y);
 
 		fish.prevVelocty = fish.velocty;
 
-		fish.velocty.x = creature_vx;
-		fish.velocty.y = creature_vy;
+		fish.velocty = EVector(creature_vx, creature_vy);
 	}
 }
 
