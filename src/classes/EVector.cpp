@@ -32,6 +32,11 @@ void	EVector::normalize()
 		this->x /= mag;
 		this->y /= mag;
 	}
+	else
+	{
+		this->x = 0;
+		this->y = 0;
+	}
 }
 
 void	EVector::setMag(double _magnitude)
