@@ -6,11 +6,35 @@
 Drone::Drone()
 {
 	this->light = 1;
-	this->velocty = EVector(rand()%2000 - 1000, rand()%1000);
-	this->velocty.setMag(600);
+	// this->velocty = EVector(rand()%2000 - 1000, rand()%1000);
+	this->velocty = EVector(100, 0);
+	// this->velocty.setMag(600);
 	this->acceleration = EVector(0, 0);
 	this->maxSpeed = 600;
-	this->direction = ((rand()%1) ? "BL" : "BR");
+}
+
+void	Drone::applyForce(EVector force)
+{
+	this->acceleration += force;
+}
+
+void	Drone::edges(void)
+{
+	if (this->pos.x < 200 || this->pos.x > 9800)
+	{
+		this->velocty.x *= -1;
+	}
+
+	if (this->pos.y < 200 || this->pos.y > 9800)
+	{
+		this->velocty.y *= -1;
+	}
+}
+
+void	Drone::updatePos(void)
+{
+	this->velocty += this->acceleration;
+	this->pos += this->velocty;
 }
 
 /* Drone Comparison Operators OverLoads */

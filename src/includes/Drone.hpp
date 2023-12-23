@@ -19,8 +19,6 @@ struct Drone
 	int		maxSpeed;
 	int		light;
 
-	string	direction;
-
 	vector<int>					scannedCreatures;
 
 	// creatureID : Direction
@@ -28,6 +26,11 @@ struct Drone
 
 	// constructer
 	Drone();
+
+	void	applyForce(EVector force);
+	void	edges(void);
+	void	updatePos(void);
+
 
 	bool operator<(const Drone &other) const;
 	bool operator<=(const Drone &other) const;

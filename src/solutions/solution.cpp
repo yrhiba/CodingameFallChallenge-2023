@@ -18,25 +18,20 @@ void Game::solution()
 	{
 		Drone &curDrone = this->getDroneById(droneId);
 
-
 		cerr << curDrone << endl;
+
 		cerr << "Pos: " << curDrone.pos << " " << curDrone.pos.magnitude() << endl;
 		cerr << "Vel: " << curDrone.velocty << " " << curDrone.velocty.magnitude() << endl;
 		cerr << "Acc: " << curDrone.acceleration << " " << curDrone.acceleration.magnitude() << endl;
 
 		// EXPLORE MODE
-		if (curDrone.pos.x < 200 || curDrone.pos.x > 9800)
+		if (this->game_turn == 0)
 		{
-			curDrone.velocty.x *= -1;
+			curDrone.applyForce(EVector(0, 50));
 		}
 
-		if (curDrone.pos.y < 200 || curDrone.pos.y > 9800)
-		{
-			curDrone.velocty.y *= -1;
-		}
-
-		curDrone.velocty += curDrone.acceleration;
-		curDrone.pos += curDrone.velocty;
+		curDrone.edges();
+		curDrone.updatePos();
 
 		actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
 
