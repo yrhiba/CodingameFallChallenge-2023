@@ -27,8 +27,10 @@ struct EVector
 
 	EVector &operator*=(int value);
 	EVector &operator*=(double value);
-};
 
+};
 
 istream &operator>>(istream &is, EVector &vect);
 ostream &operator<<(ostream &os, const EVector &vect);
+
+double calcDistance(EVector pointA, EVector pointB);

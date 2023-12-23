@@ -53,6 +53,10 @@ struct Game
 	Drone &getDroneById(int droneId);
 
 
+	Fish &getClosestUgly(EVector pos);
+	//TODO: add later closet fish, by type mybe.
+
+
 	void debug();
 	void solution();
 };

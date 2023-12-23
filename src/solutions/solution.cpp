@@ -14,12 +14,29 @@ void Game::solution()
 	{
 		Drone &curDrone = this->getDroneById(droneId);
 
-		// EXPLORE MODE
+		// Set Velocty to the Drone.
+		if (this->game_turn == 0)
+		{
+			curDrone.velocty = EVector(rand()%2000 - 1000, rand() % 800 + 200);
+		}
 
+		// Detect Ugly and Flee from them.
+		if (this->uglys_visible_count)
+		{
+			Fish &Ugly = this->getClosestUgly(curDrone.pos);
+			actions.setMsg("Ugly Detected::" + to_string(Ugly.id));
+		}
+
+		// Update the drone position in each turn.
 		curDrone.updatePos();
 		curDrone.edges();
-
-		actions.moveToPos(curDrone.pos.x, curDrone.pos.y, curDrone.light);
+		curDrone.light = (curDrone.battery >= 5 ? (rand()%3 > 0) : 0);
+		actions.setMsg(".Y.R.");
+		actions.moveToPos(
+			curDrone.pos.x,
+			curDrone.pos.y,
+			curDrone.light
+		);
 	}
 
 	return ;
