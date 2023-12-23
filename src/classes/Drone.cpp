@@ -35,16 +35,16 @@ void	Drone::edges(void)
 void	Drone::updatePos(void)
 {
 	this->velocty += this->acceleration;
-	this->velocty.setMag(this->maxSpeed);
-	// this->velocty.limit(this->maxSpeed);
+	this->velocty.limit(this->maxSpeed);
 	this->pos += this->velocty;
+	this->acceleration *= 0;
 }
 
 void Drone::seekToPos(EVector target)
 {
 	EVector disered_vel = target - this->pos;
 
-	disered_vel.setMag(this->maxSpeed);
+	disered_vel.limit(this->maxSpeed);
 
 	EVector steeing = disered_vel - this->velocty;
 
