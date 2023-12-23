@@ -54,7 +54,7 @@ struct Game
 
 
 	Fish &getClosestUgly(EVector pos);
-	//TODO: add later closet fish, by type mybe.
+	Fish &getClosestVisibleFishNotScannedYet(EVector pos);
 
 
 	void debug();

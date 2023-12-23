@@ -15,26 +15,31 @@ void Game::solution()
 		Drone &curDrone = this->getDroneById(droneId);
 
 		// Set Velocty to the Drone.
-		if (this->game_turn == 0)
-		{
-			curDrone.velocty = EVector(rand()%2000 - 1000, rand() % 800 + 200);
-		}
+		// if (this->game_turn == 0)
+		// {
+		// 	curDrone.velocty = EVector(rand()%2000 - 1000, rand() % 800 + 200);
+		// }
 
 		// Detect Ugly and Flee from them.
-		while (true)
-		{
-			if (this->uglys_visible_count)
-			{
-				Fish	&Ugly = this->getClosestUgly(curDrone.pos);
-				double	Distance = calcDistance(Ugly.pos, curDrone.pos);
+		// while (true)
+		// {
+		// 	if (this->uglys_visible_count)
+		// 	{
+		// 		Fish	&Ugly = this->getClosestUgly(curDrone.pos);
+		// 		double	Distance = calcDistance(Ugly.pos, curDrone.pos);
 
-				if (Distance > 900) break;
+		// 		if (Distance > 900) break;
 
-				actions.setMsg("Ugly Detected::" + to_string(Ugly.id));
-			}
+		// 		actions.setMsg("Ugly Detected::" + to_string(Ugly.id));
+		// 	}
 
-			break;
-		}
+		// 	break;
+		// }
+
+		Fish &fish = this->getClosestVisibleFishNotScannedYet(curDrone.pos);
+
+		actions.setMsg(to_string(fish.id));
+		curDrone.seekToPos(fish.pos + fish.velocty);
 
 		// Update the drone position in each turn.
 		curDrone.updatePos();

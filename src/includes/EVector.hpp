@@ -12,8 +12,8 @@ struct EVector
 	EVector(double _x, double _y);
 	EVector(const EVector &other);
 
-	double	magnitude() const;
-	void	normalize();
+	double	mag) const;
+	void	normalize()nitude(;
 	void	setMag(double _magnitude);
 	void	limit(double _magnitude);
 

@@ -35,8 +35,21 @@ void	Drone::edges(void)
 void	Drone::updatePos(void)
 {
 	this->velocty += this->acceleration;
+	this->velocty.limit(this->maxSpeed);
 	this->pos += this->velocty;
 }
+
+void Drone::seekToPos(EVector target)
+{
+	EVector disered_vel = target - this->pos;
+
+	disered_vel.setMag(this->maxSpeed);
+
+	EVector steeing = disered_vel - this->velocty;
+
+	this->applyForce(steeing);
+}
+
 
 /* Drone Comparison Operators OverLoads */
 bool Drone::operator<(const Drone &other) const
@@ -63,7 +76,6 @@ bool Drone::operator==(const Drone &other) const
 {
 	return (this->id == other.id);
 }
-
 
 istream &operator>>(istream &is, Drone &drone)
 {

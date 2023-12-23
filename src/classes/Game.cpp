@@ -287,3 +287,27 @@ Fish &Game::getClosestUgly(EVector pos)
 
 	return (this->getFishById(fishId));
 }
+
+Fish &Game::getClosestVisibleFishNotScannedYet(EVector pos)
+{
+	int		fishId = -1;
+	double	fishDis = -1;
+
+	for (auto &fish : this->allFishes)
+	{
+		if (fish.type == -1) continue;
+		if (!fish.isVisible) continue;
+		if (fish.scannedByMe) continue;
+
+		double curDis = calcDistance(fish.pos, pos);
+
+		if ((fishId == -1) || (fishDis > curDis))
+		{
+			fishId = fish.id;
+			fishDis = curDis;
+		}
+	}
+
+	return (this->getFishById(fishId));
+}
+

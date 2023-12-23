@@ -31,6 +31,8 @@ struct Drone
 	void	edges(void);
 	void	updatePos(void);
 
+	void seekToPos(EVector target);
+
 
 	bool operator<(const Drone &other) const;
 	bool operator<=(const Drone &other) const;
