@@ -90,6 +90,9 @@ EVector &EVector::operator*=(int value)
 	return (*this);
 }
 
+
+
+
 istream &operator>>(istream &is, EVector &vect)
 {
 	is >> vect.x >> vect.y;
@@ -100,4 +103,12 @@ ostream &operator<<(ostream &os, const EVector &vect)
 {
 	os << "(" << vect.x << "," << vect.y << ")";
 	return (os);
+}
+
+double calcDistance(EVector pointA, EVector pointB)
+{
+	return sqrt(
+		(pointA.x - pointB.x) * (pointA.x - pointB.x) +
+		(pointA.y - pointB.y) * (pointA.y - pointB.y)
+	);
 }

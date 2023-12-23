@@ -266,3 +266,24 @@ Drone &Game::getDroneById(int droneId)
 	return this->allDrones.back();
 }
 
+Fish &Game::getClosestUgly(EVector pos)
+{
+	int		fishId = -1;
+	double	fishDis = -1;
+
+	for (auto &fish : this->allFishes)
+	{
+		if (fish.type != -1) continue;
+		if (!fish.isVisible) continue;
+
+		double curDis = calcDistance(fish.pos, pos);
+
+		if ((fishId == -1) || (fishDis > curDis))
+		{
+			fishId = fish.id;
+			fishDis = curDis;
+		}
+	}
+
+	return (this->getFishById(fishId));
+}
