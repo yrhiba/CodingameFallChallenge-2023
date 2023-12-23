@@ -35,7 +35,8 @@ void	Drone::edges(void)
 void	Drone::updatePos(void)
 {
 	this->velocty += this->acceleration;
-	this->velocty.limit(this->maxSpeed);
+	this->velocty.setMag(this->maxSpeed);
+	// this->velocty.limit(this->maxSpeed);
 	this->pos += this->velocty;
 }
 
