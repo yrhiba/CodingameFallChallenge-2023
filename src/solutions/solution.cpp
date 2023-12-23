@@ -21,17 +21,25 @@ void Game::solution()
 		}
 
 		// Detect Ugly and Flee from them.
-		if (this->uglys_visible_count)
+		while (true)
 		{
-			Fish &Ugly = this->getClosestUgly(curDrone.pos);
-			actions.setMsg("Ugly Detected::" + to_string(Ugly.id));
+			if (this->uglys_visible_count)
+			{
+				Fish	&Ugly = this->getClosestUgly(curDrone.pos);
+				double	Distance = calcDistance(Ugly.pos, curDrone.pos);
+
+				if (Distance > 900) break;
+
+				actions.setMsg("Ugly Detected::" + to_string(Ugly.id));
+			}
+
+			break;
 		}
 
 		// Update the drone position in each turn.
 		curDrone.updatePos();
 		curDrone.edges();
 		curDrone.light = (curDrone.battery >= 5 ? (rand()%3 > 0) : 0);
-		actions.setMsg(".Y.R.");
 		actions.moveToPos(
 			curDrone.pos.x,
 			curDrone.pos.y,
