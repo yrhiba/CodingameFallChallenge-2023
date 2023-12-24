@@ -56,3 +56,12 @@ pair<int, int> getDirection(string s)
 			return dp[s] = {dx[d], dy[d]};
 	return dp[s] = ans;
 }
+
+double mapValue(double value, double fromLow, double fromHigh, double toLow, double toHigh)
+{
+	double fromRange = fromHigh - fromLow;
+	double toRange = toHigh - toLow;
+	double scaledValue = (value - fromLow) / fromRange;
+
+	return toLow + (scaledValue * toRange);
+}

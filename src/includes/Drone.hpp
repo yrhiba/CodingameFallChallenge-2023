@@ -34,6 +34,7 @@ struct Drone
 
 	EVector seekToPosForce(EVector target);
 	EVector fleeFromPosForce(EVector target);
+	EVector arriveToPosForce(EVector target, double radius);
 
 
 	bool operator<(const Drone &other) const;

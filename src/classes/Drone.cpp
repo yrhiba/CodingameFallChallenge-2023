@@ -61,6 +61,27 @@ EVector Drone::fleeFromPosForce(EVector target)
 	return force;
 }
 
+EVector Drone::arriveToPosForce(EVector target, double radius)
+{
+	EVector disered_vel = target - this->pos;
+
+	double distance = disered_vel.magnitude();
+
+	if (distance < radius)
+	{
+		double newMag = mapValue(distance, 0, radius, 0, this->maxSpeed);
+		disered_vel.setMag(newMag);
+	}
+	else
+	{
+		disered_vel.setMag(this->maxSpeed);
+	}
+
+	EVector force = disered_vel - this->velocty;
+
+	return force;
+}
+
 /* Drone Comparison Operators OverLoads */
 bool Drone::operator<(const Drone &other) const
 {
