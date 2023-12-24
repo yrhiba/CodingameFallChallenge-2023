@@ -14,12 +14,12 @@ void Game::solution()
 	{
 		Drone &curDrone = this->getDroneById(droneId);
 
-		if (this->game_turn == 0)
+		if (this->fishes_visible_notScanned_count)
 		{
-			curDrone.velocty = EVector(rand() % 1000, rand() % 1000);
-			curDrone.velocty.setMag(curDrone.maxSpeed);
+			Fish	&fish = this->getClosestVisibleFishNotScannedYet(curDrone.pos);
+			EVector	seekForce = curDrone.seekToPosForce(fish.pos + fish.velocty);
+			curDrone.applyForce(seekForce);
 		}
-
 
 		curDrone.updatePos();
 		curDrone.edges();
