@@ -55,9 +55,7 @@ ostream &operator<<(ostream &os, const Fish &fish)
 {
 	os << "Id: " << fish.id << " | Color: " << fish.color;
 	os << " | Type: " << fish.type << " | ScannedByMe: " << fish.scannedByMe;
-	os << " | ScannedByOp: " << fish.scannedByOp;
-	os << " | Pos " << fish.prevPos  << " ->";
-	os << " " << fish.pos << " | ";
-	os << " Speed " << fish.prevVelocty << " -> " << fish.velocty;
+	os << " | Pos " << fish.pos << " | ";
+	os << " Speed " << fish.velocty;
 	return (os);
 }

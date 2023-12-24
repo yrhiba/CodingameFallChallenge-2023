@@ -98,9 +98,6 @@ EVector &EVector::operator*=(int value)
 	return (*this);
 }
 
-
-
-
 istream &operator>>(istream &is, EVector &vect)
 {
 	is >> vect.x >> vect.y;
