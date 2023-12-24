@@ -31,6 +31,12 @@ void Game::initTurn( void )
 	this->fishes_visible_notScanned_count = 0;
 	this->uglys_visible_count = 0;
 
+	for (auto &fish : this->allFishes)
+	{
+		fish.isVisible = false;
+		fish.pos = EVector(-1, -1);
+	}
+
 	this->game_turn += 1;
 }
 
