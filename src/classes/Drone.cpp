@@ -41,28 +41,24 @@ void	Drone::updatePos(void)
 	this->acceleration *= 0;
 }
 
-void Drone::seekToPos(EVector target)
+EVector Drone::seekToPosForce(EVector target)
 {
 	EVector disered_vel = target - this->pos;
 
 	disered_vel.setMag(this->maxSpeed);
 
-	EVector steeing = disered_vel - this->velocty;
+	EVector force = disered_vel - this->velocty;
 
-	this->applyForce(steeing);
+	return force;
 }
 
-void Drone::fleeFromPos(EVector target)
+EVector Drone::fleeFromPosForce(EVector target)
 {
-	EVector disered_vel = target - this->pos;
+	EVector force = this->seekToPosForce(target);
 
-	disered_vel.setMag(this->maxSpeed);
+	force *= -1;
 
-	EVector steeing = disered_vel - this->velocty;
-
-	steeing *= -1;
-
-	this->applyForce(steeing);
+	return force;
 }
 
 /* Drone Comparison Operators OverLoads */
