@@ -23,9 +23,9 @@ vector<string> files =
 
 	"src/includes/EVector.hpp",
 
-	"src/includes/Drone.hpp",
-
 	"src/includes/Fish.hpp",
+
+	"src/includes/Drone.hpp",
 
 	"src/includes/Game.hpp",
 

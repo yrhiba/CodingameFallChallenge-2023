@@ -17,6 +17,7 @@ struct Drone
 	int		myDrone;
 	int		opDrone;
 	int		maxSpeed;
+	double	maxForce;
 	int		light;
 
 	vector<int>					scannedCreatures;
@@ -32,6 +33,7 @@ struct Drone
 	void	updatePos(void);
 
 	void seekToPos(EVector target);
+	void fleeFromPos(EVector target);
 
 
 	bool operator<(const Drone &other) const;
