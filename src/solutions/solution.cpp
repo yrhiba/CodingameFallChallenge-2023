@@ -14,20 +14,21 @@ void Game::solution()
 	{
 		Drone &curDrone = this->getDroneById(droneId);
 
+		if (this->game_turn == 0)
+		{
+			curDrone.velocty = EVector(rand() % 100, rand() % 100);
+			curDrone.velocty.setMag(curDrone.maxSpeed);
+		}
 
-		Fish &fish = this->getClosestVisibleFishNotScannedYet(curDrone.pos);
 
-		// actions.setMsg(to_string(fish.id));
-		curDrone.seekToPos(EVector(5e3, 5e3));
-
-		cerr << curDrone.pos << " " << curDrone.pos.magnitude() << endl;
-		cerr << curDrone.velocty << " " << curDrone.velocty.magnitude() << endl;
-		cerr << curDrone.acceleration << " " << curDrone.acceleration.magnitude() << endl;
-
-		// Update the drone position in each turn.
 		curDrone.updatePos();
-		// curDrone.edges();
-		curDrone.light = (curDrone.battery >= 5 ? (rand()%3 > 0) : 0);
+		curDrone.edges();
+
+		if (this->game_turn > 4 && curDrone.battery >= 5)
+		{
+			curDrone.light = (this->game_turn % 2) ? 1 : 0;
+		}
+
 		actions.moveToPos(
 			curDrone.pos.x,
 			curDrone.pos.y,
