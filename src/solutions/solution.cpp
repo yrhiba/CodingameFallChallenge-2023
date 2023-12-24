@@ -16,7 +16,7 @@ void Game::solution()
 
 		if (this->game_turn == 0)
 		{
-			curDrone.velocty = EVector(rand() % 100, rand() % 100);
+			curDrone.velocty = EVector(rand() % 1000, rand() % 1000);
 			curDrone.velocty.setMag(curDrone.maxSpeed);
 		}
 
