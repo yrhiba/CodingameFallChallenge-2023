@@ -12,6 +12,7 @@ struct Game
 
 	int	creature_count;
 	int	creature_visible_count;
+	int	fishes_visible_notScanned_count;
 	int	fishes_visible_count;
 	int	uglys_visible_count;
 
