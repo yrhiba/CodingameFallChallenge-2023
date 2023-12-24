@@ -82,6 +82,29 @@ EVector Drone::arriveToPosForce(EVector target, double radius)
 	return force;
 }
 
+
+EVector Drone::avoidUglyForce(Fish &ugly)
+{
+	/* Not Perfect Yet | Need Adjustments */
+	EVector uglyPredectPos = ugly.pos + ugly.velocty;
+
+	EVector toObstacle = this->pos - uglyPredectPos;
+
+	double distance = toObstacle.magnitude();
+	double obstacleRadius = 2301;
+
+	if (distance < obstacleRadius)
+	{
+		double avoidanceStrength = (obstacleRadius - distance) / obstacleRadius;
+
+		toObstacle.setMag(avoidanceStrength * this->maxSpeed);
+
+		return toObstacle;
+	}
+
+	return (EVector(0, 0));
+}
+
 /* Drone Comparison Operators OverLoads */
 bool Drone::operator<(const Drone &other) const
 {
