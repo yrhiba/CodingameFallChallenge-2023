@@ -28,6 +28,7 @@ void Game::initTurn( void )
 
 	this->creature_visible_count = 0;
 	this->fishes_visible_count = 0;
+	this->fishes_visible_notScanned_count = 0;
 	this->uglys_visible_count = 0;
 
 	this->game_turn += 1;
@@ -170,6 +171,7 @@ void Game::readVisibleCreatures( void )
 		fish.velocty = EVector(creature_vx, creature_vy);
 
 		this->fishes_visible_count += (fish.type >= 0);
+		this->fishes_visible_notScanned_count += (fish.type >= 0 && !fish.scannedByMe);
 		this->uglys_visible_count += (fish.type == -1);
 	}
 }
@@ -310,4 +312,3 @@ Fish &Game::getClosestVisibleFishNotScannedYet(EVector pos)
 
 	return (this->getFishById(fishId));
 }
-
