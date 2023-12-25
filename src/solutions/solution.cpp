@@ -16,10 +16,10 @@ void Game::solution()
 
 		if (this->game_turn == 0)
 		{
-			curDrone.velocty = EVector(rand() % 1000, rand() % 1000);
-			curDrone.velocty.setMag(curDrone.maxSpeed);
+			EVector gravity = EVector(0, 100);
+			gravity.setMag(curDrone.maxSpeed);
+			curDrone.applyForce(gravity);
 		}
-
 
 		curDrone.updatePos();
 		curDrone.edges();
