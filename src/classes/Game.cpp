@@ -93,6 +93,7 @@ void Game::readDrones( void )
 			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;
+			rDrone.light = 0;
 			rDrone.scannedCreatures.clear();
 			rDrone.creaturesDirection.clear();
 		}
