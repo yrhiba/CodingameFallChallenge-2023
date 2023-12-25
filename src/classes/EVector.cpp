@@ -110,6 +110,13 @@ ostream &operator<<(ostream &os, const EVector &vect)
 	return (os);
 }
 
+double EVector::heading() const
+{
+	// Use atan2 to get the angle from the x-axis
+	return atan2(this->y, this->x);
+}
+
+
 double calcDistance(EVector pointA, EVector pointB)
 {
 	return sqrt(

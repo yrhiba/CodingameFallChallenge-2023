@@ -12,10 +12,11 @@ struct EVector
 	EVector(double _x, double _y);
 	EVector(const EVector &other);
 
-	double	magnitude() const;
 	void	normalize();
 	void	setMag(double _magnitude);
 	void	limit(double _magnitude);
+	double	magnitude() const; // distance from origin
+	double	heading() const; // angle theta x,y
 
 	EVector &operator=(const EVector &vect);
 
