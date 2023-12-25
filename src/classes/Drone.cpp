@@ -10,6 +10,7 @@ Drone::Drone()
 	this->acceleration = EVector(0, 0);
 	this->maxSpeed = 600;
 	this->maxForce = 1e9;
+	this->wanderTheta = ((M_PI * -1) / 2);
 }
 
 void	Drone::applyForce(EVector force)
@@ -80,6 +81,36 @@ EVector Drone::arriveToPosForce(EVector target, double radius)
 	EVector force = disered_vel - this->velocty;
 
 	return force;
+}
+
+EVector	Drone::wanderForce(void)
+{
+	EVector wanderPoint = this->velocty;
+
+	wanderPoint.setMag(500);
+
+	wanderPoint += this->pos;
+
+	double wanderRadius = 500;
+
+	double theta = this->wanderTheta + this->velocty.heading();
+
+	double x = wanderRadius * cos(theta);
+	double y = wanderRadius * sin(theta);
+
+	wanderPoint += EVector(x, y);
+
+	EVector steer = (wanderPoint - this->pos);
+
+	steer.setMag(this->maxSpeed);
+
+	double displcaRange = 0.5;
+
+	double r =  mapValue((rand()%100) - 100, -100, 99, 0, displcaRange*2) - displcaRange;
+
+	this->wanderTheta += r;
+
+	return (steer);
 }
 
 

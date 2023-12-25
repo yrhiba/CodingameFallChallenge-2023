@@ -19,6 +19,7 @@ struct Drone
 	int		maxSpeed;
 	double	maxForce;
 	int		light;
+	double	wanderTheta;
 
 	vector<int>					scannedCreatures;
 
@@ -36,6 +37,7 @@ struct Drone
 	EVector fleeFromPosForce(EVector target);
 	EVector arriveToPosForce(EVector target, double radius);
 	EVector avoidUglyForce(Fish &ugly);
+	EVector wanderForce(void);
 
 	bool operator<(const Drone &other) const;
 	bool operator<=(const Drone &other) const;
