@@ -29,6 +29,8 @@ struct EVector
 	EVector &operator*=(int value);
 	EVector &operator*=(double value);
 
+	EVector &operator/=(double value);
+	EVector operator/(double value);
 };
 
 istream &operator>>(istream &is, EVector &vect);

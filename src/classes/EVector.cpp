@@ -98,6 +98,19 @@ EVector &EVector::operator*=(int value)
 	return (*this);
 }
 
+EVector &EVector::operator/=(double value)
+{
+	this->x /= value;
+	this->y /= value;
+	return (*this);
+}
+
+EVector EVector::operator/(double value)
+{
+	return (EVector(this->x / value, this->y / value));
+}
+
+
 istream &operator>>(istream &is, EVector &vect)
 {
 	is >> vect.x >> vect.y;

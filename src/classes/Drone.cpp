@@ -113,28 +113,28 @@ EVector	Drone::wanderForce(void)
 	return (steer);
 }
 
-
 EVector Drone::avoidUglyForce(Fish &ugly)
 {
-	/* Not Perfect Yet | Need Adjustments */
-	EVector uglyPredectPos = ugly.pos + ugly.velocty;
+	EVector UglyVel = this->pos - ugly.pos;
+
+	UglyVel.setMag(100);
+
+	EVector uglyPredectPos = ugly.pos + UglyVel;
 
 	EVector toObstacle = this->pos - uglyPredectPos;
 
 	double distance = toObstacle.magnitude();
-	double obstacleRadius = 2301;
+	double obstacleRadius = 2300;
 
-	if (distance < obstacleRadius)
+	if (0 < distance && distance < obstacleRadius)
 	{
-		double avoidanceStrength = (obstacleRadius - distance) / obstacleRadius;
-
-		toObstacle.setMag(avoidanceStrength * this->maxSpeed);
-
+		toObstacle /= distance;
 		return toObstacle;
 	}
 
 	return (EVector(0, 0));
 }
+
 
 /* Drone Comparison Operators OverLoads */
 bool Drone::operator<(const Drone &other) const
