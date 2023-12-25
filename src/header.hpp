@@ -45,6 +45,10 @@ string	dn[] = {"B", "T", "R", "L", "BR", "TL", "TR", "BL"};
 int		dx[] = {0, 0, 1, -1, 1, -1, 1, -1};
 int		dy[] = {1, -1, 0, 0, 1, -1, -1, 1};
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 pair<int, int> getDirection(string s)
 {
 	static map<string, pair<int, int> > dp;
