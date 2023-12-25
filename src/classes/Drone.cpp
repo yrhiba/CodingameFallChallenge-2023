@@ -29,8 +29,6 @@ void	Drone::edges(void)
 	{
 		this->velocty.y *= -1;
 	}
-
-	this->updatePos();
 }
 
 void	Drone::updatePos(void)
