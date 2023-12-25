@@ -16,7 +16,7 @@ void Game::solution()
 
 		if (this->game_turn == 0)
 		{
-			EVector gravity = EVector(0, 100);
+			EVector gravity = EVector(1000, 1000);
 			gravity.setMag(curDrone.maxSpeed);
 			curDrone.applyForce(gravity);
 		}
