@@ -30,8 +30,7 @@ void	Drone::edges(void)
 		this->velocty.y *= -1;
 	}
 
-	for (int i = 0; i < 2; i++)
-		this->updatePos();
+	this->updatePos();
 }
 
 void	Drone::updatePos(void)
