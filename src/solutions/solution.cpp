@@ -8,6 +8,8 @@
 
 void Game::solution()
 {
+	cerr << "Game-Turn: " << this->game_turn << endl;
+
 	Actions actions;
 
 	for (auto &droneId : this->myDrones)
@@ -24,7 +26,7 @@ void Game::solution()
 		curDrone.updatePos();
 		curDrone.edges();
 
-		if (this->game_turn > 4 && curDrone.battery >= 5)
+		if (this->game_turn > 4 && curDrone.battery >= 5 && curDrone.pos.y > 3000)
 		{
 			curDrone.light = (this->game_turn % 2) ? 1 : 0;
 		}
