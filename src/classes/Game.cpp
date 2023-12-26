@@ -301,7 +301,6 @@ int	Game::getClosestUgly(EVector pos)
 	return (fishId);
 }
 
-
 /*
 to update it need to take a drone as argument and ignore the fishes
 that are already scanned by it, i guess this function need to be implemented inside

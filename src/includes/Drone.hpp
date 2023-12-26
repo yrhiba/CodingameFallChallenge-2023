@@ -12,11 +12,14 @@ struct Drone
 	EVector	velocty;
 	EVector	acceleration;
 
-	// to convert to array of MAX_GAME_TURN
-	int		battery;
-	int		emergency;
-	int		light;
+	int			emergency;
+	int			light;
+	int			battery;
 
+	/*	battery as a vector.
+		gonna help to now if the drone activate
+		or not */
+	vector<int>		battery_history;
 
 	int		myDrone;
 	int		opDrone;
