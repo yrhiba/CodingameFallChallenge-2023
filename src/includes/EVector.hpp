@@ -37,3 +37,9 @@ istream &operator>>(istream &is, EVector &vect);
 ostream &operator<<(ostream &os, const EVector &vect);
 
 double calcDistance(EVector pointA, EVector pointB);
+
+double	dotProduct(EVector a, EVector b);
+EVector	vectorProjection(EVector vect, EVector path);
+EVector	pointProjection(EVector point, EVector lineStartPoint, EVector lineEndPoint);
+double	distanceBetweenPointAndLine(EVector point, EVector lineStartPoint, EVector lineEndPoint);
+

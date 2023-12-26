@@ -137,3 +137,36 @@ double calcDistance(EVector pointA, EVector pointB)
 		(pointA.y - pointB.y) * (pointA.y - pointB.y)
 	);
 }
+
+double dotProduct(EVector a, EVector b)
+{
+	return (a.x * b.x) + (a.y * b.y);
+}
+
+EVector vectorProjection(EVector vect, EVector path)
+{
+	path.normalize();
+
+	double spectre = dotProduct(vect, path);;
+
+	path *= spectre;
+
+	return (path);
+}
+
+EVector	pointProjection(EVector point, EVector lineStartPoint, EVector lineEndPoint)
+{
+	EVector	vectStartLineToPoint = point - lineStartPoint;
+
+	EVector vectStartLineToEndLine = lineEndPoint - lineStartPoint;
+
+	EVector vectProjection = vectorProjection(vectStartLineToPoint, vectStartLineToEndLine);
+
+	return (lineStartPoint + vectProjection);
+}
+
+double distanceBetweenPointAndLine(EVector point, EVector lineStartPoint, EVector lineEndPoint)
+{
+	return (calcDistance(pointProjection(point, lineStartPoint, lineEndPoint), point));
+}
+
