@@ -12,21 +12,26 @@ struct Drone
 	EVector	velocty;
 	EVector	acceleration;
 
+	// to convert to array of MAX_GAME_TURN
 	int		battery;
 	int		emergency;
+	int		light;
+
+
 	int		myDrone;
 	int		opDrone;
+
 	int		maxSpeed;
 	double	maxForce;
-	int		light;
+
 	double	wanderTheta;
 
 	SingleLinePath	single_line_path;
 
-	vector<int>					scannedCreatures;
+	vector<int>		scannedCreatures;
 
 	// creatureID : Direction
-	vector<pair<int, string>>	creaturesDirection;
+	vector< pair<int, string> >	creaturesDirection;
 
 	// constructer
 	Drone();

@@ -54,8 +54,9 @@ struct Game
 	Drone &getDroneById(int droneId);
 
 
-	Fish &getClosestUgly(EVector pos);
-	Fish &getClosestVisibleFishNotScannedYet(EVector pos);
+	int		getClosestUgly(EVector pos); // -1 if not found
+	int		getClosestVisibleFishNotScannedYet(EVector pos); // -1 if there is no visible fish
+	int		getClosestDroneIdFromPos(EVector pos); // -1 if not found
 
 
 	void debug();

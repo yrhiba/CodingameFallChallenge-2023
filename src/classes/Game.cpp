@@ -275,7 +275,11 @@ Drone &Game::getDroneById(int droneId)
 	return this->allDrones.back();
 }
 
-Fish &Game::getClosestUgly(EVector pos)
+
+/*new-funciton-in-testing-mode-start*/
+
+// get the closest ugly fish from the given position
+int	Game::getClosestUgly(EVector pos)
 {
 	int		fishId = -1;
 	double	fishDis = -1;
@@ -294,10 +298,17 @@ Fish &Game::getClosestUgly(EVector pos)
 		}
 	}
 
-	return (this->getFishById(fishId));
+	return (fishId);
 }
 
-Fish &Game::getClosestVisibleFishNotScannedYet(EVector pos)
+
+/*
+to update it need to take a drone as argument and ignore the fishes
+that are already scanned by it, i guess this function need to be implemented inside
+drone.cpp file | but anyway i am gonna work on that today no time to waste.
+*/
+// get the closest visible fish or simulated fish to the given position
+int	Game::getClosestVisibleFishNotScannedYet(EVector pos)
 {
 	int		fishId = -1;
 	double	fishDis = -1;
@@ -317,5 +328,29 @@ Fish &Game::getClosestVisibleFishNotScannedYet(EVector pos)
 		}
 	}
 
-	return (this->getFishById(fishId));
+	return (fishId);
 }
+
+// get closest drone from the given position
+int		Game::getClosestDroneIdFromPos(EVector pos)
+{
+	int		droneId = -1;
+	double	droneDis = -1;
+
+	for (Drone &drone : this->allDrones)
+	{
+		if (drone.emergency) continue;
+
+		double curDroneDis = calcDistance(drone.pos, pos);
+
+		if ((droneDis == -1) || (droneDis > curDroneDis))
+		{
+			droneId = drone.id;
+			droneDis = curDroneDis;
+		}
+	}
+
+	return droneId;
+}
+
+/*new-funciton-in-testing-mode-end*/
