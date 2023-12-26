@@ -23,11 +23,15 @@ vector<string> files =
 
 	"src/includes/EVector.hpp",
 
+	"src/includes/SingleLinePath.hpp",
+
 	"src/includes/Fish.hpp",
 
 	"src/includes/Drone.hpp",
 
 	"src/includes/Game.hpp",
+
+	"src/classes/SingleLinePath.cpp",
 
 	"src/includes/Actions.hpp",
 
