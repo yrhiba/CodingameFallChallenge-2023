@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <fstream>
 
+#include "includes/SingleLinePath.hpp"
 #include "includes/Actions.hpp"
 #include "includes/EVector.hpp"
 #include "includes/Drone.hpp"
@@ -48,6 +49,8 @@ int		dy[] = {1, -1, 0, 0, 1, -1, -1, 1};
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
+
+# define MAP_SIZE 10000
 
 pair<int, int> getDirection(string s)
 {
