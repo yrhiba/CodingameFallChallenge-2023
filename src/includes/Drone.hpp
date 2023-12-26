@@ -16,10 +16,7 @@ struct Drone
 	int			light;
 	int			battery;
 
-	/*	battery as a vector.
-		gonna help to now if the drone activate
-		or not */
-	vector<int>		battery_history;
+	bool	isLightOn;
 
 	int		myDrone;
 	int		opDrone;

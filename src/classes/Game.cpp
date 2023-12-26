@@ -90,10 +90,11 @@ void Game::readDrones( void )
 
 			Drone &rDrone = this->getDroneById(drone.id);
 
+			rDrone.isLightOn = (rDrone.battery < drone.battery);
+
 			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;
-			rDrone.battery_history.push_back(rDrone.battery);
 			rDrone.light = 0;
 			rDrone.scannedCreatures.clear();
 			rDrone.creaturesDirection.clear();
@@ -106,11 +107,12 @@ void Game::readDrones( void )
 			Drone drone; cin >> drone;
 			
 			Drone &rDrone = this->getDroneById(drone.id);
-			
+
+			rDrone.isLightOn = (rDrone.battery < drone.battery);
+
 			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;
-			rDrone.battery_history.push_back(rDrone.battery);
 			rDrone.scannedCreatures.clear();
 			rDrone.creaturesDirection.clear();
 		}
@@ -124,7 +126,6 @@ void Game::readDrones( void )
 			Drone drone; cin >> drone;
 			drone.myDrone = 1;
 			drone.opDrone = 0;
-			drone.battery_history.push_back(drone.battery);
 			this->allDrones.push_back(drone);
 			this->myDrones.push_back(drone.id);
 		}
@@ -135,10 +136,10 @@ void Game::readDrones( void )
 			Drone drone; cin >> drone;
 			drone.myDrone = 0;
 			drone.opDrone = 1;
-			drone.battery_history.push_back(drone.battery);
 			this->allDrones.push_back(drone);
 			this->opponentsDrones.push_back(drone.id);
 		}
+
 		sort(this->allDrones.begin(), this->allDrones.end());
 	}
 }

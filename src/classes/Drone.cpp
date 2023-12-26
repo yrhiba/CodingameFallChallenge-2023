@@ -11,6 +11,7 @@ Drone::Drone()
 	this->maxSpeed = 600;
 	this->maxForce = 1e9;
 	this->wanderTheta = ((M_PI * -1) / 2);
+	this->isLightOn = false;
 }
 
 void	Drone::applyForce(EVector force)
