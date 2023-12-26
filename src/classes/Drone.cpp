@@ -133,6 +133,54 @@ EVector Drone::avoidUglyForce(Fish &ugly)
 }
 
 
+EVector Drone::followSingleLinePathForce(void)
+{
+	SingleLinePath &path = this->single_line_path;
+
+	if (path.isFinish())
+	{
+		return (EVector(0, 0));
+	}
+
+	EVector &targetEnd = (path.direction == FORWARD_DIR) ? path.pointB : path.pointA;
+
+	if (calcDistance(this->pos, targetEnd) <= 800)
+	{
+		path.reacheTheEnd = true;
+		return (EVector(0, 0));
+	}
+
+	// step 1: predictied drone position point
+	EVector predictedPoint = this->pos + this->velocty;
+
+	// step 2: project the point into the line
+	EVector projectedPoint = pointProjection(predictedPoint, path.pointA, path.pointB);
+
+	// step 3: check if predictedPoint already on the path
+	if (calcDistance(projectedPoint, predictedPoint) <= path.radius)
+		return (EVector(0, 0));
+
+	// step 4: choes direction
+	EVector direction = EVector(0, 0);
+
+	if (path.direction == FORWARD_DIR)
+	{
+		direction = path.pointB - path.pointA;
+	}
+	else
+	{
+		direction = path.pointA - path.pointB;
+	}
+
+	direction.setMag(300);
+
+	// step 5: calculate the target position
+	EVector target = projectedPoint + direction;
+
+	return this->seekToPosForce(target);
+}
+
+
 /* Drone Comparison Operators OverLoads */
 bool Drone::operator<(const Drone &other) const
 {

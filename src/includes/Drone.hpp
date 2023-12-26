@@ -21,6 +21,8 @@ struct Drone
 	int		light;
 	double	wanderTheta;
 
+	SingleLinePath	single_line_path;
+
 	vector<int>					scannedCreatures;
 
 	// creatureID : Direction
@@ -38,6 +40,7 @@ struct Drone
 	EVector arriveToPosForce(EVector target, double radius);
 	EVector avoidUglyForce(Fish &ugly);
 	EVector wanderForce(void);
+	EVector followSingleLinePathForce(void);
 
 	bool operator<(const Drone &other) const;
 	bool operator<=(const Drone &other) const;
