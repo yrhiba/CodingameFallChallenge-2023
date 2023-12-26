@@ -90,7 +90,7 @@ void Game::readDrones( void )
 
 			Drone &rDrone = this->getDroneById(drone.id);
 
-			rDrone.isLightOn = (rDrone.battery < drone.battery);
+			rDrone.isLightOn = (rDrone.battery - 5 == drone.battery);
 
 			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
@@ -108,11 +108,12 @@ void Game::readDrones( void )
 			
 			Drone &rDrone = this->getDroneById(drone.id);
 
-			rDrone.isLightOn = (rDrone.battery < drone.battery);
+			rDrone.isLightOn = (rDrone.battery - 5 == drone.battery);
 
 			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;
+			rDrone.light = 0;
 			rDrone.scannedCreatures.clear();
 			rDrone.creaturesDirection.clear();
 		}
