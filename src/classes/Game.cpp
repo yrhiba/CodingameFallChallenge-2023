@@ -173,12 +173,7 @@ void Game::readVisibleCreatures( void )
 
 		fish.isVisible = true;
 
-		fish.prevPos = fish.pos;
-
 		fish.pos = EVector(creature_x, creature_y);
-
-		fish.prevVelocty = fish.velocty;
-
 		fish.velocty = EVector(creature_vx, creature_vy);
 
 		this->fishes_visible_count += (fish.type >= 0);
@@ -354,6 +349,11 @@ int		Game::getClosestDroneIdFromPos(EVector pos)
 	}
 
 	return droneId;
+}
+
+void	Game::uglysSimulation(void)
+{
+	// TODO: TODAY
 }
 
 /*new-funciton-in-testing-mode-end*/
