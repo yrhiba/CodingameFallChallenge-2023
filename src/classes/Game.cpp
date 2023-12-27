@@ -354,6 +354,24 @@ int		Game::getClosestDroneIdFromPos(EVector pos)
 void	Game::uglysSimulation(void)
 {
 	// TODO: TODAY
+	vector<int> &allUglys = this->typeFishes[-1];
+
+	if (allUglys.empty())
+	{
+		// there is no visible or uglys at the game.
+		return ;
+	}
+
+	for (int UglyId : allUglys)
+	{
+		Fish &ugly = this->getFishById(UglyId);
+
+		if (!ugly.isVisible) continue;
+
+
+		
+
+	}
 }
 
 /*new-funciton-in-testing-mode-end*/
