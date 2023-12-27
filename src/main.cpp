@@ -40,6 +40,10 @@ int main()
 		/* Read Creatures Radar Direction */
 		game.readRadarInfo();
 
+		// simulate the next position of the visible uglys
+		// add a prediction futur pos for all the previous visible Uglys
+		game.uglysSimulation();
+
 		/* puts the solution */
 		game.solution();
 	}
