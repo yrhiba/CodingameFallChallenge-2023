@@ -10,12 +10,10 @@ struct Fish
 	int		type;
 
 	EVector	pos;
-	EVector	prevPos;
-	EVector	nextPos;
+	EVector	nextSimulatedPos;
 
 	EVector	velocty;
-	EVector	prevVelocty;
-	EVector	nextVelocty;
+	EVector	nextSimulatedVel;
 
 	int		scaned; // 0 : not-scanned || 1 : scanned
 	int		dead;  // 0 : still alive || 1 : dead fish
