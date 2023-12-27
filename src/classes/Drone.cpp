@@ -21,12 +21,18 @@ void	Drone::applyForce(EVector force)
 
 void	Drone::edges(void)
 {
-	if (this->pos.x <= 0 || this->pos.x >= 9999)
+	EVector nextDronePos = this->pos + this->velocty;
+
+	if ((nextDronePos.x < 0 && nextDronePos.x < this->pos.x) || 
+		(nextDronePos.x > 9999 && nextDronePos.x > this->pos.x)
+	)
 	{
 		this->velocty.x *= -1;
 	}
 
-	if (this->pos.y <= 0 || this->pos.y >= 9999)
+	if ((nextDronePos.y < 0 && nextDronePos.y < this->pos.y) || 
+		(nextDronePos.y > 9999 && nextDronePos.y > this->pos.y)
+	)
 	{
 		this->velocty.y *= -1;
 	}

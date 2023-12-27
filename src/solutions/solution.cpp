@@ -23,8 +23,8 @@ void Game::solution()
 			curDrone.applyForce(gravity);
 		}
 
-		curDrone.updatePos();
 		curDrone.edges();
+		curDrone.updatePos();
 
 		if (this->game_turn > 4 && curDrone.battery >= 5 && curDrone.pos.y > 3000)
 		{
