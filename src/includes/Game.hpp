@@ -58,7 +58,8 @@ struct Game
 	int		getClosestVisibleFishNotScannedYet(EVector pos); // -1 if there is no visible fish
 	int		getClosestDroneIdFromPos(EVector pos); // -1 if not found
 
+	void	uglysSimulation(void);
 
-	void debug();
-	void solution();
+	void	debug();
+	void	solution();
 };
