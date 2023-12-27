@@ -53,6 +53,12 @@ void	EVector::limit(double _magnitude)
 	}
 }
 
+void	EVector::roundme(void)
+{
+	this->x = (int)round(this->x);
+	this->y = (int)round(this->y);
+}
+
 EVector &EVector::operator=(const EVector &vect)
 {
 	this->x = vect.x;

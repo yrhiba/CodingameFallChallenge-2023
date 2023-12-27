@@ -18,6 +18,8 @@ struct EVector
 	double	magnitude() const; // distance from origin
 	double	heading() const; // angle theta x,y
 
+	void	roundme(void);
+
 	EVector &operator=(const EVector &vect);
 
 	EVector operator+(const EVector &vect);
