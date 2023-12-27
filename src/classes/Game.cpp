@@ -33,8 +33,11 @@ void Game::initTurn( void )
 
 	for (auto &fish : this->allFishes)
 	{
-		fish.isVisible = false;
-		fish.pos = EVector(-1, -1);
+		if (fish.type != -1)
+		{
+			fish.isVisible = false;
+			fish.pos = EVector(-1, -1);
+		}
 	}
 
 	this->game_turn += 1;
@@ -171,14 +174,15 @@ void Game::readVisibleCreatures( void )
 
 		Fish &fish = this->getFishById(creature_id);
 
-		fish.isVisible = true;
-
-		fish.pos = EVector(creature_x, creature_y);
-		fish.velocty = EVector(creature_vx, creature_vy);
-
 		this->fishes_visible_count += (fish.type >= 0);
 		this->fishes_visible_notScanned_count += (fish.type >= 0 && !fish.scannedByMe);
 		this->uglys_visible_count += (fish.type == -1);
+
+		if ((fish.type == -1) && fish.isVisible) continue;
+
+		fish.isVisible = true;
+		fish.pos = EVector(creature_x, creature_y);
+		fish.velocty = EVector(creature_vx, creature_vy);
 	}
 }
 
@@ -353,6 +357,8 @@ int		Game::getClosestDroneIdFromPos(EVector pos)
 
 void	Game::uglysSimulation(void)
 {
+	// cerr << "Ugly TO simulate" << endl;
+
 	// TODO: TODAY
 	vector<int> &allUglys = this->typeFishes[-1];
 
@@ -368,9 +374,31 @@ void	Game::uglysSimulation(void)
 
 		if (!ugly.isVisible) continue;
 
+		// TODO return the closest Drone within it's Light Radius
+		// int droneID = this->updateTarget(ugly);
 
-		
+		// if (droneID != -1)
+		// {
+		// 	ugly.pos += ugly.velocty;
 
+		// 	if (ugly.pos.x < 0)
+		// 		ugly.pos.x = 0;
+		// 	else if (ugly.pos.x > 9999)
+		// 		ugly.pos.x = 9999;
+
+		// 	if (ugly.pos.y < 2500)
+		// 		ugly.pos.y = 0;
+		// 	else if (ugly.pos.y > 9999)
+		// 		ugly.pos.y = 9999;
+
+		// 	ugly.pos 
+		// }
+		// else
+		// {
+
+		// }
+
+		// cerr << ugly << endl;
 	}
 }
 
