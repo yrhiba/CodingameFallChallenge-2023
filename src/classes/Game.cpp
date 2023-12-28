@@ -178,8 +178,7 @@ void Game::readVisibleCreatures( void )
 		this->fishes_visible_notScanned_count += (fish.type >= 0 && !fish.scannedByMe);
 		this->uglys_visible_count += (fish.type == -1);
 
-		if ((fish.type == -1) && fish.isVisible) continue;
-
+		fish.visibleAtTurn = -1;
 		fish.isVisible = true;
 		fish.pos = EVector(creature_x, creature_y);
 		fish.velocty = EVector(creature_vx, creature_vy);
