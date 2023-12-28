@@ -19,6 +19,7 @@ struct EVector
 	double	heading() const; // angle theta x,y
 
 	void	roundme(void);
+	bool	isZero(void) const;
 
 	EVector &operator=(const EVector &vect);
 

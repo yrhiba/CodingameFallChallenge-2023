@@ -135,6 +135,10 @@ double EVector::heading() const
 	return atan2(this->y, this->x);
 }
 
+bool EVector::isZero(void) const
+{
+	return (this->x == 0 && this->y == 0);
+}
 
 double calcDistance(EVector pointA, EVector pointB)
 {
