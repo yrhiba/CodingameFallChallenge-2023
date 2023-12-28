@@ -20,6 +20,7 @@ struct Fish
 	int		scannedByMe; // 0 | 1
 	int		scannedByOp; // 0 | 1
 	int		isVisible;  // 0 | 1
+	int		visibleAtTurn;
 
 	Fish();
 

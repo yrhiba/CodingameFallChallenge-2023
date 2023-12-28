@@ -53,19 +53,17 @@ struct Game
 	Fish &getFishById(int fishId);
 	Drone &getDroneById(int droneId);
 
-
 	int		getClosestUgly(EVector pos); // -1 if not found
 	int		getClosestVisibleFishNotScannedYet(EVector pos); // -1 if there is no visible fish
 	int		getClosestDroneIdFromPos(EVector pos); // -1 if not found
 
-
-	/*new*/
-	void	updateUglySpeed(Fish &ugly);
-	void	snapUglyToZone(Fish &ugly);
-	void	uglysSimulation(void);
-	/*new-end*/
+	/*ugly-simulation*/
+	void		updateUglySpeed(Fish &ugly);
+	void		snapUglyToZone(EVector &uglyPos);
+	void		uglysSimulation(void);
+	vector<int>	uglysDroneIdTarget(Fish &ugly);
+	/*ugly-simulation*/
 
 	void	debug();
 	void	solution();
 };
-

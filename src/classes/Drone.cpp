@@ -5,6 +5,7 @@
 
 Drone::Drone()
 {
+	this->emergency = 0;
 	this->light = 0;
 	this->velocty = EVector(0, 0);
 	this->acceleration = EVector(0, 0);
