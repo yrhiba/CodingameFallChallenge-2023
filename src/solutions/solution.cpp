@@ -8,7 +8,17 @@
 
 void Game::solution()
 {
-	cerr << "Game-Turn: " << this->game_turn << endl;
+	cerr << "Game-Turn: " << this->game_turn << endl << endl;
+
+	for (int &uglyId : this->typeFishes[-1])
+	{
+		Fish &ugly = this->getFishById(uglyId);
+
+		if (!ugly.isVisible) continue;
+
+		cerr << "Ugly-Id: " << ugly.id << " Pos: " << ugly.pos << " Vel: " << ugly.velocty;
+		cerr << " | " << ugly.velocty.magnitude() << endl;
+	}
 
 	Actions actions;
 
