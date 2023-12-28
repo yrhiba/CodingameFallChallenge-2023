@@ -61,9 +61,11 @@ struct Game
 	void		updateUglySpeed(Fish &ugly);
 	void		snapUglyToZone(EVector &uglyPos);
 	void		uglysSimulation(void);
+	vector<int>	getClosestUglysIdFrom(Fish &ugly);
 	vector<int>	uglysDroneIdTarget(Fish &ugly);
 	/*ugly-simulation*/
 
 	void	debug();
 	void	solution();
 };
+
