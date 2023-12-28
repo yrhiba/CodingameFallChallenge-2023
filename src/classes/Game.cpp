@@ -411,6 +411,44 @@ vector<int>		Game::uglysDroneIdTarget(Fish &ugly)
 	return (droneIds);
 }
 
+vector<int>	Game::getClosestUglysIdFrom(Fish &ugly)
+{
+	vector<int>	uglyIds;
+	double		uglyDis = -1;
+
+	vector<int> &allUglys = this->typeFishes[-1];
+
+	for (int &curUglyId : allUglys)
+	{
+		if (curUglyId == ugly.id)	continue;
+
+		Fish &curUgly = this->getFishById(curUglyId);
+
+		double range = 600;
+		double distance = calcDistance(curUgly.pos, ugly.pos);
+
+		if (distance <= range)
+		{
+			if (uglyDis == -1)
+			{
+				uglyIds.push_back(curUgly.id);
+				uglyDis = distance;
+			}
+			else if (distance < uglyDis)
+			{
+				uglyIds = vector<int>(1, curUgly.id);
+				uglyDis = distance;
+			}
+			else if (distance == uglyDis)
+			{
+				uglyIds.push_back(curUgly.id);
+			}
+		}
+	}
+
+	return (uglyIds);
+}
+
 void	Game::uglysSimulation(void)
 {
 	vector<int> &allUglys = this->typeFishes[-1];
@@ -419,16 +457,22 @@ void	Game::uglysSimulation(void)
 	{
 		Fish &ugly = this->getFishById(UglyId);
 
-		if (!ugly.isVisible) continue;
+		if (ugly.visibleAtTurn == -1) continue;
 
+		ugly.velocty.roundme();
+		ugly.pos += ugly.velocty;
+		this->snapUglyToZone(ugly.pos);
+	}
+
+	for (int UglyId : allUglys)
+	{
+		Fish &ugly = this->getFishById(UglyId);
+		if (!ugly.isVisible) continue;
 		if (ugly.visibleAtTurn == -1)
 		{
 			ugly.visibleAtTurn = this->game_turn;
 			continue;
 		}
-
-		ugly.pos += ugly.velocty;
-		this->snapUglyToZone(ugly.pos);
 
 		vector<int> dronesId = this->uglysDroneIdTarget(ugly);
 
@@ -436,13 +480,32 @@ void	Game::uglysSimulation(void)
 		{
 			ugly.velocty.limit(270);
 			ugly.velocty.roundme();
+
+			vector<int> closestUglys = this->getClosestUglysIdFrom(ugly);
+
+			if (!ugly.velocty.isZero() && !closestUglys.empty())
+			{
+				EVector target(0, 0);
+				for (auto &i : closestUglys)
+					target += this->getFishById(i).pos;
+				target /= closestUglys.size();
+				EVector avoidDir = ugly.pos - target;
+				if (!avoidDir.isZero())
+				{
+					avoidDir.setMag(200);
+					ugly.velocty = avoidDir;
+				}
+			}
 			this->updateUglySpeed(ugly);
+			ugly.velocty.roundme();
 		}
 		else
 		{
 			EVector target(0, 0);
 			for (auto &i : dronesId)
+			{
 				target += this->getDroneById(i).pos;
+			}
 			target /= dronesId.size();
 			ugly.velocty = target - ugly.pos;
 			ugly.velocty.limit(540);
@@ -450,4 +513,3 @@ void	Game::uglysSimulation(void)
 		}
 	}
 }
-
