@@ -278,10 +278,6 @@ Drone &Game::getDroneById(int droneId)
 	return this->allDrones.back();
 }
 
-
-/*new-funciton-in-testing-mode-start*/
-
-// get the closest ugly fish from the given position
 int	Game::getClosestUgly(EVector pos)
 {
 	int		fishId = -1;
@@ -304,12 +300,6 @@ int	Game::getClosestUgly(EVector pos)
 	return (fishId);
 }
 
-/*
-to update it need to take a drone as argument and ignore the fishes
-that are already scanned by it, i guess this function need to be implemented inside
-drone.cpp file | but anyway i am gonna work on that today no time to waste.
-*/
-// get the closest visible fish or simulated fish to the given position
 int	Game::getClosestVisibleFishNotScannedYet(EVector pos)
 {
 	int		fishId = -1;
@@ -333,7 +323,6 @@ int	Game::getClosestVisibleFishNotScannedYet(EVector pos)
 	return (fishId);
 }
 
-// get closest drone from the given position
 int		Game::getClosestDroneIdFromPos(EVector pos)
 {
 	int		droneId = -1;
@@ -355,18 +344,76 @@ int		Game::getClosestDroneIdFromPos(EVector pos)
 	return droneId;
 }
 
+void	Game::updateUglySpeed(Fish &ugly)
+{
+	EVector nextPos = ugly.pos + ugly.velocty;
+
+	if ((nextPos.x < 0 && nextPos.x < ugly.pos.x) || 
+		(nextPos.x > 9999 && nextPos.x > ugly.pos.x))
+	{
+		ugly.velocty.x *= -1;
+	}
+
+	if ((nextPos.y < 2500 && nextPos.y < ugly.pos.y) || 
+		(nextPos.y > 9999 && nextPos.y > ugly.pos.y))
+	{
+		ugly.velocty.y *= -1;
+	}
+}
+
+void	Game::snapUglyToZone(EVector &uglyPos)
+{
+	if (uglyPos.x < 0)
+		uglyPos.x = 0;
+
+	if (uglyPos.y < 0)
+		uglyPos.y = 0;
+
+	if (uglyPos.y > 9999)
+		uglyPos.y = 9999;
+
+	if (uglyPos.y < 2500)
+		uglyPos.y = 2500;
+}
+
+vector<int>		Game::uglysDroneIdTarget(Fish &ugly)
+{
+	vector<int>	droneIds;
+	int			droneDis = -1;
+
+	for (Drone &drone : this->allDrones)
+	{
+		if (drone.emergency) continue;
+
+		double range = drone.isLightOn ? 2000 : 800;
+		double distance =	(drone.pos.x - ugly.pos.x) * (drone.pos.x - ugly.pos.x) +
+							(drone.pos.y - ugly.pos.y) * (drone.pos.y - ugly.pos.y);
+
+		if (distance <= (range * range))
+		{
+			if (droneDis == -1)
+			{
+				droneIds.push_back(drone.id);
+				droneDis = distance;
+			}
+			else if (distance < droneDis)
+			{
+				droneIds = vector<int>(1, drone.id);
+				droneDis = distance;
+			}
+			else if (distance == droneDis)
+			{
+				droneIds.push_back(drone.id);
+			}
+		}
+	}
+
+	return (droneIds);
+}
+
 void	Game::uglysSimulation(void)
 {
-	// cerr << "Ugly TO simulate" << endl;
-
-	// TODO: TODAY
 	vector<int> &allUglys = this->typeFishes[-1];
-
-	if (allUglys.empty())
-	{
-		// there is no visible or uglys at the game.
-		return ;
-	}
 
 	for (int UglyId : allUglys)
 	{
@@ -374,32 +421,33 @@ void	Game::uglysSimulation(void)
 
 		if (!ugly.isVisible) continue;
 
-		// TODO return the closest Drone within it's Light Radius
-		// int droneID = this->updateTarget(ugly);
+		if (ugly.visibleAtTurn == -1)
+		{
+			ugly.visibleAtTurn = this->game_turn;
+			continue;
+		}
 
-		// if (droneID != -1)
-		// {
-		// 	ugly.pos += ugly.velocty;
+		ugly.pos += ugly.velocty;
+		this->snapUglyToZone(ugly.pos);
 
-		// 	if (ugly.pos.x < 0)
-		// 		ugly.pos.x = 0;
-		// 	else if (ugly.pos.x > 9999)
-		// 		ugly.pos.x = 9999;
+		vector<int> dronesId = this->uglysDroneIdTarget(ugly);
 
-		// 	if (ugly.pos.y < 2500)
-		// 		ugly.pos.y = 0;
-		// 	else if (ugly.pos.y > 9999)
-		// 		ugly.pos.y = 9999;
-
-		// 	ugly.pos 
-		// }
-		// else
-		// {
-
-		// }
-
-		// cerr << ugly << endl;
+		if (dronesId.empty())
+		{
+			ugly.velocty.limit(270);
+			ugly.velocty.roundme();
+			this->updateUglySpeed(ugly);
+		}
+		else
+		{
+			EVector target(0, 0);
+			for (auto &i : dronesId)
+				target += this->getDroneById(i).pos;
+			target /= dronesId.size();
+			ugly.velocty = target - ugly.pos;
+			ugly.velocty.limit(540);
+			ugly.velocty.roundme();
+		}
 	}
 }
 
-/*new-funciton-in-testing-mode-end*/
