@@ -167,7 +167,7 @@ EVector Drone::followSingleLinePathForce(void)
 
 	EVector &targetEnd = (path.direction == FORWARD_DIR) ? path.pointB : path.pointA;
 
-	if (calcDistance(this->pos, targetEnd) <= 500)
+	if (calcDistance(this->pos, targetEnd) <= 800)
 	{
 		path.reacheTheEnd = true;
 		return (EVector(0, 0));

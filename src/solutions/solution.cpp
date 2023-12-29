@@ -10,6 +10,15 @@ void Game::solution()
 {
 	cerr << "Game-Turn: " << this->game_turn << endl << endl;
 
+	cerr << "Visible+Simulated-Uglys : " << endl;
+	for (int i : this->typeFishes[-1])
+	{
+		Fish &ugly = this->getFishById(i);
+		if (ugly.isVisible)
+			cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
+	}
+	cerr << endl;
+
 	Actions actions;
 
 	for (auto &droneId : this->myDrones)
