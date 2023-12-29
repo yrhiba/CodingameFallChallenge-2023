@@ -14,8 +14,8 @@ void Game::solution()
 	for (int i : this->typeFishes[-1])
 	{
 		Fish &ugly = this->getFishById(i);
-		if (ugly.isVisible)
-			cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
+		if (!ugly.isVisible) continue;
+		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
 	}
 	cerr << endl;
 
@@ -32,7 +32,7 @@ void Game::solution()
 				curDrone.single_line_path = SingleLinePath
 				(
 					EVector(5e3, 0),
-					EVector(0, MAP_SIZE), 
+					EVector(2000, MAP_SIZE - 1000), 
 					800
 				);
 			}
@@ -41,7 +41,7 @@ void Game::solution()
 				curDrone.single_line_path = SingleLinePath
 				(
 					EVector(5e3, 0),
-					EVector(MAP_SIZE, MAP_SIZE),
+					EVector(MAP_SIZE - 2000, MAP_SIZE - 1000),
 					800
 				);
 			}
