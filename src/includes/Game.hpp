@@ -65,6 +65,11 @@ struct Game
 	vector<int>	uglysDroneIdTarget(Fish &ugly);
 	/*ugly-simulation*/
 
+
+	/*drone-avoidness*/
+	void	dronesAvoidnes(Drone &drone);
+	/*drone-avoidness*/
+
 	void	debug();
 	void	solution();
 };

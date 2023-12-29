@@ -39,6 +39,7 @@ struct Drone
 	void	applyForce(EVector force);
 	void	edges(void);
 	void	updatePos(void);
+	void	snaptoDroneZone(void);
 
 	EVector seekToPosForce(EVector target);
 	EVector fleeFromPosForce(EVector target);
