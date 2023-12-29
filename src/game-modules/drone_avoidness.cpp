@@ -2,6 +2,57 @@
 
 /*start*/
 
+struct Circle {
+    float m_radius;
+    float m_velocityX, m_velocityY;
+    float m_positionX, m_positionY;
+};
+
+struct CollisionResult {
+    bool isCollision;
+    float collisionTime;
+    float collisionPointX, collisionPointY;
+};
+
+bool checkCollision(const Circle& circleA, const Circle& circleB, float deltaTime)
+{
+	// Calculate relative velocity
+	float relativeVelocityX = circleA.m_velocityX - circleB.m_velocityX;
+	float relativeVelocityY = circleA.m_velocityY - circleB.m_velocityY;
+
+	// Calculate relative position
+	float relativePositionX = circleA.m_positionX - circleB.m_positionX;
+	float relativePositionY = circleA.m_positionY - circleB.m_positionY;
+
+	// Calculate coefficients for the quadratic equation
+	float a = relativeVelocityX * relativeVelocityX + relativeVelocityY * relativeVelocityY;
+	float b = 2.0f * (relativeVelocityX * relativePositionX + relativeVelocityY * relativePositionY);
+	float c = relativePositionX * relativePositionX + relativePositionY * relativePositionY - pow(circleA.m_radius + circleB.m_radius, 2);
+
+	// Calculate discriminant
+	float discriminant = b * b - 4 * a * c;
+
+	if (discriminant >= 0)
+	{
+		// Calculate time of collision
+		double t = (-b - sqrt(discriminant)) / (2.0f * a);
+
+		if (t >= 0.0 && t <= 1.5)
+			return true;
+
+		// Handle the case of two possible collision points
+		if (discriminant > 0) {
+			// Calculate the second time of collision
+			t = (-b + sqrt(discriminant)) / (2.0f * a);
+
+			if (t >= 0.0 && t <= 1.5)
+				return true;
+		}
+	}
+
+	return false;
+}
+
 EVector	rotateVector(EVector vect, double angle)
 {
 	double x = vect.x;
@@ -14,59 +65,12 @@ EVector	rotateVector(EVector vect, double angle)
 	return EVector(xRotated, yRotated);
 }
 
-
-bool Game::getCollision(Drone &drone, Fish& ugly)
-{
-        // Check instant collision
-        pair <int ,int> next_stp = {drone.pos.x + drone.velocty.x, drone.pos.y + drone.velocty.y};
-
-        double DroneSpeedX = drone.velocty.x;
-        double DroneSpeedY = drone.velocty.y;
-
-		double distance = (drone.pos.x + drone.velocty.x - ugly.pos.x) * (drone.pos.x - ugly.pos.x) 
-					+ ((drone.pos.y - ugly.pos.y) * (drone.pos.y - ugly.pos.y));
-
-		double range = 500;
-
-		if (distance <= range * range)
-			return true;
-
-		double distanceBetweenNextPosUgly = 
-			(next_stp.first - ugly.pos.x) * (next_stp.first - ugly.pos.x) +
-			(next_stp.second - ugly.pos.y) * (next_stp.second - ugly.pos.y);
-
-
-
-		if (distanceBetweenNextPosUgly <= 500 * 500) {
-			return true;
-		}
-
-		if (!ugly.velocty.x && !ugly.velocty.y && !DroneSpeedX && !DroneSpeedY) return false;
-
-		// Change referencial
-		double x = ugly.pos.x, y = ugly.pos.y, ux = drone.pos.x, uy = drone.pos.y;
-		double x2 = x - ux, y2 = y - uy;
-		double r2 = 500;
-
-		double vx2 = ugly.velocty.x - DroneSpeedX, vy2 = ugly.velocty.y - DroneSpeedY;
-		double a = vx2 * vx2 + vy2 * vy2;
-		if ( a <= 0.0) return false;
-		double b = 2.0 * (x2 * vx2 + y2 * vy2);
-		double c = x2 * x2 + y2 * y2 - r2 * r2;
-		double delta = b * b - 4.0 * a * c;
-		if (delta < 0.0) return false;
-		double t = (-b - sqrt(delta)) / (2.0 * a);
-		if (t <= 0.0) return false; 
-		if (t > 1.0) return false;
-		return true;
-}
-
 bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly)
 {
-	double distance = (drone.pos.x + drone.velocty.x - ugly.pos.x) * (drone.pos.x - ugly.pos.x) 
+	double distance = ((drone.pos.x - ugly.pos.x) * (drone.pos.x - ugly.pos.x))
 					+ ((drone.pos.y - ugly.pos.y) * (drone.pos.y - ugly.pos.y));
 
-	double range = 505;
+	double range = 520;
 
 	if (distance <= range * range)
 		return true;
@@ -77,43 +81,30 @@ bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly)
 		return false;
 	}
 
-	double x = ugly.pos.x;
-	double y = ugly.pos.y;
-	double ux = drone.pos.x;
-	double uy = drone.pos.y;
+	EVector nextDronePos = drone.pos + drone.velocty;
+	EVector nextUglyPos = ugly.pos + ugly.velocty;
 
+	distance = ((nextDronePos.x - nextUglyPos.x) * (nextDronePos.x - nextUglyPos.x))
+				+ ((nextDronePos.y - nextUglyPos.y) * (nextDronePos.y - nextUglyPos.y));
 
-	double x2 = x - ux;
-	double y2 = y - uy;
-	double r2 = range;
-	double vx2 = ugly.velocty.x - drone.velocty.x;
-	double vy2 = ugly.velocty.y - drone.velocty.x;
+	if (distance <= (range + 5) * (range + 5))
+		return true;
 
-	double a = vx2 * vx2 + vy2 * vy2;
+	Circle a, b;
 
-	if (a <= 0.0) {
-		return false;
-	}
+	a.m_radius = range / 2;
+	a.m_positionX = drone.pos.x;
+	a.m_positionY = drone.pos.y;
+	a.m_velocityX = drone.velocty.x;
+	a.m_velocityY = drone.velocty.y;
 
-	double b = 2.0 * (x2 * vx2 + y2 * vy2);
-	double c = x2 * x2 + y2 * y2 - r2 * r2;
-	double delta = b * b - 4.0 * a * c;
+	b.m_radius = range / 2;
+	b.m_positionX = ugly.pos.x;
+	b.m_positionY = ugly.pos.y;
+	b.m_velocityX = ugly.velocty.x;
+	b.m_velocityY = ugly.velocty.y;
 
-	if (delta < 0.0) {
-		return false;
-	}
-
-	double t = (-b - sqrt(delta)) / (2.0 * a);
-
-	if (t <= 0.0) {
-		return false;
-	}
-
-	if (t > 1.0) {
-		return false;
-	}
-
-	return true;
+	return (checkCollision(a, b, 1.0));
 }
 
 bool	Game::goodDroneVelocty(Drone &drone)
@@ -128,8 +119,6 @@ bool	Game::goodDroneVelocty(Drone &drone)
 
 		if (isCoillisionBetwDroneUgly(drone, ugly))
 			return (false);
-		// if (this->getCollision(drone, ugly))
-		// 	return (false);
 	}
 
 	return (true);
@@ -137,8 +126,12 @@ bool	Game::goodDroneVelocty(Drone &drone)
 
 void	Game::dronesAvoidnes(Drone &drone)
 {
+	if (drone.emergency) return ;
+
+	cerr << "drone: " << drone.id << " | " << "pos" << drone.pos << " | vel" << drone.velocty << endl;
+
 	double angle = 0;
-	double shift = (2 * M_PI) / 360;
+	double shift = (2 * M_PI) / 3000;
 
 	EVector	originVel = drone.velocty;
 	bool	wayExist = false;
@@ -151,11 +144,17 @@ void	Game::dronesAvoidnes(Drone &drone)
 		double nx = (drone.pos.x + drone.velocty.x);
 		double ny = (drone.pos.y + drone.velocty.y);
 
-		if (nx >= 0 && nx <= 9999 && ny >= 0 && ny <= 9999
-			&& this->goodDroneVelocty(drone))
+		if (nx >= 0 && nx <= 9999 && ny >= 0 && ny <= 9999)
 		{
-			wayExist = true;
-			break;
+			// cerr << "rotated-vel: " << drone.velocty << " ";
+
+			if (this->goodDroneVelocty(drone))
+			{
+				// cerr << "no-coillison" << endl;
+				wayExist = true;
+				break;
+			}
+			// cerr << "yes-coillison" << endl;
 		}
 
 		angle += shift;
