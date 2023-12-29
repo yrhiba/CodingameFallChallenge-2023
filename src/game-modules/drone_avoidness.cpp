@@ -119,6 +119,23 @@ bool	Game::goodDroneVelocty(Drone &drone)
 
 		if (isCoillisionBetwDroneUgly(drone, ugly))
 			return (false);
+
+		Drone	nextDrone;
+		Fish	nextUgly;
+
+		nextDrone.pos = drone.pos + drone.velocty;
+		nextUgly.pos = ugly.pos + ugly.velocty;
+
+		nextDrone.velocty = nextUgly.velocty = nextUgly.pos - nextDrone.pos;
+
+		nextDrone.velocty.setMag(600);
+		nextUgly.velocty.setMag(540);
+
+		nextDrone.velocty.roundme();
+		nextUgly.velocty.roundme();
+
+		if (isCoillisionBetwDroneUgly(nextDrone, nextUgly))
+			return (false);
 	}
 
 	return (true);
