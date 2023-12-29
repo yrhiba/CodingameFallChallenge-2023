@@ -45,6 +45,8 @@ vector<string> files =
 
 	"src/game-modules/ugly_simulation.cpp",
 
+	"src/game-modules/drone_avoidness.cpp",
+
 	"src/classes/Actions.cpp",
 
 	"src/solutions/solution.cpp",

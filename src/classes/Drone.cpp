@@ -39,11 +39,28 @@ void	Drone::edges(void)
 	}
 }
 
+void	Drone::snaptoDroneZone(void)
+{
+	if (this->pos.x < 0)
+		this->pos.x = 0;
+	if (this->pos.y < 0)
+		this->pos.y = 0;
+
+	if (this->pos.x > 9999)
+		this->pos.x = 9999;
+	if (this->pos.y > 9999)
+		this->pos.y = 9999;
+}
+
 void	Drone::updatePos(void)
 {
+	this->acceleration.roundme();
 	this->velocty += this->acceleration;
 	this->velocty.setMag(this->maxSpeed);
+	this->velocty.roundme();
 	this->pos += this->velocty;
+	this->snaptoDroneZone();
+	this->velocty *= 0;
 	this->acceleration *= 0;
 }
 
@@ -52,10 +69,9 @@ EVector Drone::seekToPosForce(EVector target)
 	EVector disered_vel = target - this->pos;
 
 	disered_vel.setMag(this->maxSpeed);
+	disered_vel.roundme();
 
-	EVector force = disered_vel - this->velocty;
-
-	return force;
+	return disered_vel;
 }
 
 EVector Drone::fleeFromPosForce(EVector target)
@@ -140,7 +156,6 @@ EVector Drone::avoidUglyForce(Fish &ugly)
 	return (EVector(0, 0));
 }
 
-
 EVector Drone::followSingleLinePathForce(void)
 {
 	SingleLinePath &path = this->single_line_path;
@@ -152,21 +167,17 @@ EVector Drone::followSingleLinePathForce(void)
 
 	EVector &targetEnd = (path.direction == FORWARD_DIR) ? path.pointB : path.pointA;
 
-	if (calcDistance(this->pos, targetEnd) <= 800)
+	if (calcDistance(this->pos, targetEnd) <= 500)
 	{
 		path.reacheTheEnd = true;
 		return (EVector(0, 0));
 	}
 
 	// step 1: predictied drone position point
-	EVector predictedPoint = this->pos + this->velocty;
+	EVector predictedPoint = this->pos;
 
 	// step 2: project the point into the line
 	EVector projectedPoint = pointProjection(predictedPoint, path.pointA, path.pointB);
-
-	// step 3: check if predictedPoint already on the path
-	if (calcDistance(projectedPoint, predictedPoint) <= path.radius)
-		return (EVector(0, 0));
 
 	// step 4: choes direction
 	EVector direction = EVector(0, 0);
@@ -181,6 +192,7 @@ EVector Drone::followSingleLinePathForce(void)
 	}
 
 	direction.setMag(300);
+	direction.roundme();
 
 	// step 5: calculate the target position
 	EVector target = projectedPoint + direction;
