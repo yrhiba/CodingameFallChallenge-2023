@@ -70,7 +70,7 @@ bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly)
 	double distance = ((drone.pos.x - ugly.pos.x) * (drone.pos.x - ugly.pos.x))
 					+ ((drone.pos.y - ugly.pos.y) * (drone.pos.y - ugly.pos.y));
 
-	double range = 520;
+	double range = 500 + ((sqrt(distance) > 100.0) ? 20 : 2);
 
 	if (distance <= range * range)
 		return true;
@@ -128,8 +128,6 @@ void	Game::dronesAvoidnes(Drone &drone)
 {
 	if (drone.emergency) return ;
 
-	cerr << "drone: " << drone.id << " | " << "pos" << drone.pos << " | vel" << drone.velocty << endl;
-
 	double angle = 0;
 	double shift = (2 * M_PI) / 3000;
 
@@ -146,15 +144,11 @@ void	Game::dronesAvoidnes(Drone &drone)
 
 		if (nx >= 0 && nx <= 9999 && ny >= 0 && ny <= 9999)
 		{
-			// cerr << "rotated-vel: " << drone.velocty << " ";
-
 			if (this->goodDroneVelocty(drone))
 			{
-				// cerr << "no-coillison" << endl;
 				wayExist = true;
 				break;
 			}
-			// cerr << "yes-coillison" << endl;
 		}
 
 		angle += shift;
@@ -163,5 +157,15 @@ void	Game::dronesAvoidnes(Drone &drone)
 	if (!wayExist)
 	{
 		cerr << "noWay for drone: " << drone.id << endl;
+
+		int uglyID = this->getClosestUgly(drone.pos);
+
+		if (uglyID == -1) return ;
+
+		Fish &ugly = this->getFishById(uglyID);
+
+		drone.velocty = drone.pos - ugly.pos;
+		drone.velocty.setMag(drone.maxSpeed);
+		drone.velocty.roundme();
 	}
 }

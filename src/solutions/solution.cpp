@@ -73,7 +73,14 @@ void Game::solution()
 		);
 	}
 
-	return ;
+
+	cerr << "Drones-result-:" << endl;
+	for (int &droneId : this->myDrones)
+	{
+		Drone &drone = this->getDroneById(droneId);
+		cerr << "drone: " << drone.id << " Pos" << drone.pos << " Vel" << drone.velocty;
+		cerr << " Light:" << (drone.light?"on":"off") << endl;
+	}
 }
 
 /*
@@ -98,4 +105,5 @@ Other-Mission-possible-help:
 2 - calc the score i have currently in my drone and compare it to the opponents one
 	if it have the same creatures as mine go to top in the shortest movemment possible
 	to gain the bonus.
+3 - to do add simulation for the next two turns.
 */
