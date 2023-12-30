@@ -75,6 +75,8 @@ struct Game
 	void	dronesAvoidnes(Drone &drone);
 	bool	isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly);
 	int		getClosestFishNotScannedYetTarget(Drone &drone);
+	int		getClosestFishByTypeNotScannedYetTarget(Drone &drone, int type);
+	int		getClosestFishStrategieOne(Drone &drone);
 	/*drone-avoidness*/
 
 	void	debug();

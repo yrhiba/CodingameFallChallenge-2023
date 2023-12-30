@@ -97,3 +97,92 @@ int		Game::getClosestFishNotScannedYetTarget(Drone &drone)
 
 	return (fishId);
 }
+
+int		Game::getClosestFishByTypeNotScannedYetTarget(Drone &drone, int type)
+{
+	int		fishId = -1;
+	double	fishDis = -1;
+
+	for (auto &fish : this->allFishes)
+	{
+		if (fish.type != type && fish.type != -1) continue;
+		if (!fish.availlableToscan) continue;
+
+		double curDis = calcDistance(fish.targetPointToScan, drone.pos);
+
+		if (fish.targetPointToScan.x < 0 || fish.targetPointToScan.x > 9999)
+			continue;
+
+		if (fish.targetPointToScan.y < 0 || fish.targetPointToScan.y > 9999)
+			continue;
+
+		if ((fishId == -1) || (curDis < fishDis))
+		{
+			fishId = fish.id;
+			fishDis = curDis;
+		}
+	}
+
+	return (fishId);
+}
+
+int		Game::getClosestFishStrategieOne(Drone &drone)
+{
+	if (drone.mode == 0)
+	{
+		// scan the fishs with type 3
+		int fishId = this->getClosestFishByTypeNotScannedYetTarget(drone, 2);
+
+		if (fishId == -1)
+		{
+			if (drone.scannedCreatures.size() > 0)
+			{
+				drone.mode = 1;
+			}
+			else
+			{
+				drone.mode = 2;
+			}
+		}
+		else
+		{
+			return (fishId);
+		}
+	}
+
+	if (drone.mode == 1)
+	{
+		// save the fishes
+		if (drone.scannedCreatures.size() > 0)
+		{
+			return -1;
+		}
+		else
+		{
+			drone.mode = 2;
+		}
+	}
+
+	if (drone.mode == 2)
+	{
+		// scan the remaing fishes
+		int fishId = this->getClosestFishNotScannedYetTarget(drone);
+
+		if (fishId != -1)
+		{
+			return fishId;
+		}
+		else
+		{
+			drone.mode = 3;
+		}
+	}
+
+	if (drone.mode == 3)
+	{
+		// save the fishes
+		return -1;
+	}
+
+	return -1;
+}

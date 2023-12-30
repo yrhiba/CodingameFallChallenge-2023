@@ -8,6 +8,11 @@ struct Drone
 {
 	int		id;
 
+	int		mode; // 0 scanne fishes type 3
+				 // 1 save them
+				// 2 scann the remaimning fishes
+				// 3 save them
+
 	EVector	pos;
 	EVector	velocty;
 	EVector	acceleration;

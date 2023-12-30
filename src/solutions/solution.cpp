@@ -24,36 +24,44 @@ void Game::solution()
 	{
 		Drone &curDrone = this->getDroneById(droneId);
 
-		int targetFishId = this->getClosestFishNotScannedYetTarget(curDrone);
-
-		if (targetFishId != -1 && curDrone.scannedCreatures.size() < 60)
+		if (curDrone.emergency)
 		{
-			Fish &targetFish = this->getFishById(targetFishId);	targetFish.availlableToscan = false;
-			curDrone.velocty = targetFish.targetPointToScan - curDrone.pos;
-
-			cerr << "targetFish: " << targetFishId << endl;
-			actions.setMsg("target: " + to_string(targetFish.id));
+			curDrone.light = 0;
+			curDrone.velocty *= 0;
+			actions.setMsg("wtf!!");
 		}
 		else
 		{
-			curDrone.velocty = EVector(0, -600);
-			actions.setMsg("Top");
+			int targetFishId = this->getClosestFishStrategieOne(curDrone);
+
+			if (targetFishId != -1)
+			{
+				Fish &targetFish = this->getFishById(targetFishId);	targetFish.availlableToscan = false;
+				curDrone.velocty = targetFish.targetPointToScan - curDrone.pos;
+
+				actions.setMsg("target: " + to_string(targetFish.id));
+			}
+			else
+			{
+				curDrone.velocty = EVector(0, -600);
+				actions.setMsg("Top");
+			}
+
+			curDrone.velocty.setMag(curDrone.maxSpeed);
+			curDrone.velocty.roundme();
+
+			this->dronesAvoidnes(curDrone);
+
+			if (this->game_turn > 4 && curDrone.battery >= 5 && curDrone.pos.y > 3000)
+			{
+				curDrone.light = (this->game_turn % 2) ? 1 : 0;
+			}
+
+			cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty;
+			cerr << " Light:" << (curDrone.light? "on" : "off") << endl;
+
+			curDrone.updatePos();
 		}
-
-		curDrone.velocty.setMag(curDrone.maxSpeed);
-		curDrone.velocty.roundme();
-
-		this->dronesAvoidnes(curDrone);
-
-		if (this->game_turn > 4 && curDrone.battery >= 5 && curDrone.pos.y > 3000)
-		{
-			curDrone.light = (this->game_turn % 2) ? 1 : 0;
-		}
-
-		cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty;
-		cerr << " Light:" << (curDrone.light?"on":"off") << endl;
-
-		curDrone.updatePos();
 
 		actions.moveToPos(
 			curDrone.pos.x,
