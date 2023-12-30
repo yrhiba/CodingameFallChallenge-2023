@@ -19,8 +19,6 @@ int main()
 	/* Game Loop */
 	while (true) 
 	{
-		cerr << "Game-Turn: " << game.game_turn << endl << endl;
-
 		/* Initialize Data */
 		game.initTurn();
 
@@ -50,6 +48,7 @@ int main()
 		game.evaluate_fishes_targets();
 
 		/* puts the solution */
+		cerr << "Game-Turn: " << game.game_turn << endl << endl;
 		game.solution();
 	}
 
