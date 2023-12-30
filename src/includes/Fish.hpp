@@ -22,6 +22,13 @@ struct Fish
 	int		isVisible;  // 0 | 1
 	int		visibleAtTurn;
 
+	// evaluate-fish-target-members
+	bool					availlable;
+	pair<EVector, EVector>	existZone; // carre first:top|left second:bottom|right
+	EVector					targetPointToScan;
+
+	vector< pair<EVector, EVector> >	existZones;
+
 	Fish();
 
 	void setPos(EVector _pos);
