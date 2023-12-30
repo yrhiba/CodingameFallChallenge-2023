@@ -57,6 +57,10 @@ struct Game
 	int		getClosestVisibleFishNotScannedYet(EVector pos); // -1 if there is no visible fish
 	int		getClosestDroneIdFromPos(EVector pos); // -1 if not found
 
+	/*fishes-target-points*/
+	void	evaluate_fishes_targets(void);
+	/*fishes-target-points*/
+
 	/*ugly-simulation*/
 	void		updateUglySpeed(Fish &ugly);
 	void		snapUglyToZone(EVector &uglyPos);
@@ -67,7 +71,6 @@ struct Game
 
 
 	/*drone-avoidness*/
-	bool	getCollision(Drone &drone, Fish &ugly);
 	bool	goodDroneVelocty(Drone &drone);
 	void	dronesAvoidnes(Drone &drone);
 	bool	isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly);
