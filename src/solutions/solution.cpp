@@ -24,37 +24,19 @@ void Game::solution()
 	{
 		Drone &curDrone = this->getDroneById(droneId);
 
-		if (this->game_turn == 0)
+		int targetFishId = this->getClosestFishNotScannedYetTarget(curDrone);
+
+		if (targetFishId != -1)
 		{
-			if (curDrone.pos.x < 5e3)
-			{
-				curDrone.single_line_path = SingleLinePath
-				(
-					EVector(2500, 0),
-					EVector(2000, MAP_SIZE - 1000), 
-					800
-				);
-			}
-			else
-			{
-				curDrone.single_line_path = SingleLinePath
-				(
-					EVector(7500, 0),
-					EVector(MAP_SIZE - 2000, MAP_SIZE - 1000),
-					800
-				);
-			}
+			curDrone.velocty = this->getFishById(targetFishId).targetPointToScan - curDrone.pos;
+		}
+		else
+		{
+			curDrone.velocty = EVector(curDrone.pos.x, 400);
 		}
 
-		curDrone.velocty = curDrone.followSingleLinePathForce();
-
-		if (curDrone.single_line_path.isFinish())
-		{
-			curDrone.single_line_path.reset();
-			curDrone.single_line_path.reverseDirection();
-
-			curDrone.velocty = curDrone.followSingleLinePathForce();
-		}
+		curDrone.velocty.setMag(curDrone.maxSpeed);
+		curDrone.velocty.roundme();
 
 		this->dronesAvoidnes(curDrone);
 
@@ -91,7 +73,8 @@ Drone: mission order
 4 - define the target point (path) - calc the velocty : TO-Do
 5 - avoid the uglys with the calculated velocty : done (95% work fine) 
 	| TODO:NOW:add multi avid check for this move and predicted next turn move.
-6 - algo for lighting the drone or not (depending if i am close enghouf to the target fishes or possible invisble ugly close to me).
+6 - algo for lighting the drone or not (depending if i am close enghouf to the target 
+	fishes or possible invisble ugly close to me).
 7 - update and output the move or the wait : done (100%)
 
 Other-Mission-possible-help:
