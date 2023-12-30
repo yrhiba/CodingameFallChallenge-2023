@@ -101,4 +101,6 @@ Other-Mission-possible-help:
 2 - calc the score i have currently in my drone and compare it to the opponents one
 	if it have the same creatures as mine go to top in the shortest movemment possible
 	to gain the bonus.
+3 - add if i already scanned the fish and my opponents gonna lose some points
+	sifte fish bera map.
 */
