@@ -44,11 +44,13 @@ int main()
 		// add a prediction futur pos for all the previous visible Uglys
 		game.uglysSimulation();
 
+		// start of new Turn
+		cerr << "Game-Turn: " << game.game_turn << endl << endl;
+
 		// evaluate target point for remainig fishes
 		game.evaluate_fishes_targets();
 
 		/* puts the solution */
-		cerr << "Game-Turn: " << game.game_turn << endl << endl;
 		game.solution();
 	}
 
