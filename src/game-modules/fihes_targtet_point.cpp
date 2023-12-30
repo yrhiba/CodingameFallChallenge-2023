@@ -2,7 +2,7 @@
 
 /*start*/
 
-pair<EVector, EVector> calcTheIntersctionReactangle(vector<pair<EVector, EVector>> rectangles)
+pair<EVector, EVector> calcTheIntersctionReactangle(vector<pair<EVector, EVector>> &rectangles)
 {
 	if (rectangles.empty())
 	{
