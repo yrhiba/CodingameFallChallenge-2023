@@ -67,6 +67,7 @@ void	Game::evaluate_fishes_targets(void)
 
 		cerr << "fish:" << fish.id << " Target: " << fish.targetPointToScan << endl;
 	}
+	cerr << endl;
 }
 
 int		Game::getClosestFishNotScannedYetTarget(Drone &drone)
