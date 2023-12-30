@@ -43,6 +43,8 @@ vector<string> files =
 
 	"src/classes/Game.cpp",
 
+	"src/game-modules/fihes_targtet_point.cpp",
+
 	"src/game-modules/ugly_simulation.cpp",
 
 	"src/game-modules/drone_avoidness.cpp",
