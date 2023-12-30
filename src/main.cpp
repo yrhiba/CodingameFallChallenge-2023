@@ -44,6 +44,9 @@ int main()
 		// add a prediction futur pos for all the previous visible Uglys
 		game.uglysSimulation();
 
+		// evaluate target point for remainig fishes
+		game.evaluate_fishes_targets();
+
 		/* puts the solution */
 		game.solution();
 	}

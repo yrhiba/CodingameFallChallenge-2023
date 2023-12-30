@@ -4,6 +4,8 @@
 
 void	Game::evaluate_fishes_targets(void)
 {
+	cerr << "Fishes To Scan: " << endl;
+
 	for (Fish &fish : this->allFishes)
 	{
 		// skip the uglys
@@ -12,9 +14,7 @@ void	Game::evaluate_fishes_targets(void)
 		// skip the saved fishes
 		if (!fish.availlableToscan) continue;
 
-		
-
-
+		cerr << fish << endl;
 	}
 }
 
