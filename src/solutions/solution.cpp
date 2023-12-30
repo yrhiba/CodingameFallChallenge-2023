@@ -21,6 +21,7 @@ void Game::solution()
 
 	Actions actions;
 
+	cerr << "Drones-result-:" << endl;
 	for (auto &droneId : this->myDrones)
 	{
 		Drone &curDrone = this->getDroneById(droneId);
@@ -59,27 +60,21 @@ void Game::solution()
 
 		this->dronesAvoidnes(curDrone);
 
-		curDrone.updatePos();
-
 		if (this->game_turn > 4 && curDrone.battery >= 5 && curDrone.pos.y > 3000)
 		{
 			curDrone.light = (this->game_turn % 2) ? 1 : 0;
 		}
+
+		cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty;
+		cerr << " Light:" << (curDrone.light?"on":"off") << endl;
+
+		curDrone.updatePos();
 
 		actions.moveToPos(
 			curDrone.pos.x,
 			curDrone.pos.y,
 			curDrone.light
 		);
-	}
-
-
-	cerr << "Drones-result-:" << endl;
-	for (int &droneId : this->myDrones)
-	{
-		Drone &drone = this->getDroneById(droneId);
-		cerr << "drone: " << drone.id << " Pos" << drone.pos << " Vel" << drone.velocty;
-		cerr << " Light:" << (drone.light?"on":"off") << endl;
 	}
 }
 

@@ -70,7 +70,7 @@ bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly)
 	double distance = ((drone.pos.x - ugly.pos.x) * (drone.pos.x - ugly.pos.x))
 					+ ((drone.pos.y - ugly.pos.y) * (drone.pos.y - ugly.pos.y));
 
-	double range = 500 + ((sqrt(distance) > 100.0) ? 20 : 2);
+	double range = 540;
 
 	if (distance <= range * range)
 		return true;
@@ -87,7 +87,7 @@ bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly)
 	distance = ((nextDronePos.x - nextUglyPos.x) * (nextDronePos.x - nextUglyPos.x))
 				+ ((nextDronePos.y - nextUglyPos.y) * (nextDronePos.y - nextUglyPos.y));
 
-	if (distance <= (range + 5) * (range + 5))
+	if (distance <= range * range)
 		return true;
 
 	Circle a, b;
