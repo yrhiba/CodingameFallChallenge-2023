@@ -26,14 +26,18 @@ void Game::solution()
 
 		int targetFishId = this->getClosestFishNotScannedYetTarget(curDrone);
 
-		if (targetFishId != -1)
+		if (targetFishId != -1 && curDrone.scannedCreatures.size() < 60)
 		{
 			Fish &targetFish = this->getFishById(targetFishId);	targetFish.availlableToscan = false;
 			curDrone.velocty = targetFish.targetPointToScan - curDrone.pos;
+
+			cerr << "targetFish: " << targetFishId << endl;
+			actions.setMsg("target: " + to_string(targetFish.id));
 		}
 		else
 		{
-			curDrone.velocty = EVector(curDrone.pos.x, 400);
+			curDrone.velocty = EVector(0, -600);
+			actions.setMsg("Top");
 		}
 
 		curDrone.velocty.setMag(curDrone.maxSpeed);

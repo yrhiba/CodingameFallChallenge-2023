@@ -49,8 +49,13 @@ void	Game::evaluate_fishes_targets(void)
 		// skip the saved fishes
 		if (!fish.availlableToscan) continue;
 
-		fish.existZone = calcTheIntersctionReactangle(fish.existZones);
+		if (fish.existZones.size() != 3) 
+		{
+			fish.availlableToscan = false;
+			continue;
+		}
 
+		fish.existZone = calcTheIntersctionReactangle(fish.existZones);
 
 		EVector vect = fish.existZone.second - fish.existZone.first;
 
@@ -72,9 +77,15 @@ int		Game::getClosestFishNotScannedYetTarget(Drone &drone)
 	for (auto &fish : this->allFishes)
 	{
 		if (fish.type == -1) continue;
-		if (!fish.isVisible) continue;
+		if (!fish.availlableToscan) continue;
 
 		double curDis = calcDistance(fish.targetPointToScan, drone.pos);
+
+		if (fish.targetPointToScan.x < 0 || fish.targetPointToScan.x > 9999)
+			continue;
+
+		if (fish.targetPointToScan.y < 0 || fish.targetPointToScan.y > 9999)
+			continue;
 
 		if ((fishId == -1) || (curDis < fishDis))
 		{
@@ -85,4 +96,3 @@ int		Game::getClosestFishNotScannedYetTarget(Drone &drone)
 
 	return (fishId);
 }
-
