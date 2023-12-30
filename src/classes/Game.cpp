@@ -37,6 +37,25 @@ void Game::initTurn( void )
 		{
 			fish.isVisible = false;
 			fish.pos = EVector(-1, -1);
+
+			fish.availlableToscan = true;
+			fish.existZone = make_pair(EVector(-1, -1), EVector(-1, -1));
+			fish.targetPointToScan = EVector(-1, -1);
+			fish.existZones.clear();
+
+			// push back the fish zone depending on their type
+			if (fish.type == 0)
+			{
+				fish.existZones.push_back({EVector(0, 2500), EVector(9999, 5000)});
+			}
+			else if (fish.type == 1)
+			{
+				fish.existZones.push_back({EVector(0, 5000), EVector(9999, 7500)});
+			}
+			else if (fish.type == 2)
+			{
+				fish.existZones.push_back({EVector(0, 7500), EVector(9999, 9999)});
+			}
 		}
 	}
 
@@ -64,6 +83,8 @@ void Game::readScannedCreatures( void )
 		this->isScannedFish[fish.id] = true;
 		fish.scannedByMe = true;
 		fish.scaned = true;
+
+		fish.availlableToscan = false;
 	}
 
 	/* What Oponnents Scan */
@@ -160,6 +181,9 @@ void Game::readDronesCurrentScan( void )
 
 		Drone &drone = this->getDroneById(drone_id);
 		drone.scannedCreatures.push_back(creature_id);
+
+		Fish &fish = this->getFishById(creature_id);
+		fish.availlableToscan = false;
 	}
 }
 
@@ -195,6 +219,26 @@ void Game::readRadarInfo( void )
 
 		Drone &drone = this->getDroneById(drone_id);
 		drone.creaturesDirection.push_back({creature_id, radar});
+
+		Fish &fish = this->getFishById(creature_id);
+
+		// push back the fish zone depending on direction given by radar
+		if (radar == "TL")
+		{
+			fish.existZones.push_back({EVector(0, 0), drone.pos});
+		}
+		else if (radar == "TR")
+		{
+			fish.existZones.push_back({EVector(drone.pos.x, 0), EVector(9999, drone.pos.y)});
+		}
+		else if (radar == "BR")
+		{
+			fish.existZones.push_back({drone.pos, EVector(9999, 9999)});
+		}
+		else if (radar == "BL")
+		{
+			fish.existZones.push_back({EVector(0, drone.pos.y), EVector(drone.pos.x, 9999)});
+		}
 	}
 }
 
