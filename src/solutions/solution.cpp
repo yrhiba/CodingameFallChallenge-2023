@@ -28,7 +28,8 @@ void Game::solution()
 
 		if (targetFishId != -1)
 		{
-			curDrone.velocty = this->getFishById(targetFishId).targetPointToScan - curDrone.pos;
+			Fish &targetFish = this->getFishById(targetFishId);	targetFish.availlableToscan = false;
+			curDrone.velocty = targetFish.targetPointToScan - curDrone.pos;
 		}
 		else
 		{
