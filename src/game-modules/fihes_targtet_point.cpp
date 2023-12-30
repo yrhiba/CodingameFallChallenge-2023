@@ -63,3 +63,26 @@ void	Game::evaluate_fishes_targets(void)
 		cerr << "fish:" << fish.id << " Target: " << fish.targetPointToScan << endl;
 	}
 }
+
+int		Game::getClosestFishNotScannedYetTarget(Drone &drone)
+{
+	int		fishId = -1;
+	double	fishDis = -1;
+
+	for (auto &fish : this->allFishes)
+	{
+		if (fish.type == -1) continue;
+		if (!fish.isVisible) continue;
+
+		double curDis = calcDistance(fish.targetPointToScan, drone.pos);
+
+		if ((fishId == -1) || (curDis < fishDis))
+		{
+			fishId = fish.id;
+			fishDis = curDis;
+		}
+	}
+
+	return (fishId);
+}
+
