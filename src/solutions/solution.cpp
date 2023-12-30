@@ -8,8 +8,6 @@
 
 void Game::solution()
 {
-	cerr << "Game-Turn: " << this->game_turn << endl << endl;
-
 	cerr << "Visible+Simulated-Uglys : " << endl;
 	for (int i : this->typeFishes[-1])
 	{
