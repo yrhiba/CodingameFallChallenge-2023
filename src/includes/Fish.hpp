@@ -23,7 +23,7 @@ struct Fish
 	int		visibleAtTurn;
 
 	// evaluate-fish-target-members
-	bool					availlable;
+	bool					availlableToscan;
 	pair<EVector, EVector>	existZone; // carre first:top|left second:bottom|right
 	EVector					targetPointToScan;
 
