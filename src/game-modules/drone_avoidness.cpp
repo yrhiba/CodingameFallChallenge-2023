@@ -148,10 +148,13 @@ void	Game::dronesAvoidnes(Drone &drone)
 	double angle = 0;
 	double shift = (2 * M_PI) / 3000;
 
+	EVector	firstVel = EVector(-1, -1);
+	EVector	secondVel = EVector(-1, -1);
+
 	EVector	originVel = drone.velocty;
 	bool	wayExist = false;
 
-	while (angle < 6.30)
+	while (angle < 3.15)
 	{
 		drone.velocty = rotateVector(originVel, angle);
 		drone.velocty.roundme();
@@ -163,6 +166,30 @@ void	Game::dronesAvoidnes(Drone &drone)
 		{
 			if (this->goodDroneVelocty(drone))
 			{
+				firstVel = drone.velocty;
+				wayExist = true;
+				break;
+			}
+		}
+
+		angle += shift;
+	}
+
+	angle = 0;
+
+	while (angle < 3.15)
+	{
+		drone.velocty = rotateVector(originVel, angle * -1);
+		drone.velocty.roundme();
+
+		double nx = (drone.pos.x + drone.velocty.x);
+		double ny = (drone.pos.y + drone.velocty.y);
+
+		if (nx >= 0 && nx <= 9999 && ny >= 0 && ny <= 9999)
+		{
+			if (this->goodDroneVelocty(drone))
+			{
+				secondVel = drone.velocty;
 				wayExist = true;
 				break;
 			}
@@ -184,5 +211,28 @@ void	Game::dronesAvoidnes(Drone &drone)
 		drone.velocty = drone.pos - ugly.pos;
 		drone.velocty.setMag(drone.maxSpeed);
 		drone.velocty.roundme();
+	}
+
+	if (wayExist && secondVel.x == -1)
+	{
+		drone.velocty = firstVel;
+	}
+	else if (wayExist && firstVel.x == -1)
+	{
+		drone.velocty = secondVel;
+	}
+	else if (wayExist)
+	{
+		EVector target = drone.pos + originVel;
+
+		if (calcDistance(target, drone.pos + firstVel)
+			<= calcDistance(target, drone.pos + secondVel))
+		{
+			drone.velocty = firstVel;
+		}
+		else
+		{
+			drone.velocty = secondVel;
+		}
 	}
 }
