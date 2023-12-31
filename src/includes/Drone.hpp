@@ -8,11 +8,21 @@ struct Drone
 {
 	int		id;
 
+	int		mode; // 0 scan fishes | 1 save fishes | 2 kick out the fishes
+
 	/*for-update-drone-vel*/
 	EVector	TargetPos;
-	int		TargetFish;
-	bool	alreadyAssignedToSeekAFish; // boolean true|false
-	/*for-update-drone-vel*/
+
+	// target fish to scan
+	bool	assignedFishToScan; // true: must follow the target fish
+	int		TargetFishToScan;
+
+	// target fish to kick out
+	bool	assignedFishToKick; // true: must kick out the target fish
+	int		TargetFishToKick;
+
+	// mode explore or go top for save the fishes;
+	bool	mustGoToTop; // true need to go and save the fishes | false go to explore
 
 	EVector	pos;
 	EVector	velocty;

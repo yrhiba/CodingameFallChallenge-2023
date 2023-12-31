@@ -6,9 +6,17 @@
 Drone::Drone()
 {
 	/*init-data*/
-	this->alreadyAssignedToSeekAFish = false;
-	this->TargetFish = -1;
+
+	/*data-related-to-update-drone*/
+	this->mode = 0;
 	this->TargetPos = EVector(0, 0);
+	this->assignedFishToScan = false;
+	this->TargetFishToScan = -1;
+	this->assignedFishToKick = false;
+	this->TargetFishToKick = -1;
+	this->mustGoToTop = false;
+	/*data-related-to-update-drone*/
+
 	this->emergency = 0;
 	this->light = 0;
 	this->velocty = EVector(0, 0);

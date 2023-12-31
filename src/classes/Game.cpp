@@ -116,9 +116,15 @@ void Game::readDrones( void )
 			rDrone.isLightOn = (rDrone.battery - 5 == drone.battery);
 
 			/*initalize data related to update drone target */
-			rDrone.alreadyAssignedToSeekAFish = false;
-			rDrone.TargetFish = -1;
+			// to-evaluate: if need to keep mode over the turn
+			// or initialze it.
+			rDrone.mode = 0;
 			rDrone.TargetPos = EVector(0, 0);
+			rDrone.assignedFishToScan = false;
+			rDrone.TargetFishToScan = -1;
+			rDrone.assignedFishToKick = false;
+			rDrone.TargetFishToKick = -1;
+			rDrone.mustGoToTop = false;
 			/*initalize data related to update drone target */
 
 			rDrone.pos = drone.pos;

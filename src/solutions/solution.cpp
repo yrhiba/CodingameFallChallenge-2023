@@ -74,8 +74,7 @@ Drone: mission order
 2 - remove from the map the fishes already scanned - TO-Do
 3 - calc the remaing availlable fishes to scan and there cost : TO-Do
 4 - define the target point (path) - calc the velocty : TO-Do
-5 - avoid the uglys with the calculated velocty : done (95% work fine) 
-	| TODO:NOW:add multi avid check for this move and predicted next turn move.
+5 - avoid the uglys with the calculated velocty : done (99.9% work fine) 
 6 - algo for lighting the drone or not (depending if i am close enghouf to the target 
 	fishes or possible invisble ugly close to me).
 7 - update and output the move or the wait : done (100%)
