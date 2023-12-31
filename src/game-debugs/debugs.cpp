@@ -33,19 +33,25 @@ void Game::debugFishsVisibleSimulated(void)
 
 			cerr << "Fish: " << fish.id << " ";
 
-			if (fish.isVisible)
+			if (fish.existZones.size() != 3)
 			{
-				cerr << "Pos" << fish.pos << ", Vel" << fish.velocty;
+				cerr << "Out-Of-The-Map." << endl;
 			}
 			else
 			{
-				cerr << "Estimated-Pos: " << fish.targetPointToScan;
-			}
+				if (fish.isVisible)
+				{
+					cerr << "Pos" << fish.pos << ", Vel" << fish.velocty;
+				}
+				else
+				{
+					cerr << "Estimated-Pos: " << fish.targetPointToScan;
+				}
 
-			cerr << ", AvaillableToScan: " << (fish.availlableToscan?"yes":"no") << endl;
+				cerr << ", AvaillableToScan: " << (fish.availlableToscan?"yes":"no") << endl;
+			}
 		}
 	}
-
 	cerr << endl;
 }
 
