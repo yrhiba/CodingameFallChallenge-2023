@@ -5,18 +5,23 @@
 void Game::debugVisibleSimulatedUglys(void)
 {
 	cerr << "Visible+Simulated-Uglys : " << endl;
+	bool	isAtLeastOne = false;
 	for (int i : this->typeFishes[-1])
 	{
 		Fish &ugly = this->getFishById(i);
 		if (!ugly.isVisible) continue;
+		isAtLeastOne = true;
 		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
 	}
-	cerr << endl;
+	if (!isAtLeastOne)
+		cerr << "No-Information-Availlable";
+	cerr << endl << endl;
 }
 
 void Game::debugFishsVisibleSimulated(void)
 {
 	cerr << "Visible+Simulated-Fishes : " << endl;
+
 	for (int fishType = 2; fishType >= 0; fishType--)
 	{
 		cerr << "######### Fishes-Type: " << fishType << endl;
@@ -39,6 +44,8 @@ void Game::debugFishsVisibleSimulated(void)
 			cerr << ", AvaillableToScan: " << (fish.availlableToscan?"yes":"no") << endl;
 		}
 	}
+
+	cerr << endl;
 }
 
 void Game::debugMyDroneState(void)
@@ -50,6 +57,7 @@ void Game::debugMyDroneState(void)
 		cerr << "drone: " << drone.id << " Pos" << drone.pos << " Vel" << drone.velocty;
 		cerr << " Light:" << (drone.light? "on" : "off") << endl;
 	}
+	cerr << endl;
 }
 
 // output the sved fishes + the current score | me and opponets
