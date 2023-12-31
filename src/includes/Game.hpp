@@ -90,7 +90,6 @@ struct Game
 
 
 	/*debugs-functions*/
-	void	debug();
 	void	debugVisibleSimulatedUglys(void);
 	void	debugFishsVisibleSimulated(void);
 	void	debugMyDroneState(void);

@@ -243,31 +243,6 @@ void Game::readRadarInfo( void )
 	}
 }
 
-void Game::debug( void )
-{
-	cerr << "Turn: " << this->game_turn << endl;
-	cerr << "Creaturs-Count: " << this->creature_count << endl;
-	cerr << "MyScore: " << this->my_score << " | OpScore: " << this->op_score << endl;
-	cerr << "MyDroneCount: " << this->my_drone_count << " | OpDroneCount: " << this->op_drone_count << endl;
-	cerr << "MyScanCount: " << this->my_scan_count << " | OpScanCount: " << this->op_scan_count << endl;  
-	cerr << endl;
-
-	cerr << "Fishes Informations: " << endl;
-	for (auto &fish : this->allFishes)
-		cerr << fish << endl;
-	cerr << endl;
-
-	cerr << "Drones Informations: " << endl;
-	for (auto &drone : this->allDrones)
-	{
-		cerr << drone << endl;
-		cerr << "Drone Creatures Radar: " << endl;
-		for (auto &[creatureID, direction] : drone.creaturesDirection)
-			cerr << creatureID << "," << direction << " | ";
-		cerr << endl << endl;
-	}
-}
-
 Fish &Game::getFishById(int fishId)
 {
 	int start = 0;
