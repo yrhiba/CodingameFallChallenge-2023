@@ -39,8 +39,6 @@ pair<EVector, EVector> calcTheIntersctionReactangle(vector<pair<EVector, EVector
 
 void	Game::evaluate_fishes_targets(void)
 {
-	cerr << "Fishes To Scan: " << endl;
-
 	for (Fish &fish : this->allFishes)
 	{
 		// skip the uglys
@@ -64,36 +62,5 @@ void	Game::evaluate_fishes_targets(void)
 		vect.roundme();
 
 		fish.targetPointToScan = fish.existZone.first + vect;
-
-		cerr << "fish:" << fish.id << " Target: " << fish.targetPointToScan << endl;
 	}
-	cerr << endl;
-}
-
-int		Game::getClosestFishNotScannedYetTarget(Drone &drone)
-{
-	int		fishId = -1;
-	double	fishDis = -1;
-
-	for (auto &fish : this->allFishes)
-	{
-		if (fish.type == -1) continue;
-		if (!fish.availlableToscan) continue;
-
-		double curDis = calcDistance(fish.targetPointToScan, drone.pos);
-
-		if (fish.targetPointToScan.x < 0 || fish.targetPointToScan.x > 9999)
-			continue;
-
-		if (fish.targetPointToScan.y < 0 || fish.targetPointToScan.y > 9999)
-			continue;
-
-		if ((fishId == -1) || (curDis < fishDis))
-		{
-			fishId = fish.id;
-			fishDis = curDis;
-		}
-	}
-
-	return (fishId);
 }
