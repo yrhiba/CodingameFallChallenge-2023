@@ -13,7 +13,7 @@ void Game::solution()
 	this->debugVisibleSimulatedUglys();
 
 	// For Drones debug descions.
-	cerr << "Drones-next-Turn-Estimation-Result:" << endl;
+	cerr << "Drones-Turn-Result:" << endl;
 
 	// loop for each drone and do something | Let's Go
 	for (auto &droneId : this->myDrones)

@@ -4,17 +4,18 @@
 
 void Game::debugVisibleSimulatedUglys(void)
 {
-	cerr << "Visible+Simulated-Uglys : " << endl;
+	cerr << "Visible+Simulated-Uglys : ";
 	bool	isAtLeastOne = false;
 	for (int i : this->typeFishes[-1])
 	{
 		Fish &ugly = this->getFishById(i);
 		if (!ugly.isVisible) continue;
+		if (!isAtLeastOne) cerr << endl;
 		isAtLeastOne = true;
 		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
 	}
 	if (!isAtLeastOne)
-		cerr << "No-Information-Availlable";
+		cerr << " No-Information-Availlable";
 	cerr << endl << endl;
 }
 
