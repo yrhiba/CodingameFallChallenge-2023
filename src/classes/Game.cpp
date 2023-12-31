@@ -115,6 +115,12 @@ void Game::readDrones( void )
 
 			rDrone.isLightOn = (rDrone.battery - 5 == drone.battery);
 
+			/*initalize data related to update drone target */
+			rDrone.alreadyAssignedToSeekAFish = false;
+			rDrone.TargetFish = -1;
+			rDrone.TargetPos = EVector(0, 0);
+			/*initalize data related to update drone target */
+
 			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;

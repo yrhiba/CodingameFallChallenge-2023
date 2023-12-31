@@ -8,6 +8,12 @@ struct Drone
 {
 	int		id;
 
+	/*for-update-drone-vel*/
+	EVector	TargetPos;
+	int		TargetFish;
+	bool	alreadyAssignedToSeekAFish; // boolean true|false
+	/*for-update-drone-vel*/
+
 	EVector	pos;
 	EVector	velocty;
 	EVector	acceleration;
