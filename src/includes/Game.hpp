@@ -61,20 +61,25 @@ struct Game
 	void	evaluate_fishes_targets(void);
 	/*fishes-target-points*/
 
-	/*ugly-simulation*/
+
+	/*uglys-simulation*/
 	void		updateUglySpeed(Fish &ugly);
 	void		snapUglyToZone(EVector &uglyPos);
 	void		uglysSimulation(void);
 	vector<int>	getClosestUglysIdFrom(Fish &ugly);
 	vector<int>	uglysDroneIdTarget(Fish &ugly);
-	/*ugly-simulation*/
+	/*uglys-simulation*/
+
+
+	/*scores-evaluation*/
+	void	scores_evaluate(void);
+	/*scores-evaluation*/
 
 
 	/*drone-avoidness*/
 	bool	goodDroneVelocty(Drone &drone);
 	void	dronesAvoidnes(Drone &drone);
 	bool	isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly);
-	int		getClosestFishNotScannedYetTarget(Drone &drone);
 	/*drone-avoidness*/
 
 

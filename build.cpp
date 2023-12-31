@@ -47,9 +47,11 @@ vector<string> files =
 
 	"src/game-modules/ugly_simulation.cpp",
 
-	"src/game-modules/drone_avoidness.cpp",
+	"src/game-modules/scores_evaluate.cpp",
 
 	"src/drone-work/drone_update.cpp",
+
+	"src/drone-work/drone_avoidness.cpp",
 
 	"src/drone-work/light_evaluate.cpp",
 

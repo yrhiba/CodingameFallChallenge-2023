@@ -3,15 +3,15 @@
 /*start*/
 
 struct Circle {
-    float m_radius;
-    float m_velocityX, m_velocityY;
-    float m_positionX, m_positionY;
+	float m_radius;
+	float m_velocityX, m_velocityY;
+	float m_positionX, m_positionY;
 };
 
 struct CollisionResult {
-    bool isCollision;
-    float collisionTime;
-    float collisionPointX, collisionPointY;
+	bool isCollision;
+	float collisionTime;
+	float collisionPointX, collisionPointY;
 };
 
 bool checkCollision(const Circle& circleA, const Circle& circleB, float deltaTime)
@@ -202,37 +202,34 @@ void	Game::dronesAvoidnes(Drone &drone)
 	{
 		cerr << "noWay for drone: " << drone.id << endl;
 
-		int uglyID = this->getClosestUgly(drone.pos);
-
-		if (uglyID == -1) return ;
-
-		Fish &ugly = this->getFishById(uglyID);
-
-		drone.velocty = drone.pos - ugly.pos;
+		// go to top to win some time.
+		drone.velocty = EVector(0, -600);
 		drone.velocty.setMag(drone.maxSpeed);
 		drone.velocty.roundme();
 	}
-
-	if (wayExist && secondVel.x == -1)
+	else
 	{
-		drone.velocty = firstVel;
-	}
-	else if (wayExist && firstVel.x == -1)
-	{
-		drone.velocty = secondVel;
-	}
-	else if (wayExist)
-	{
-		EVector target = drone.pos + originVel;
-
-		if (calcDistance(target, drone.pos + firstVel)
-			<= calcDistance(target, drone.pos + secondVel))
+		if (secondVel.x == -1)
 		{
 			drone.velocty = firstVel;
 		}
-		else
+		else if (firstVel.x == -1)
 		{
 			drone.velocty = secondVel;
+		}
+		else
+		{
+			EVector target = drone.pos + originVel;
+
+			if (calcDistance(target, drone.pos + firstVel)
+				<= calcDistance(target, drone.pos + secondVel))
+			{
+				drone.velocty = firstVel;
+			}
+			else
+			{
+				drone.velocty = secondVel;
+			}
 		}
 	}
 }

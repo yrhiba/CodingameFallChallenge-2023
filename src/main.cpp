@@ -47,6 +47,9 @@ int main()
 		// start of new Turn
 		cerr << "Game-Turn: " << game.game_turn << endl << endl;
 
+		// evaluate the current score Table
+		game.scores_evaluate();
+
 		// evaluate target point for remainig fishes
 		game.evaluate_fishes_targets();
 
