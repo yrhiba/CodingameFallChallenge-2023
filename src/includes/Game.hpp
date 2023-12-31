@@ -78,11 +78,22 @@ struct Game
 	/*drone-avoidness*/
 
 
-	/*drone-stratgy*/
+	/*drone-work*/
+	void	droneUpdateVel(Drone &drone);
 	void	droneLighEvaluateState(Drone &drone);
-	/*drone-stratgy*/
+	/*drone-work*/
 
+
+	/*debugs-functions*/
 	void	debug();
+	void	debugVisibleSimulatedUglys(void);
+	void	debugFishsVisibleSimulated(void);
+	void	debugMyDroneState(void);
+	void	debugSavedScore(void);
+	void	debugUnsavedScore(void);
+	void	debugScoring(void);
+	/*debugs-functions*/
+
 	void	solution();
 };
 

@@ -8,39 +8,42 @@
 
 void Game::solution()
 {
-	cerr << "Visible+Simulated-Uglys : " << endl;
-	for (int i : this->typeFishes[-1])
-	{
-		Fish &ugly = this->getFishById(i);
-		if (!ugly.isVisible) continue;
-		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
-	}
-	cerr << endl;
+	// Debugs Info
+	this->debugFishsVisibleSimulated();
+	this->debugVisibleSimulatedUglys();
 
-	cerr << "Drones-result-:" << endl;
+	// For Drones debug descions.
+	cerr << "Drones-next-Turn-Estimation-Result:" << endl;
+
+	// loop for each drone and do something | Let's Go
 	for (auto &droneId : this->myDrones)
 	{
-		Actions actions;
+		Actions	action;
 
-		Drone &curDrone = this->getDroneById(droneId);
+		Drone	&curDrone = this->getDroneById(droneId);
 
 		if (curDrone.emergency)
 		{
-			// do nothing.
-			actions.setMsg("emergency.");
-			actions.wait(false);
+			// Do nothing, I don't have control on the drone.
+			action.setMsg("emergency.");
+			// add action with ligh off state
+			action.wait(false);
 		}
 		else
 		{
-			this->droneLighEvaluateState(curDrone);
+			// update velocty
+			this->droneUpdateVel(curDrone);
+			// avoid uglys
 			this->dronesAvoidnes(curDrone);
-
-			cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty;
-			cerr << " Light:" << (curDrone.light? "on" : "off") << endl;
-
+			// light desion on/off
+			this->droneLighEvaluateState(curDrone);
+			// debug drone desion
+			cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty
+				<< " Light:" << (curDrone.light ? "on" : "off") << endl;
+			// update position
 			curDrone.updatePos();
-
-			actions.moveToPos(
+			// output the reult action
+			action.moveToPos(
 				curDrone.pos.x,
 				curDrone.pos.y,
 				curDrone.light
