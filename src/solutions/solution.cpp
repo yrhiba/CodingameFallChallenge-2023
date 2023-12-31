@@ -17,53 +17,48 @@ void Game::solution()
 	}
 	cerr << endl;
 
-	Actions actions;
-
 	cerr << "Drones-result-:" << endl;
 	for (auto &droneId : this->myDrones)
 	{
+		Actions actions;
+
 		Drone &curDrone = this->getDroneById(droneId);
 
-		int targetFishId = this->getClosestFishNotScannedYetTarget(curDrone);
-
-		if (targetFishId != -1 && curDrone.scannedCreatures.size() < 60)
+		if (curDrone.emergency)
 		{
-			Fish &targetFish = this->getFishById(targetFishId);	targetFish.availlableToscan = false;
-			curDrone.velocty = targetFish.targetPointToScan - curDrone.pos;
-
-			cerr << "targetFish: " << targetFishId << endl;
-			actions.setMsg("target: " + to_string(targetFish.id));
+			// do nothing.
+			actions.setMsg("emergency.");
+			actions.wait(false);
 		}
 		else
 		{
-			curDrone.velocty = EVector(0, -600);
-			actions.setMsg("Top");
+			this->droneLighEvaluateState(curDrone);
+			this->dronesAvoidnes(curDrone);
+
+			cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty;
+			cerr << " Light:" << (curDrone.light? "on" : "off") << endl;
+
+			curDrone.updatePos();
+
+			actions.moveToPos(
+				curDrone.pos.x,
+				curDrone.pos.y,
+				curDrone.light
+			);
 		}
-
-		curDrone.velocty.setMag(curDrone.maxSpeed);
-		curDrone.velocty.roundme();
-
-		this->dronesAvoidnes(curDrone);
-
-		if (this->game_turn > 4 && curDrone.battery >= 5 && curDrone.pos.y > 3000)
-		{
-			curDrone.light = (this->game_turn % 2) ? 1 : 0;
-		}
-
-		cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty;
-		cerr << " Light:" << (curDrone.light?"on":"off") << endl;
-
-		curDrone.updatePos();
-
-		actions.moveToPos(
-			curDrone.pos.x,
-			curDrone.pos.y,
-			curDrone.light
-		);
 	}
 }
 
 /*
+To-Work-On:
+0 - score the current fishes scan for me and opponents
+1 - remove fish from the map
+
+Tips:
+0 - don't wast time with the leaderBoard
+	the game still not finish yet and play for
+	the best bot you code ever, see the details.
+
 Turn order taches:
 0 - simulate the already visible uglys moves (estimation : 99.9% work)
 1 - initialize the data from the previous turn (99.9%)

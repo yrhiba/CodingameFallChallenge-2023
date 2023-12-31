@@ -77,6 +77,11 @@ struct Game
 	int		getClosestFishNotScannedYetTarget(Drone &drone);
 	/*drone-avoidness*/
 
+
+	/*drone-stratgy*/
+	void	droneLighEvaluateState(Drone &drone);
+	/*drone-stratgy*/
+
 	void	debug();
 	void	solution();
 };

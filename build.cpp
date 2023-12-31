@@ -49,6 +49,8 @@ vector<string> files =
 
 	"src/game-modules/drone_avoidness.cpp",
 
+	"src/drone-stratgys/light_evaluate.cpp",
+
 	"src/classes/Actions.cpp",
 
 	"src/solutions/solution.cpp",
