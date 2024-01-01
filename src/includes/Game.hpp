@@ -68,6 +68,7 @@ struct Game
 
 
 	/*fishes-to-kick*/
+	void	fishesEvaluatePossibleToKick(void);
 	void	dronesAssingFishesToKickOut(void);
 	/*fishes-to-kick*/
 	
@@ -107,6 +108,7 @@ struct Game
 	void	debugUnsavedScore(void);
 	void	debugScoring(void);
 	void	debugFishsToKickAssinment(void);
+	void	debugFishesPossibleToKick(void);
 	/*debugs-functions*/
 
 	void	solution();

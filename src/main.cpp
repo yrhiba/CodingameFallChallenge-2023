@@ -53,6 +53,9 @@ int main()
 		// evaluate target point for remainig fishes
 		game.evaluate_fishes_targets();
 
+		// evaluate fishes possible to kick them out
+		game.fishesEvaluatePossibleToKick();
+
 		/* puts the solution */
 		game.solution();
 	}
