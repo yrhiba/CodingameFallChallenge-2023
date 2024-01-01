@@ -23,6 +23,8 @@ void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
 		targetPos = targetFishToScan.targetPointToScan;
 	}
 
+	targetPos.y += (400 * ((drone.pos.y <= targetPos.y) ? -1 : +1));
+
 	drone.velocty = targetPos - drone.pos;
 	drone.velocty.setMag(drone.maxSpeed);
 	drone.velocty.roundme();
