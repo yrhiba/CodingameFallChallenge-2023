@@ -4,7 +4,8 @@
 
 void	Game::dronesAssingFishesToKickOut(void)
 {
-	vector<int> fishsPossibleToKick;
+	vector<int>	myDronesWithoutAssignment;
+	set<int>	fishsPossibleToKick;
 
 	for (Fish &fish : this->allFishes)
 	{
@@ -24,7 +25,25 @@ void	Game::dronesAssingFishesToKickOut(void)
 		// ***********************
 
 		// Add the fish to the list need to kick them before the opponets scan them
-		fishsPossibleToKick.push_back(fish.id);
+		fishsPossibleToKick.insert(fish.id);
+	}
+
+	for (int droneId : this->myDrones)
+	{
+		Drone	&drone = this->getDroneById(droneId);
+
+		if (drone.assignedFishToKick)
+		{
+			if (!(fishsPossibleToKick.count(drone.TargetFishToKick)))
+			{
+				drone.assignedFishToKick = false;
+				drone.TargetFishToKick = false;
+			}
+			else
+			{
+				this->getFishById(drone.TargetFishToKick).availableToKick = false;
+			}
+		}
 	}
 
 	if (fishsPossibleToKick.empty())
@@ -39,6 +58,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 		for (int droneId : this->myDrones)
 		{
 			Drone	&drone = this->getDroneById(droneId);
+			if (drone.assignedFishToKick) continue;
 			int		fishResId = -1;
 			int		fishResDis = -1;
 			for (int fishId : fishsPossibleToKick)
@@ -65,6 +85,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 		for (int fishId : fishsPossibleToKick)
 		{
 			Fish	&fish = this->getFishById(fishId);
+			if (!fish.availableToKick) continue;
 			int		droneResId = -1;
 			int		droneResDis = -1;
 			for (int droneId : this->myDrones)

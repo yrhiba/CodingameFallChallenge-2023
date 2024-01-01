@@ -44,9 +44,6 @@ void	Game::evaluate_fishes_targets(void)
 		// skip the uglys
 		if (fish.type == -1) continue;
 
-		// skip the saved fishes
-		if (!fish.availlableToscan) continue;
-
 		if (fish.existZones.size() != 3) 
 		{
 			fish.availlableToscan = false;
