@@ -28,8 +28,12 @@ struct Game
 	vector<Fish>				allFishes;
 	map<int, vector<int>>		typeFishes;
 	map<int, bool>				isScannedFish;
+
 	map<int, bool>				isScannedByMeFish;
 	map<int, bool>				isScannedByOpFish;
+	map<int, set<int> >			isDronesScannedByMeFish; // contain Ids for drone that currently scan the fish
+	map<int, set<int> >			isDronesScannedByOpFish;
+
 	map<int, bool>				isDeadFish;
 
 	// Drone Informations

@@ -24,6 +24,8 @@ void Game::initTurn( void )
 	this->isScannedFish.clear();
 	this->isScannedByMeFish.clear();
 	this->isScannedByOpFish.clear();
+	this->isDronesScannedByMeFish.clear();
+	this->isDronesScannedByOpFish.clear();
 	this->isDeadFish.clear();
 
 	this->creature_visible_count = 0;
@@ -187,17 +189,24 @@ void Game::readDronesCurrentScan( void )
 	cin >> drone_scan_count; cin.ignore();
 	for (int i = 0; i < drone_scan_count; i++)
 	{
-		int drone_id;
-		int creature_id;
+		int drone_id, creature_id;
+
 		cin >> drone_id >> creature_id; cin.ignore();
 
 		Drone &drone = this->getDroneById(drone_id);
+
 		drone.scannedCreatures.push_back(creature_id);
 
-		if (drone.opDrone) continue;
-
-		Fish &fish = this->getFishById(creature_id);
-		fish.availlableToscan = false;
+		if (drone.opDrone)
+		{
+			this->isDronesScannedByOpFish[creature_id].insert(drone.id);
+		}
+		else if (drone.myDrone)
+		{
+			Fish &fish = this->getFishById(creature_id);
+			fish.availlableToscan = false;
+			this->isDronesScannedByMeFish[creature_id].insert(drone.id);
+		}
 	}
 }
 
