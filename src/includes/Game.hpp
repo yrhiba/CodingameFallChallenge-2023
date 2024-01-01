@@ -68,6 +68,7 @@ struct Game
 
 
 	/*fishes-to-kick*/
+	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
 	void	fishesEvaluatePossibleToKick(void);
 	void	dronesAssingFishesToKickOut(void);
 	/*fishes-to-kick*/
