@@ -7,16 +7,29 @@ void Game::droneUpdateVel(Drone &drone)
 	// must go to kick a fish out of the map
 	if (drone.assignedFishToKick)
 	{
+		drone.action.setMsg("Kick-Fish-" + to_string(drone.TargetFishToKick));
 		this->droneUpdateVelToKickOutTheTargetFish(drone);
 	}
 	// must go to scan a fish
 	else if (drone.assignedFishToScan)
 	{
+		drone.action.setMsg("Scan-Fish-" + to_string(drone.TargetFishToScan));
 	}
 	// must go to top | save the scanned fishes
 	else
 	{
-		drone.velocty = EVector(0, -600);
+		if (drone.pos.y > 500)
+		{
+			// move to Top
+			drone.action.setMsg("Going-To-Top");
+			drone.velocty = EVector(0, -600);
+		}
+		else
+		{
+			// Do Nothing
+			drone.action.setMsg("No-Work-To-Do");
+			drone.velocty = EVector(0, 0);
+		}
 	}
 }
 
