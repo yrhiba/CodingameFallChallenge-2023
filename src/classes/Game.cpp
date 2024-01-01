@@ -24,6 +24,8 @@ void Game::initTurn( void )
 	this->isScannedFish.clear();
 	this->isScannedByMeFish.clear();
 	this->isScannedByOpFish.clear();
+	this->isDronesScannedByMeFish.clear();
+	this->isDronesScannedByOpFish.clear();
 	this->isDeadFish.clear();
 
 	this->creature_visible_count = 0;
@@ -38,6 +40,7 @@ void Game::initTurn( void )
 		fish.isVisible = false;
 		fish.pos = EVector(-1, -1);
 
+		fish.availableToKick = true;
 		fish.availlableToscan = true;
 		fish.existZone = make_pair(EVector(-1, -1), EVector(-1, -1));
 		fish.targetPointToScan = EVector(-1, -1);
@@ -115,18 +118,6 @@ void Game::readDrones( void )
 
 			rDrone.isLightOn = (rDrone.battery - 5 == drone.battery);
 
-			/*initalize data related to update drone target */
-			// to-evaluate: if need to keep mode over the turn
-			// or initialze it.
-			rDrone.mode = 0;
-			rDrone.TargetPos = EVector(0, 0);
-			rDrone.assignedFishToScan = false;
-			rDrone.TargetFishToScan = -1;
-			rDrone.assignedFishToKick = false;
-			rDrone.TargetFishToKick = -1;
-			rDrone.mustGoToTop = false;
-			/*initalize data related to update drone target */
-
 			rDrone.pos = drone.pos;
 			rDrone.emergency = drone.emergency;
 			rDrone.battery = drone.battery;
@@ -186,17 +177,24 @@ void Game::readDronesCurrentScan( void )
 	cin >> drone_scan_count; cin.ignore();
 	for (int i = 0; i < drone_scan_count; i++)
 	{
-		int drone_id;
-		int creature_id;
+		int drone_id, creature_id;
+
 		cin >> drone_id >> creature_id; cin.ignore();
 
 		Drone &drone = this->getDroneById(drone_id);
+
 		drone.scannedCreatures.push_back(creature_id);
 
-		if (drone.opDrone) continue;
-
-		Fish &fish = this->getFishById(creature_id);
-		fish.availlableToscan = false;
+		if (drone.opDrone)
+		{
+			this->isDronesScannedByOpFish[creature_id].insert(drone.id);
+		}
+		else if (drone.myDrone)
+		{
+			Fish &fish = this->getFishById(creature_id);
+			fish.availlableToscan = false;
+			this->isDronesScannedByMeFish[creature_id].insert(drone.id);
+		}
 	}
 }
 

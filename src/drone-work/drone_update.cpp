@@ -4,6 +4,36 @@
 
 void Game::droneUpdateVel(Drone &drone)
 {
+	if (drone.assignedFishToKick && !drone.assignedFishToScan && !drone.mustGoToTop)
+	{
+		Fish &targetFishToKick = this->getFishById(drone.TargetFishToKick);
+
+		EVector	targetPos;
+		double	range;
+
+		if (targetFishToKick.isVisible)
+		{
+			targetPos = targetFishToKick.pos;
+			range = 1390;
+		}
+		else
+		{
+			targetPos = targetFishToKick.targetPointToScan;
+			range = 500;
+		}
+
+		targetPos.x += (range * ((targetPos.x < 5e3) ? 1 : -1));
+
+		cerr <<  "drone: " << drone.id << " targetPos: " << targetPos << endl;
+
+		drone.velocty = targetPos - drone.pos;
+		drone.velocty.setMag(drone.maxSpeed);
+		drone.velocty.roundme();
+	}
+	else
+	{
+		drone.velocty = EVector(0, -600);
+	}
 }
 
 

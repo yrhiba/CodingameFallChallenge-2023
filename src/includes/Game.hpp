@@ -28,8 +28,12 @@ struct Game
 	vector<Fish>				allFishes;
 	map<int, vector<int>>		typeFishes;
 	map<int, bool>				isScannedFish;
+
 	map<int, bool>				isScannedByMeFish;
 	map<int, bool>				isScannedByOpFish;
+	map<int, set<int> >			isDronesScannedByMeFish; // contain Ids for drone that currently scan the fish
+	map<int, set<int> >			isDronesScannedByOpFish;
+
 	map<int, bool>				isDeadFish;
 
 	// Drone Informations
@@ -61,6 +65,11 @@ struct Game
 	void	evaluate_fishes_targets(void);
 	/*fishes-target-points*/
 
+
+	/*fishes-to-kick*/
+	void	dronesAssingFishesToKickOut(void);
+	/*fishes-to-kick*/
+	
 
 	/*uglys-simulation*/
 	void		updateUglySpeed(Fish &ugly);
@@ -96,6 +105,7 @@ struct Game
 	void	debugSavedScore(void);
 	void	debugUnsavedScore(void);
 	void	debugScoring(void);
+	void	debugFishsToKickAssinment(void);
 	/*debugs-functions*/
 
 	void	solution();
