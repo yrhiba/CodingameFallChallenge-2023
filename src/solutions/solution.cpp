@@ -14,7 +14,10 @@ void Game::solution()
 	this->debugFishesPossibleToScan();
 	this->debugFishesPossibleToKick();
 
-	// loop for each drone and do something | Let's Go
+	// Assign fishes to drones for scan
+	this->dronesAssingFishesToScan();
+	this->dronesAssingFishesToKickOut();
+
 	for (auto &droneId : this->myDrones)
 	{
 		Drone	&curDrone = this->getDroneById(droneId);
