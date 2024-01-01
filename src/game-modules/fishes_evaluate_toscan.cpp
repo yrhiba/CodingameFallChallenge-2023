@@ -19,5 +19,6 @@ void	Game::fishesEvaluatePossibleToScan(void)
 
 		// Add the fish to the list need to scan them.
 		this->fishsPossibleToScan.insert(fish.id);
+		this->fishsPossibleToScanType[fish.type].insert(fish.id);
 	}
 }

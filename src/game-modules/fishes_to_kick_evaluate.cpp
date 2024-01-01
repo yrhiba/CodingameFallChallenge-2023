@@ -19,5 +19,6 @@ void	Game::fishesEvaluatePossibleToKick(void)
 
 		// Add the fish to the list need to kick them before the opponets scan them
 		this->fishsPossibleToKick.insert(fish.id);
+		this->fishsPossibleToKickType[fish.type].insert(fish.id);
 	}
 }
