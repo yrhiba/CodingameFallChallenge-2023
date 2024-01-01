@@ -8,7 +8,7 @@ Drone::Drone()
 	/*init-data*/
 
 	/*data-related-to-update-drone*/
-	this->mode = 0;
+	this->mission = 0;
 	this->TargetPos = EVector(0, 0);
 	this->assignedFishToScan = false;
 	this->TargetFishToScan = -1;

@@ -8,7 +8,7 @@ struct Drone
 {
 	int		id;
 
-	int		mode; // 0 scan fishes | 1 save fishes | 2 kick out the fishes
+	int		mission; // || 0 scan fishes || 1 save fishes || 2 kick out fish || -1 nothing ||
 
 	/*for-update-drone-vel*/
 	EVector	TargetPos;
