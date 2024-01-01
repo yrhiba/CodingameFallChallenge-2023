@@ -33,7 +33,7 @@ struct Game
 	set<int>					fishsPossibleToScan;
 
 	set<int>					fishsPossibleToKickType[3]; // type 0 | 1 | 2
-	set<int>					fishsPossibleToKickType[3]; // type 0 | 1 | 2
+	set<int>					fishsPossibleToScanType[3]; // type 0 | 1 | 2
 
 	map<int, bool>				isScannedByMeFish;
 	map<int, bool>				isScannedByOpFish;
