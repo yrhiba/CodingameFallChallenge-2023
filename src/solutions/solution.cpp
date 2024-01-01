@@ -14,9 +14,9 @@ void Game::solution()
 	this->debugFishesPossibleToScan();
 	this->debugFishesPossibleToKick();
 
-	// Assign fishes to drones for scan
+	// Assign fishes to drones for scan & kick
 	this->dronesAssingFishesToScan();
-	// this->dronesAssingFishesToKickOut();
+	this->dronesAssingFishesToKickOut();
 
 	for (auto &droneId : this->myDrones)
 	{
