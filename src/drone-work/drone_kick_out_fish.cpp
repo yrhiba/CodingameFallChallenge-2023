@@ -43,8 +43,6 @@ futur updates:
 // this function is just for learn and debug purpos it not take part with the final strategie
 void	Game::dronesAssingFishesToKickOut(void)
 {
-	vector<int>	myDronesWithoutAssignment;
-
 	for (int droneId : this->myDrones)
 	{
 		Drone	&drone = this->getDroneById(droneId);
@@ -54,7 +52,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 			if (!(this->fishsPossibleToKick.count(drone.TargetFishToKick)))
 			{
 				drone.assignedFishToKick = false;
-				drone.TargetFishToKick = false;
+				drone.TargetFishToKick = -1;
 			}
 			else
 			{

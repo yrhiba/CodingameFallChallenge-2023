@@ -14,6 +14,7 @@ void Game::droneUpdateVel(Drone &drone)
 	else if (drone.assignedFishToScan)
 	{
 		drone.action.setMsg("Scan-Fish-" + to_string(drone.TargetFishToScan));
+		this->droneUpdateVelToScanTheTargetFish(drone);
 	}
 	// must go to top | save the scanned fishes
 	else
