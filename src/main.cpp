@@ -48,13 +48,13 @@ int main()
 		cerr << "Game-Turn: " << game.game_turn << endl << endl;
 
 		// evaluate the current score Table
-		game.scores_evaluate();
+		game.scores_evaluate(); // ||| still do nothing for the moment
 
 		// evaluate target point for remainig fishes
-		game.evaluate_fishes_targets();
+		game.evaluate_fishes_targets(); // || calc an estimation postion for the unvisible fishes
 
 		// evaluate fishes possible to kick them out
-		game.fishesEvaluatePossibleToKick();
+		game.fishesEvaluatePossibleToKick(); // || map the fishes that my opponents still not scan them yet
 
 		/* puts the solution */
 		game.solution();
