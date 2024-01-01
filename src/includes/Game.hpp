@@ -119,6 +119,7 @@ struct Game
 	void	debugScoring(void);
 	void	debugFishsToKickAssinment(void);
 	void	debugFishesPossibleToKick(void);
+	void	debugFishesPossibleToScan(void);
 	/*debugs-functions*/
 
 	void	solution();

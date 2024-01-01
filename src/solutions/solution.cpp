@@ -10,8 +10,9 @@ void Game::solution()
 {
 	// Debugs Info
 	this->debugFishsVisibleSimulated();
-	this->debugFishesPossibleToKick();
 	this->debugVisibleSimulatedUglys();
+	this->debugFishesPossibleToScan();
+	this->debugFishesPossibleToKick();
 
 	// loop for each drone and do something | Let's Go
 	for (auto &droneId : this->myDrones)
