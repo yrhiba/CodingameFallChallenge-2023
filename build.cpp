@@ -51,6 +51,8 @@ vector<string> files =
 
 	"src/game-modules/scores_evaluate.cpp",
 
+	"src/game-modules/fishes_evaluate_toscan.cpp",
+
 	"src/drone-work/drone_update.cpp",
 
 	"src/drone-work/drone_avoidness.cpp",

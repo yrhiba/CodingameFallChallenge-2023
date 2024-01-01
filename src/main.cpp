@@ -56,6 +56,9 @@ int main()
 		// evaluate fishes possible to kick them out
 		game.fishesEvaluatePossibleToKick(); // || map the fishes that my opponents still not scan them yet
 
+		// evaluate fishes possible to scan them
+		game.fishesEvaluatePossibleToScan(); // || maybe start with the fishes not scanned by opponts
+
 		/* puts the solution */
 		game.solution();
 	}

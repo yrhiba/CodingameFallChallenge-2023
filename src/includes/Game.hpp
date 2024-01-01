@@ -29,6 +29,7 @@ struct Game
 	map<int, vector<int>>		typeFishes;
 	map<int, bool>				isScannedFish;
 	set<int>					fishsPossibleToKick;
+	set<int>					fishsPossibleToScan;
 
 	map<int, bool>				isScannedByMeFish;
 	map<int, bool>				isScannedByOpFish;
@@ -69,6 +70,10 @@ struct Game
 	/*fishes-to-kick-evaluate*/
 	void	fishesEvaluatePossibleToKick(void);
 	/*fishes-to-kick-evaluate*/
+
+	/*fishes-to-scan-evaluate*/
+	void	fishesEvaluatePossibleToScan(void);
+	/*fishes-to-scan-evaluate*/
 
 	/*drones-assignement+utils*/
 	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
