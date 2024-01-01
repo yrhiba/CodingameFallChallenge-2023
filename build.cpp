@@ -57,6 +57,8 @@ vector<string> files =
 
 	"src/drone-work/light_evaluate.cpp",
 
+	"src/drone-work/drone_kick_out_fish.cpp",
+
 	"src/game-debugs/debugs.cpp",
 
 	"src/classes/Actions.cpp",
