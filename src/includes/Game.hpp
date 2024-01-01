@@ -62,6 +62,11 @@ struct Game
 	/*fishes-target-points*/
 
 
+	/*fishes-to-kick*/
+	void	dronesAssingFishesToKickOut(void);
+	/*fishes-to-kick*/
+	
+
 	/*uglys-simulation*/
 	void		updateUglySpeed(Fish &ugly);
 	void		snapUglyToZone(EVector &uglyPos);
