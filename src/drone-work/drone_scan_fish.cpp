@@ -43,7 +43,8 @@ void	Game::dronesAssingFishesToScan(void)
 	for (int droneId : this->myDrones)
 	{
 		Drone	&drone = this->getDroneById(droneId);
-		if (drone.assignedFishToKick)
+
+		if (drone.assignedFishToScan)
 		{
 			if (!(this->fishsPossibleToScan.count(drone.TargetFishToScan)))
 			{
