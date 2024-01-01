@@ -4,7 +4,7 @@
 
 void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 {
-	if (!(drone.assignedFishToKick))
+	if (!(drone.assignedFishToKick) || drone.emergency)
 	{
 		cerr << "droneId: " << drone.id << " Not assigned to kick out any fish." << endl;
 		return ;
@@ -49,7 +49,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 
 		if (drone.assignedFishToKick)
 		{
-			if (!(this->fishsPossibleToKick.count(drone.TargetFishToKick)))
+			if (!(this->fishsPossibleToKick.count(drone.TargetFishToKick)) || drone.emergency)
 			{
 				drone.assignedFishToKick = false;
 				drone.TargetFishToKick = -1;
@@ -73,7 +73,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 		for (int droneId : this->myDrones)
 		{
 			Drone	&drone = this->getDroneById(droneId);
-			if (drone.assignedFishToKick) continue;
+			if (drone.assignedFishToKick || drone.emergency) continue;
 			int		fishResId = -1;
 			int		fishResDis = -1;
 			for (int fishId : this->fishsPossibleToKick)
@@ -106,7 +106,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 			for (int droneId : this->myDrones)
 			{
 				Drone &drone = this->getDroneById(droneId);
-				if (drone.assignedFishToKick) continue;
+				if (drone.assignedFishToKick || drone.emergency) continue;
 				double	curDistance = calcDistance((fish.isVisible ? fish.pos : fish.targetPointToScan), drone.pos);
 				if ((droneResId == -1) || (curDistance < droneResDis))
 				{

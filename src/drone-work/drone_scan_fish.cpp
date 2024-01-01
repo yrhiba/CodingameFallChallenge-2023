@@ -4,7 +4,7 @@
 
 void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
 {
-	if (!(drone.assignedFishToScan))
+	if (!(drone.assignedFishToScan) || drone.emergency)
 	{
 		cerr << "droneId: " << drone.id << " Not assigned to scan any fish." << endl;
 		return ;
