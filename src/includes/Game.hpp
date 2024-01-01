@@ -28,6 +28,7 @@ struct Game
 	vector<Fish>				allFishes;
 	map<int, vector<int>>		typeFishes;
 	map<int, bool>				isScannedFish;
+	set<int>					fishsPossibleToKick;
 
 	map<int, bool>				isScannedByMeFish;
 	map<int, bool>				isScannedByOpFish;
