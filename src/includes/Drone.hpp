@@ -6,6 +6,8 @@
 
 struct Drone
 {
+	Actions	action;
+
 	int		id;
 
 	int		mission; // || 0 scan fishes || 1 save fishes || 2 kick out fish || -1 nothing ||

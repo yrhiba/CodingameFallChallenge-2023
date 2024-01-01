@@ -27,13 +27,14 @@ vector<string> files =
 
 	"src/includes/Fish.hpp",
 
+	"src/includes/Actions.hpp",
+
 	"src/includes/Drone.hpp",
 
 	"src/includes/Game.hpp",
 
 	"src/classes/SingleLinePath.cpp",
 
-	"src/includes/Actions.hpp",
 
 	"src/classes/Drone.cpp",
 

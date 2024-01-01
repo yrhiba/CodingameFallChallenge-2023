@@ -125,6 +125,7 @@ void Game::readDrones( void )
 			rDrone.light = 0;
 			rDrone.scannedCreatures.clear();
 			rDrone.creaturesDirection.clear();
+			rDrone.action = Actions();
 		}
 
 		// Oponents Drones Status
@@ -152,6 +153,7 @@ void Game::readDrones( void )
 		for (int i = 0; i < this->my_drone_count; i++)
 		{
 			Drone drone; cin >> drone;
+			drone.action = Actions();
 			drone.myDrone = 1;
 			drone.opDrone = 0;
 			this->allDrones.push_back(drone);

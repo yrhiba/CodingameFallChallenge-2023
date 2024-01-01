@@ -13,22 +13,17 @@ void Game::solution()
 	this->debugFishesPossibleToKick();
 	this->debugVisibleSimulatedUglys();
 
-	// For Drones debug descions.
-	cerr << "Drones-Turn-Result:" << endl;
-
 	// loop for each drone and do something | Let's Go
 	for (auto &droneId : this->myDrones)
 	{
-		Actions	action;
-
 		Drone	&curDrone = this->getDroneById(droneId);
 
 		if (curDrone.emergency)
 		{
 			// Do nothing, I don't have control on the drone.
-			action.setMsg("emergency.");
+			curDrone.action.setMsg("emergency.");
 			// add action with ligh off state
-			action.wait(false);
+			curDrone.action.wait(false);
 		}
 		else
 		{
@@ -38,18 +33,23 @@ void Game::solution()
 			this->dronesAvoidnes(curDrone);
 			// light desion on/off
 			this->droneLighEvaluateState(curDrone);
-			// debug drone desion
-			cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty
-				<< " Light:" << (curDrone.light ? "on" : "off") << endl;
 			// update position
 			curDrone.updatePos();
 			// output the reult action
-			action.moveToPos(
+			curDrone.action.moveToPos(
 				curDrone.pos.x,
 				curDrone.pos.y,
 				curDrone.light
 			);
 		}
+	}
+
+	// For Drones debug descions.
+	cerr << "Drones-Turn-Result:" << endl;
+	for (auto &droneId : this->myDrones)
+	{
+		Drone &curDrone = this->getDroneById(droneId);
+		curDrone.action.debug(curDrone.id);
 	}
 }
 
