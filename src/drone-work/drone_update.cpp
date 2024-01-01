@@ -4,38 +4,21 @@
 
 void Game::droneUpdateVel(Drone &drone)
 {
-	if (drone.assignedFishToKick && !drone.assignedFishToScan && !drone.mustGoToTop)
+	// must go to kick a fish out of the map
+	if (drone.assignedFishToKick)
 	{
-		Fish &targetFishToKick = this->getFishById(drone.TargetFishToKick);
-
-		EVector	targetPos;
-		double	range;
-
-		if (targetFishToKick.isVisible)
-		{
-			targetPos = targetFishToKick.pos;
-			range = 1390;
-		}
-		else
-		{
-			targetPos = targetFishToKick.targetPointToScan;
-			range = 500;
-		}
-
-		targetPos.x += (range * ((targetPos.x < 5e3) ? 1 : -1));
-
-		cerr <<  "drone: " << drone.id << " targetPos: " << targetPos << endl;
-
-		drone.velocty = targetPos - drone.pos;
-		drone.velocty.setMag(drone.maxSpeed);
-		drone.velocty.roundme();
+		this->droneUpdateVelToKickOutTheTargetFish(drone);
 	}
+	// must go to scan a fish
+	else if (drone.assignedFishToScan)
+	{
+	}
+	// must go to top | save the scanned fishes
 	else
 	{
 		drone.velocty = EVector(0, -600);
 	}
 }
-
 
 /*
 
@@ -101,4 +84,3 @@ for scores, till there the movement and best strategies
 to explore and scanned the fishes on the map must be try and evaluated.
 
 */
-
