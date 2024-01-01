@@ -38,6 +38,7 @@ void Game::initTurn( void )
 		fish.isVisible = false;
 		fish.pos = EVector(-1, -1);
 
+		fish.availableToKick = true;
 		fish.availlableToscan = true;
 		fish.existZone = make_pair(EVector(-1, -1), EVector(-1, -1));
 		fish.targetPointToScan = EVector(-1, -1);
