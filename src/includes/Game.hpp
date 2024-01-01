@@ -66,13 +66,17 @@ struct Game
 	void	evaluate_fishes_targets(void);
 	/*fishes-target-points*/
 
-
-	/*fishes-to-kick*/
-	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
+	/*fishes-to-kick-evaluate*/
 	void	fishesEvaluatePossibleToKick(void);
-	void	dronesAssingFishesToKickOut(void);
-	/*fishes-to-kick*/
-	
+	/*fishes-to-kick-evaluate*/
+
+	/*drones-assignement+utils*/
+	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
+	void	dronesAssingFishesToKickOut(void); // for testing strategie
+
+	void	droneUpdateVelToScanTheTargetFish(Drone &drone);
+	void	dronesAssingFishesToScan(void); // for testing strategie
+	/*drones-assignement+utils*/
 
 	/*uglys-simulation*/
 	void		updateUglySpeed(Fish &ugly);

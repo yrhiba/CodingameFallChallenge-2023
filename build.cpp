@@ -35,7 +35,6 @@ vector<string> files =
 
 	"src/classes/SingleLinePath.cpp",
 
-
 	"src/classes/Drone.cpp",
 
 	"src/classes/EVector.cpp",
@@ -59,6 +58,8 @@ vector<string> files =
 	"src/drone-work/light_evaluate.cpp",
 
 	"src/drone-work/drone_kick_out_fish.cpp",
+
+	"src/drone-work/drone_scan_fish.cpp",
 
 	"src/game-debugs/debugs.cpp",
 
