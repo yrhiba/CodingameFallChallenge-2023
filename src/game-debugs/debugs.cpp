@@ -67,6 +67,26 @@ void Game::debugMyDroneState(void)
 	cerr << endl;
 }
 
+void	Game::debugFishsToKickAssinment(void)
+{
+	for (int droneID : this->myDrones)
+	{
+		Drone &drone = this->getDroneById(droneID);
+
+		cerr << "drone: " << drone.id << " ";
+
+		if (drone.assignedFishToKick)
+		{
+			cerr << "Assigned To Kick Fish: " << drone.TargetFishToKick << endl;
+		}
+		else
+		{
+			cerr << "Not Assigned To Kick Any Fish." << endl;
+		}
+	}
+	cerr << endl;
+}
+
 // output the sved fishes + the current score | me and opponets
 void Game::debugSavedScore(void)
 {

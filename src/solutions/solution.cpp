@@ -15,6 +15,9 @@ void Game::solution()
 	// Assigne the fishes to kick out if they exists
 	this->dronesAssingFishesToKickOut();
 
+	// Debug Info
+	this->debugFishsToKickAssinment();
+
 	// For Drones debug descions.
 	cerr << "Drones-Turn-Result:" << endl;
 
