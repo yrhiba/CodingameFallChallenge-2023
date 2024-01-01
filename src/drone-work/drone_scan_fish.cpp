@@ -50,7 +50,7 @@ void	Game::dronesAssingFishesToScan(void)
 
 		if (drone.assignedFishToScan)
 		{
-			if (!(this->fishsPossibleToScan.count(drone.TargetFishToScan)))
+			if (!(this->fishsPossibleToScan.count(drone.TargetFishToScan)) || drone.emergency)
 			{
 				drone.assignedFishToScan = false;
 				drone.TargetFishToScan = -1;
@@ -74,19 +74,27 @@ void	Game::dronesAssingFishesToScan(void)
 		for (int droneId : this->myDrones)
 		{
 			Drone	&drone = this->getDroneById(droneId);
-			if (drone.assignedFishToScan) continue;
+			if (drone.assignedFishToScan || drone.emergency) continue;
+
 			int		fishResId = -1;
 			int		fishResDis = -1;
-			for (int fishId : this->fishsPossibleToScan)
+			for (int fishType = 2; fishType >= 0; fishType--)
 			{
-				Fish	&fish = this->getFishById(fishId);
-				if (!fish.availlableToscan) continue;
-				double	curDistance = calcDistance((fish.isVisible ? fish.pos : fish.targetPointToScan), drone.pos);
-				if (((fishResId == -1) || (curDistance < fishResDis)))
+				for (int fishId : this->typeFishes[fishType])
 				{
-					fishResId = fish.id;
-					fishResDis = curDistance;
+					if (!(this->fishsPossibleToScan.count(fishId))) continue;
+
+					Fish	&fish = this->getFishById(fishId);
+					if (!fish.availlableToscan) continue;
+					double	curDistance = calcDistance((fish.isVisible ? fish.pos : fish.targetPointToScan), drone.pos);
+					if (((fishResId == -1) || (curDistance < fishResDis)))
+					{
+						fishResId = fish.id;
+						fishResDis = curDistance;
+					}
 				}
+
+				if (fishResId != -1) break;
 			}
 			if (fishResId == -1) break;
 			Fish &fishRes = this->getFishById(fishResId);
@@ -107,7 +115,7 @@ void	Game::dronesAssingFishesToScan(void)
 			for (int droneId : this->myDrones)
 			{
 				Drone &drone = this->getDroneById(droneId);
-				if (drone.assignedFishToScan) continue;
+				if (drone.assignedFishToScan || drone.emergency) continue;
 				double	curDistance = calcDistance((fish.isVisible ? fish.pos : fish.targetPointToScan), drone.pos);
 				if ((droneResId == -1) || (curDistance < droneResDis))
 				{
