@@ -13,7 +13,11 @@ void Game::solution()
 	this->debugVisibleSimulatedUglys();
 
 	// Assigne the fishes to kick out if they exists
-	this->dronesAssingFishesToKickOut();
+	// this->dronesAssingFishesToKickOut();
+	// TODO: replace by fishes kick out evaluate.
+
+	// Assign the fishes to scan if they availlable
+	// this->dronesAssingFishesToScan();
 
 	// Debug Info
 	this->debugFishsToKickAssinment();
