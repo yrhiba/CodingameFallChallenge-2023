@@ -93,13 +93,15 @@ vector<string> files =
 		/*Fishes-Scan-Assignment*/
 		"src/2_drone-module/dronesAssingFishesToScan.cpp",
 		/*Fishes-Scan-Assignment*/
+		/*Fishes-Kick-Assignment*/
+		"src/2_drone-module/dronesAssingFishesToKickOut.cpp",
+		/*Fishes-Kick-Assignment*/
 	/*Drone-Module*/
 
 	/*Drone-Work-Files*/
 	"src/drone-work/drone_update.cpp",
 	"src/drone-work/drone_avoidness.cpp",
 	"src/drone-work/drone_light_evaluate.cpp",
-	"src/drone-work/drone_kick_out_fish.cpp",
 	/*Drone-Work-Files*/
 
 
