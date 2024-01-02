@@ -42,7 +42,7 @@ vector<string> files =
 	"src/classes/Actions.cpp",
 	/*Drone|Fish|Game|standart-Impl-File*/
 
-	/*Game-Modules-Files*/
+	/*Game-Module-Files*/
 		/*game-setup*/
 		"src/game-modules/0_game-setup/readSetupCreatures.cpp",
 		"src/game-modules/0_game-setup/readSetupDrones.cpp",
@@ -72,7 +72,7 @@ vector<string> files =
 		/*game-debugs-file*/
 		"src/game-modules/B_game-debugs/debugs.cpp",
 		/*game-debugs-file*/
-	/*Game-Modules-Files*/
+	/*Game-Module-Files*/
 
 	/*Drone-Work-Files*/
 	"src/drone-work/drone_update.cpp",
