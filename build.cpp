@@ -57,6 +57,10 @@ vector<string> files =
 		/*game-utils-files*/
 		"src/game-modules/game-utils/game_geters.cpp",
 		/*game-utils-files*/
+
+		/*game-debugs-file*/
+		"src/game-modules/game-debugs/debugs.cpp",
+		/*game-debugs-file*/
 	/*Game-Modules-Files*/
 
 	/*Drone-Work-Files*/
@@ -67,9 +71,6 @@ vector<string> files =
 	"src/drone-work/drone_scan_fish.cpp",
 	/*Drone-Work-Files*/
 
-	/*game-debugs-file*/
-	"src/game-debugs/debugs.cpp",
-	/*game-debugs-file*/
 
 	/*solution|main|files*/
 	"src/solutions/solution.cpp",
