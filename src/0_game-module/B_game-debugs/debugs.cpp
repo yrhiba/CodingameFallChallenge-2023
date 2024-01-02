@@ -1,4 +1,4 @@
-#include "../header.hpp"
+#include "header.hpp"
 
 /*start*/
 
@@ -12,7 +12,12 @@ void Game::debugVisibleSimulatedUglys(void)
 		if (ugly.visibleAtTurn == -1) continue;
 		if (!isAtLeastOne) cerr << endl;
 		isAtLeastOne = true;
-		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
+		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << " ";
+		if (ugly.visibleAtTurn == this->game_turn)
+			cerr << " 100%";
+		else
+			cerr << " 95%";
+		cerr << endl;
 	}
 	if (!isAtLeastOne)
 		cerr << " No-Information-Availlable";
