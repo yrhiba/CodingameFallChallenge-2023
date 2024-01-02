@@ -48,7 +48,7 @@ int main()
 		game.readRadarInfo();
 
 		// simulate the uglys
-		game.uglysSimulation();
+		game.uglysSimulation(); // not code it yet
 
 		// simulate the fishes
 		game.fishesSimulation();
@@ -59,19 +59,16 @@ int main()
 		cerr << "Game-Turn: " << game.game_turn << endl << endl;
 		#endif
 
-		// evaluate the current score Table
-		game.scores_evaluate(); // ||| still do nothing for the moment.
+		/* FISHES EVAL MODUL */
+		// evaluate target point for remainig fishes //
+		game.evaluate_fishes_targets();
+		// evaluate fishes possible to kick them out //
+		game.fishesEvaluatePossibleToKick();
+		// evaluate fishes possible to scan them //
+		game.fishesEvaluatePossibleToScan();
+		/* FISHES EVAL MODUL */
 
-		// evaluate target point for remainig fishes
-		game.evaluate_fishes_targets(); // || calc an estimation postion for the unvisible fishes.
-
-		// evaluate fishes possible to kick them out
-		game.fishesEvaluatePossibleToKick(); // || map the fishes that my opponents still not scan them yet.
-
-		// evaluate fishes possible to scan them
-		game.fishesEvaluatePossibleToScan(); // || try to test a lot of strategies
-
-		/* puts the solution */
+		// puts the solution
 		game.solution();
 	}
 
