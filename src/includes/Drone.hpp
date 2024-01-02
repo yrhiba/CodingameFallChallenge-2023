@@ -12,7 +12,6 @@ struct Drone
 	EVector	pos;
 	EVector	velocty;
 	EVector	acceleration;
-	EVector	TargetPos;
 	/*UPDATED EACH TURN*/
 
 	int			emergency; // GIVEN EACH TURN
@@ -45,6 +44,9 @@ struct Drone
 	int			TargetFishToKick;
 	// target save current scanneds
 	bool		mustGoToTop;
+	// target position to calculate based
+	// on the mission.
+	EVector		TargetPos;
 	//#############//
 	// TO UPDATE EACH TURN //
 	/*DRONE-MISSION*/
@@ -81,9 +83,13 @@ struct Drone
 	bool operator==(const Drone &other) const;
 	/*operators-overlod*/
 
-	/*constructer*/
-	Drone();
-	/*constructer*/
+
+		/*initialize-setup-turn*/
+	void	initializeSetupGameData(void);
+	/*initialize-setup-turn*/
+	/*initialize-each-turn*/
+	void	initializeAndSetupTurnData(void);
+	/*initialize-each-turn*/
 };
 
 istream &operator>>(istream &is, Drone &drone);

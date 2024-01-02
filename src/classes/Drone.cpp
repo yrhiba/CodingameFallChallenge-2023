@@ -3,28 +3,60 @@
 
 /*start*/
 
-Drone::Drone()
+void	Drone::initializeSetupGameData(void)
 {
-	/*init-data*/
-
-	/*data-related-to-update-drone*/
-	this->mission = 0;
-	this->TargetPos = EVector(0, 0);
-	this->assignedFishToScan = false;
-	this->TargetFishToScan = -1;
-	this->assignedFishToKick = false;
-	this->TargetFishToKick = -1;
-	this->mustGoToTop = false;
-	/*data-related-to-update-drone*/
-
-	this->emergency = 0;
-	this->light = 0;
+	this->id = 0;
+	this->pos = EVector(0, 0);
 	this->velocty = EVector(0, 0);
 	this->acceleration = EVector(0, 0);
-	this->maxSpeed = 600;
-	this->maxForce = 1e9;
-	this->wanderTheta = ((M_PI * -1) / 2);
+	this->TargetPos = EVector(0, 0);
+	this->emergency = 0;
+	this->light = 0;
+	this->battery = 0;
 	this->isLightOn = false;
+	this->myDrone = 0;
+	this->opDrone = 0;
+	this->maxForce = 1e9;
+	this->maxSpeed = 600;
+	this->wanderTheta = ((M_PI * -1) / 2);
+	this->action = Actions();
+	this->mission = 0;
+	this->assignedFishToKick = false;
+	this->TargetFishToKick = -1;
+	this->assignedFishToScan = false;
+	this->mustGoToTop = false;
+	this->single_line_path = SingleLinePath();
+}
+
+void	Drone::initializeAndSetupTurnData(void)
+{
+	this->velocty = EVector(0, 0);
+	this->acceleration = EVector(0, 0);
+	this->scannedCreatures.clear();
+	this->action = Actions();
+
+	/*data-related-to-update-drone*/
+	// this->mission = 0;
+	// this->TargetPos = EVector(0, 0);
+	// this->assignedFishToScan = false;
+	// this->TargetFishToScan = -1;
+	// this->assignedFishToKick = false;
+	// this->TargetFishToKick = -1;
+	// this->mustGoToTop = false;
+	/*data-related-to-update-drone*/
+}
+
+void	Drone::snaptoDroneZone(void)
+{
+	if (this->pos.x < 0)
+		this->pos.x = 0;
+	if (this->pos.y < 0)
+		this->pos.y = 0;
+
+	if (this->pos.x > 9999)
+		this->pos.x = 9999;
+	if (this->pos.y > 9999)
+		this->pos.y = 9999;
 }
 
 void	Drone::applyForce(EVector force)
@@ -51,29 +83,15 @@ void	Drone::edges(void)
 	}
 }
 
-void	Drone::snaptoDroneZone(void)
-{
-	if (this->pos.x < 0)
-		this->pos.x = 0;
-	if (this->pos.y < 0)
-		this->pos.y = 0;
-
-	if (this->pos.x > 9999)
-		this->pos.x = 9999;
-	if (this->pos.y > 9999)
-		this->pos.y = 9999;
-}
-
 void	Drone::updatePos(void)
 {
 	this->acceleration.roundme();
+	this->acceleration.limit(this->maxForce);
 	this->velocty += this->acceleration;
-	this->velocty.setMag(this->maxSpeed);
+	this->velocty.limit(this->maxSpeed);
 	this->velocty.roundme();
 	this->pos += this->velocty;
 	this->snaptoDroneZone();
-	this->velocty *= 0;
-	this->acceleration *= 0;
 }
 
 EVector Drone::seekToPosForce(EVector target)
@@ -211,7 +229,6 @@ EVector Drone::followSingleLinePathForce(void)
 
 	return this->seekToPosForce(target);
 }
-
 
 /* Drone Comparison Operators OverLoads */
 bool Drone::operator<(const Drone &other) const
