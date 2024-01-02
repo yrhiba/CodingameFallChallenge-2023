@@ -1,8 +1,8 @@
-Codingame - Fall Challenge | yrhiba: Bot
+# Codingame - Fall Challenge | yrhiba: Bot
 
-Bot Title: Flouka-And-7oTa
+# Bot Title: Flouka-And-7oTa
 
-Introduction
+# Introduction
 
 This repository contains the code for the "Flouka-And-7oTa" bot developed by yrhiba for the Codingame Fall Challenge. The bot is designed for strategic gameplay in the arena. To test the bot in the arena, follow the instructions below:
 
@@ -13,15 +13,18 @@ Please note that this repository is meant for learning and showcase purposes. Do
 
 List Of Bots Available and History:
 
-Woo3:
+# Woo3:
 
     Branch-Name: "seek-Closest-Fishes-wood-solution"
     Description: Attempts to scan the closest fishes for the drones.
 
-Bronze/Silver:
+# Bronze/Silver:
 
     Branch-Name: "gold-stratigie-v0-startWithLegenType"
-        Description: Drones move down and up while rotating the velocity vector if a collision is detected with uglys or edges of the map.
+        Description: Drones move down and up while rotating the velocity vector if a collision is detected
+        with uglys or edges of the map.
         
     Branch-Name: "gold-stratigie-v1-cleanScan"
-        Description: Drones start by targeting fishes at the bottom (type:2), then scan the fishes above to the top and save them. It also handles collision avoidance. Once all fishes are scanned, the drones kick out the remaining fishes that opponents have not scanned yet.
+        Description: Drones start by targeting fishes at the bottom (type:2), then scan the fishes above 
+        to the top and save them. It also handles collision avoidance. Once all fishes are scanned, the 
+        drones kick out the remaining fishes that opponents have not scanned yet.
