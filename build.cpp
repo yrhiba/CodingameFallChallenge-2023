@@ -46,20 +46,24 @@ vector<string> files =
 	/*Game-Modules-Files*/
 
 		/*game-setup*/
-		"src/game-modules/game-setup/game_setup.cpp",
-		"src/game-modules/game-setup/turn_setup.cpp",
+		"src/game-modules/0_game-setup/readSetupCreatures.cpp",
+		"src/game-modules/0_game-setup/readSetupDrones.cpp",
 		/*game-setup*/
 
+		/*game-turn-init*/
+		"src/game-modules/1_game-init-turn/turn_setup.cpp",
+		/*game-turn-init*/
+
 		/*game-simulation*/
-		"src/game-modules/game-simulation/fishes_simulation.cpp",
-		"src/game-modules/game-simulation/uglys_simulation.cpp",
+		"src/game-modules/4_game-simulation/fishes_simulation.cpp",
+		"src/game-modules/4_game-simulation/uglys_simulation.cpp",
 
 		/*game-utils-files*/
-		"src/game-modules/game-utils/game_geters.cpp",
+		"src/game-modules/A_game-utils/game_geters.cpp",
 		/*game-utils-files*/
 
 		/*game-debugs-file*/
-		"src/game-modules/game-debugs/debugs.cpp",
+		"src/game-modules/B_game-debugs/debugs.cpp",
 		/*game-debugs-file*/
 	/*Game-Modules-Files*/
 
