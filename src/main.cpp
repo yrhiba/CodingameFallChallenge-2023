@@ -26,7 +26,7 @@ int main()
 		game.readTurnData();
 
 		/*fishes-updates-turn-data-and-set-flags*/
-		game.setFishesFlagsAndUpdates();
+		game.setFishesFlagsAndUpdates(); // estimated postion + availlavilty to scan + kick //
 
 		// simulate the uglys
 		game.uglysSimulation(); // not code it yet
