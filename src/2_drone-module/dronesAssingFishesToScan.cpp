@@ -1,4 +1,4 @@
-#include "../header.hpp"
+#include "header.hpp"
 
 /*start*/
 
@@ -99,9 +99,6 @@ void	Game::dronesAssignFishToScanWithType(int fishesType)
 	}
 }
 
-
-// (maybe) || TODO: Evaluat the logic of that functiocn
-// this function is just for learn and debug purpos it not take part with the final strategie
 void	Game::dronesAssingFishesToScan(void)
 {
 	for (int droneId : this->myDrones)

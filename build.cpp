@@ -90,6 +90,9 @@ vector<string> files =
 		/*setup-Turn-data*/
 		"src/2_drone-module/initializeAndSetupTurnData.cpp",
 		/*setup-Turn-data*/
+		/*Fishes-Scan-Assignment*/
+		"src/2_drone-module/dronesAssingFishesToScan.cpp",
+		/*Fishes-Scan-Assignment*/
 	/*Drone-Module*/
 
 	/*Drone-Work-Files*/
@@ -97,7 +100,6 @@ vector<string> files =
 	"src/drone-work/drone_avoidness.cpp",
 	"src/drone-work/drone_light_evaluate.cpp",
 	"src/drone-work/drone_kick_out_fish.cpp",
-	"src/drone-work/drone_scan_fish.cpp",
 	/*Drone-Work-Files*/
 
 
