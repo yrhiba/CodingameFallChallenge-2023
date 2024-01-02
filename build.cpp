@@ -39,7 +39,6 @@ vector<string> files =
 	/*Drone|Fish|Game|standart-Impl-File*/
 	"src/classes/Drone.cpp",
 	"src/classes/Fish.cpp",
-	"src/classes/Game.cpp",
 	"src/classes/Actions.cpp",
 	/*Drone|Fish|Game|standart-Impl-File*/
 
@@ -57,6 +56,11 @@ vector<string> files =
 		/*game-read-input*/
 		"src/game-modules/2_game-readinput/readTurnData.cpp",
 		/*game-read-input*/
+
+		/*game-updates-fishes-drone*/
+		"src/game-modules/3_game-updatefishesdrones/setFishesFlagsAndUpdates.cpp",
+		"src/game-modules/3_game-updatefishesdrones/setDronesFlagsAndUpdates.cpp",
+		/*game-updates-fishes-drone*/
 
 		/*game-simulation*/
 		"src/game-modules/4_game-simulation/fishes_simulation.cpp",
