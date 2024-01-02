@@ -4,7 +4,7 @@
 
 void Game::initTurn( void )
 {
-	// initialize + update varibla of Game
+	// initialize + update variballs of Game/Fishes/Uglys
 	this->initializeAndUpdateTurnData();
 }
 
@@ -190,3 +190,12 @@ void Game::setFishesFlagsAndUpdates(void)
 	}
 }
 
+void	Game::setDronesFlagsAndUpdates(void)
+{
+	for (Drone &drone : this->allDrones)
+	{
+		if (drone.opDrone) continue;
+
+		// TODO: Evaluate mision|queue_mission
+	}
+}

@@ -113,6 +113,9 @@ struct Game
 	/*fishes-updates-after-read-turn-data*/
 	void	setFishesFlagsAndUpdates(void);
 	/*fishes-updates-after-read-turn-data*/
+	/*drones-updates-after-read-turn-data*/
+	void	setDronesFlagsAndUpdates(void);
+	/*drones-updates-after-read-turn-data*/
 
 	void	solution();
 
