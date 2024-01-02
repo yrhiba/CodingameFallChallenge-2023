@@ -16,8 +16,7 @@ void Game::solution()
 	#endif
 
 	// Assign fishes to drones for scan & kick
-	this->dronesAssingFishesToScan();
-	this->dronesAssingFishesToKickOut();
+	// this->dronesAssingFishesToScan();
 
 	for (auto &droneId : this->myDrones)
 	{
@@ -26,7 +25,7 @@ void Game::solution()
 		if (curDrone.emergency)
 		{
 			// Do nothing, I don't have control on the drone.
-			curDrone.action.setMsg("emergency.");
+			curDrone.action.setMsg("Emergency-Mode.");
 			// add action with ligh off state
 			curDrone.action.wait(false);
 		}
