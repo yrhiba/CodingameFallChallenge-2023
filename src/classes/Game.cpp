@@ -4,12 +4,8 @@
 
 void Game::initTurn( void )
 {
-	// clear the variable of Game
-	this->clearGamePreviousTurnData();
 	// initialize + update varibla of Game
 	this->initializeAndUpdateTurnData();
-	// initialize + update fishes objects
-	this->initializeAndUpdateFishesTurnData();
 }
 
 void Game::readScores( void )
@@ -31,7 +27,6 @@ void Game::readScannedCreatures( void )
 
 		fish.scannedByMe = true;
 		fish.scaned = true;
-		fish.availlableToscan = false;
 
 		this->isScannedByMeFish[fish.id] = true;
 		this->isScannedFish[fish.id] = true;
@@ -57,6 +52,7 @@ void Game::readScannedCreatures( void )
 void Game::readDrones( void )
 {
 	cin >> this->my_drone_count; cin.ignore();
+
 	for (int i = 0; i < this->my_drone_count; i++)
 	{
 		Drone drone; cin >> drone;
@@ -64,18 +60,14 @@ void Game::readDrones( void )
 		Drone &rDrone = this->getDroneById(drone.id);
 
 		rDrone.isLightOn = (rDrone.battery - 5 == drone.battery);
-
 		rDrone.pos = drone.pos;
 		rDrone.emergency = drone.emergency;
 		rDrone.battery = drone.battery;
-		rDrone.light = 0;
-		rDrone.scannedCreatures.clear();
-		rDrone.creaturesDirection.clear();
-		rDrone.action = Actions();
 	}
 
 	// Oponents Drones Status
 	cin >> this->op_drone_count; cin.ignore();
+
 	for (int i = 0; i < this->op_drone_count; i++)
 	{
 		Drone drone; cin >> drone;
@@ -83,39 +75,38 @@ void Game::readDrones( void )
 		Drone &rDrone = this->getDroneById(drone.id);
 
 		rDrone.isLightOn = (rDrone.battery - 5 == drone.battery);
-
 		rDrone.pos = drone.pos;
 		rDrone.emergency = drone.emergency;
 		rDrone.battery = drone.battery;
-		rDrone.light = 0;
-		rDrone.scannedCreatures.clear();
-		rDrone.creaturesDirection.clear();
 	}
 }
 
 void Game::readDronesCurrentScan( void )
 {
-	int drone_scan_count;
-	cin >> drone_scan_count; cin.ignore();
+	int drone_scan_count; cin >> drone_scan_count; cin.ignore();
+
 	for (int i = 0; i < drone_scan_count; i++)
 	{
-		int drone_id, creature_id;
+		int drone_id, creature_id; cin >> drone_id >> creature_id; cin.ignore();
 
-		cin >> drone_id >> creature_id; cin.ignore();
+		Drone	&drone = this->getDroneById(drone_id);
+		Fish	&fish = this->getFishById(creature_id);
 
-		Drone &drone = this->getDroneById(drone_id);
+		drone.scannedCreatures.push_back(fish.id);
 
-		drone.scannedCreatures.push_back(creature_id);
+		fish.dronesScan.insert(drone.id);
 
-		if (drone.opDrone)
+		if (drone.opDrone) // opponets drone
 		{
-			this->isDronesScannedByOpFish[creature_id].insert(drone.id);
+			fish.unsavedScanedByOP = true;
+			fish.opDronesScan.insert(drone.id);
+			this->opDronesScanedTheFish[creature_id].insert(drone.id);
 		}
-		else if (drone.myDrone)
+		else // my Drone
 		{
-			Fish &fish = this->getFishById(creature_id);
-			fish.availlableToscan = false;
-			this->isDronesScannedByMeFish[creature_id].insert(drone.id);
+			fish.unsavedScanedByMe = true;
+			fish.myDronesScan.insert(drone.id);
+			this->myDronesScanedTheFish[creature_id].insert(drone.id);
 		}
 	}
 }
@@ -131,7 +122,7 @@ void Game::readVisibleCreatures( void )
 
 		Fish &fish = this->getFishById(creature_id);
 
-		fish.visibleAtTurn = -1;
+		fish.visibleAtTurn = this->game_turn;
 		fish.isVisible = true;
 		fish.pos = EVector(creature_x, creature_y);
 		fish.velocty = EVector(creature_vx, creature_vy);
@@ -141,33 +132,24 @@ void Game::readVisibleCreatures( void )
 void Game::readRadarInfo( void )
 {
 	int radar_blip_count; cin >> radar_blip_count; cin.ignore();
+
 	for (int i = 0; i < radar_blip_count; i++)
 	{
 		int drone_id, creature_id; string radar;
 		cin >> drone_id >> creature_id >> radar; cin.ignore();
 
-		Drone &drone = this->getDroneById(drone_id);
+		Drone	&drone = this->getDroneById(drone_id);
+		Fish	&fish = this->getFishById(creature_id);
 
 		drone.creaturesDirection.push_back({creature_id, radar});
+		fish.pushExistZone(drone.pos, radar);
+	}
 
-		Fish &fish = this->getFishById(creature_id);
-
-		// push back the fish zone depending on direction given by radar
-		if (radar == "TL")
+	for (Fish &fish : this->allFishes)
+	{
+		if (fish.existZones.size() != 3)
 		{
-			fish.existZones.push_back({EVector(0, 0), drone.pos});
-		}
-		else if (radar == "TR")
-		{
-			fish.existZones.push_back({EVector(drone.pos.x, 0), EVector(9999, drone.pos.y)});
-		}
-		else if (radar == "BR")
-		{
-			fish.existZones.push_back({drone.pos, EVector(9999, 9999)});
-		}
-		else if (radar == "BL")
-		{
-			fish.existZones.push_back({EVector(0, drone.pos.y), EVector(drone.pos.x, 9999)});
+			fish.dead = true;
 		}
 	}
 }
