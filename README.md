@@ -1,4 +1,4 @@
-# Codingame - Fall Challenge | yrhiba: Bot
+# Codingame - Fall Challenge 2023 | yrhiba: Bot
 
 Challenge-Link:
 https://www.codingame.com/contests/fall-challenge-2023
