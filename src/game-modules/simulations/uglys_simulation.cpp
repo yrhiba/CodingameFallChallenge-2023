@@ -34,7 +34,7 @@ void	Game::snapUglyToZone(EVector &uglyPos)
 		uglyPos.y = 2500;
 }
 
-vector<int>		Game::uglysDroneIdTarget(Fish &ugly)
+vector<int>		Game::getDronesTargetForUgly(Fish &ugly)
 {
 	vector<int>	droneIds;
 	int			droneDis = -1;
@@ -132,7 +132,7 @@ void	Game::uglysSimulation(void)
 			continue;
 		}
 
-		vector<int> dronesId = this->uglysDroneIdTarget(ugly);
+		vector<int> dronesId = this->getDronesTargetForUgly(ugly);
 
 		if (dronesId.empty())
 		{
