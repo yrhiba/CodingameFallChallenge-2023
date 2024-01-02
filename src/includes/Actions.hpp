@@ -7,9 +7,11 @@
 struct Actions
 {
 	int			isWaiting;
+
 	EVector		pos;
 	int			light;
 	string		message;
+
 	set<int>	uglyToAvoid;
 
 	Actions();
