@@ -99,13 +99,14 @@ vector<string> files =
 		/*Drone-Updates*/
 		"src/2_drone-module/droneUpdateVel.cpp",
 		/*Drone-Updates*/
+		/*Drone-Avoidness*/
+		"src/2_drone-module/dronesAvoidnes.cpp",
+		/*Drone-Avoidness*/
 	/*Drone-Module*/
 
 	/*Drone-Work-Files*/
-	"src/drone-work/drone_avoidness.cpp",
 	"src/drone-work/drone_light_evaluate.cpp",
 	/*Drone-Work-Files*/
-
 
 	/*solution|main|files*/
 	"src/solutions/solution.cpp",
