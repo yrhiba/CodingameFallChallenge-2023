@@ -35,37 +35,21 @@ struct Game
 	set<int>					fishsPossibleToKickType[3]; // CLEAR EACH TURN
 	set<int>					fishsPossibleToScanType[3]; // CLEAR EACH TURN
 
-	// FISHS FLAGS ANSERING QUESTION FOR DOUBLE SAVETY CHECK
-	map<int, bool>				isScannedFish; // CLEARED EACH TURN
-	map<int, bool>				isScannedByMeFish; // CLEARED EACH TURN
-	map<int, bool>				isScannedByOpFish;	// CLEARED EACH TURN
-	map<int, set<int> >			isDronesScannedByMeFish; // CLEARED EACH TURN
-	map<int, set<int> >			isDronesScannedByOpFish; // CLEARED EACH TURN
-	map<int, bool>				isDeadFish; // CLEARD EACH TURN
-
-	void initTurn( void );
+	void	initTurn( void );
 
 	/*game-geters*/
-	Fish	&getFishById(int fishId);
-	Drone	&getDroneById(int droneId);
-	int		getClosestUgly(EVector pos);
-	int		getClosestDroneIdFromPos(EVector pos);
-	int		getClosestVisibleFishNotScannedYet(EVector pos);
+	Fish		&getFishById(int fishId);
+	Drone		&getDroneById(int droneId);
+	int			getClosestUgly(EVector pos);
+	vector<int>	getClosestUglysIdFrom(Fish &ugly);
+	int			getClosestVisibleFishNotScannedYet(EVector pos);
+	int			getClosestDroneIdFromPos(EVector pos);
+	vector<int>	getDronesTargetForUgly(Fish &ugly);
 	/*game-geters*/
-
-	/*fishes-target-points*/
-	void	evaluate_fishes_targets(void);
-	/*fishes-target-points*/
-
-	/*fishes-to-scan/kick-evaluate*/
-	void	fishesEvaluatePossibleToKick(void);
-	void	fishesEvaluatePossibleToScan(void);
-	/*fishes-to-scan/kick-evaluate*/
 
 	/*drones-assignement+utils*/
 	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
 	void	dronesAssingFishesToKickOut(void); // for testing strategie
-
 	void	dronesAssignFishToScanWithType(int fishesType);
 	void	droneUpdateVelToScanTheTargetFish(Drone &drone);
 	void	dronesAssingFishesToScan(void); // for testing strategie
@@ -75,8 +59,6 @@ struct Game
 	void		updateUglySpeed(Fish &ugly);
 	void		snapUglyToZone(EVector &uglyPos);
 	void		uglysSimulation(void);
-	vector<int>	getClosestUglysIdFrom(Fish &ugly);
-	vector<int>	uglysDroneIdTarget(Fish &ugly);
 	/*uglys-simulation*/
 
 	/*fishes-simulatio*/
@@ -111,7 +93,6 @@ struct Game
 	/*game-turn-clear*/
 	void	clearGamePreviousTurnData(void);
 	void	initializeAndUpdateTurnData(void);
-	void	initializeAndUpdateFishesTurnData(void);
 	/*game-turn-clear*/
 
 	/*game-reads-first-turn*/
@@ -120,13 +101,18 @@ struct Game
 	/*game-reads-first-turn*/
 
 	/*game-reads-each-turn*/
-	void readScores(void);
-	void readScannedCreatures( void );
-	void readDrones(void);
-	void readDronesCurrentScan( void );
-	void readVisibleCreatures( void );
-	void readRadarInfo(void);
+	void	readTurnData(void);
+	void	readScores(void);
+	void	readScannedCreatures(void);
+	void	readDrones(void);
+	void	readDronesCurrentScan(void);
+	void	readVisibleCreatures(void);
+	void	readRadarInfo(void);
 	/*game-reads-each-turn*/
+
+	/*fishes-updates-after-read-turn-data*/
+	void	setFishesFlagsAndUpdates(void);
+	/*fishes-updates-after-read-turn-data*/
 
 	void	solution();
 

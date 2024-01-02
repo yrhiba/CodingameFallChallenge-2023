@@ -18,34 +18,21 @@ void Game::readScannedCreatures( void )
 {
 	/* What Me I Scan */
 	cin >> this->my_scan_count; cin.ignore();
-
 	for (int i = 0; i < this->my_scan_count; i++)
 	{
 		int creature_id; cin >> creature_id; cin.ignore();
-
 		Fish &fish = this->getFishById(creature_id);
-
 		fish.scannedByMe = true;
 		fish.scaned = true;
-
-		this->isScannedByMeFish[fish.id] = true;
-		this->isScannedFish[fish.id] = true;
 	}
-
 	/* What Oponnents Scan */
 	cin >> this->op_scan_count; cin.ignore();
-
 	for (int i = 0; i < this->op_scan_count; i++)
 	{
 		int creature_id; cin >> creature_id; cin.ignore();
-
 		Fish &fish = this->getFishById(creature_id);
-
 		fish.scaned = true;
 		fish.scannedByOp = true;
-
-		this->isScannedByOpFish[creature_id] = true;
-		this->isScannedFish[creature_id] = true;
 	}
 }
 
@@ -100,13 +87,11 @@ void Game::readDronesCurrentScan( void )
 		{
 			fish.unsavedScanedByOP = true;
 			fish.opDronesScan.insert(drone.id);
-			this->opDronesScanedTheFish[creature_id].insert(drone.id);
 		}
 		else // my Drone
 		{
 			fish.unsavedScanedByMe = true;
 			fish.myDronesScan.insert(drone.id);
-			this->myDronesScanedTheFish[creature_id].insert(drone.id);
 		}
 	}
 }
@@ -141,7 +126,6 @@ void Game::readRadarInfo( void )
 		Drone	&drone = this->getDroneById(drone_id);
 		Fish	&fish = this->getFishById(creature_id);
 
-		drone.creaturesDirection.push_back({creature_id, radar});
 		fish.pushExistZone(drone.pos, radar);
 	}
 
@@ -153,3 +137,57 @@ void Game::readRadarInfo( void )
 		}
 	}
 }
+
+void Game::readTurnData(void)
+{
+	/* Read Scores */
+	this->readScores();
+
+	/* Read Scanned Creatures (Me, Opponets) */
+	this->readScannedCreatures();
+
+	/* Read My Drones and Opponnets Drones */
+	if (this->game_turn == 0)
+	{
+		this->readSetupDrones();
+	}
+	else
+	{
+		this->readDrones();
+	}
+
+	/* Read Drones current creatures scann */ 
+	this->readDronesCurrentScan();
+
+	/* Creatures(fishes) Position */
+	this->readVisibleCreatures();
+
+	/* Read Creatures Radar Direction */
+	this->readRadarInfo();
+}
+
+void Game::setFishesFlagsAndUpdates(void)
+{
+	for (Fish &fish : this->allFishes)
+	{
+		if (fish.type == -1) continue;
+
+		if (fish.dead) continue;
+
+		fish.setAvaillabilty();
+		fish.extimatePossiblePosition();
+
+		if (fish.availlableToscan)
+		{
+			this->fishsPossibleToScan.insert(fish.id);
+			this->fishsPossibleToScanType[fish.type].insert(fish.id);
+		}
+
+		if (fish.availableToKick)
+		{
+			this->fishsPossibleToKick.insert(fish.id);
+			this->fishsPossibleToKickType[fish.type].insert(fish.id);
+		}
+	}
+}
+
