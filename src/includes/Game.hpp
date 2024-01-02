@@ -1,7 +1,8 @@
 #pragma once
+
 #include "../header.hpp"
-#include "../includes/Drone.hpp";
-#include "../includes/Fish.hpp"
+#include "Drone.hpp";
+#include "Fish.hpp"
 
 /*start*/
 
@@ -64,10 +65,6 @@ struct Game
 	/*fishes-simulatio*/
 	void		fishesSimulation(void);
 	/*fishes-simulatio*/
-
-	/*scores-evaluation*/
-	void	scores_evaluate(void);
-	/*scores-evaluation*/
 
 	/*drone-avoidness*/
 	bool	isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly);
