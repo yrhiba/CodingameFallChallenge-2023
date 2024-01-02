@@ -1,5 +1,8 @@
 # Codingame - Fall Challenge | yrhiba: Bot
 
+Challenge-Link:
+https://www.codingame.com/contests/fall-challenge-2023
+
 # Bot Title: Flouka-And-7oTa
 
 # Introduction
