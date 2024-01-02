@@ -28,6 +28,7 @@ void Game::initTurn( void )
 	this->isDronesScannedByOpFish.clear();
 	this->isDeadFish.clear();
 	this->fishsPossibleToKick.clear();
+	this->fishsPossibleToScan.clear();
 
 	this->creature_visible_count = 0;
 	this->fishes_visible_count = 0;

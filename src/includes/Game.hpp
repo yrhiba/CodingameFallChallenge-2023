@@ -28,7 +28,12 @@ struct Game
 	vector<Fish>				allFishes;
 	map<int, vector<int>>		typeFishes;
 	map<int, bool>				isScannedFish;
+
 	set<int>					fishsPossibleToKick;
+	set<int>					fishsPossibleToScan;
+
+	set<int>					fishsPossibleToKickType[3]; // type 0 | 1 | 2
+	set<int>					fishsPossibleToScanType[3]; // type 0 | 1 | 2
 
 	map<int, bool>				isScannedByMeFish;
 	map<int, bool>				isScannedByOpFish;
@@ -66,13 +71,22 @@ struct Game
 	void	evaluate_fishes_targets(void);
 	/*fishes-target-points*/
 
-
-	/*fishes-to-kick*/
-	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
+	/*fishes-to-kick-evaluate*/
 	void	fishesEvaluatePossibleToKick(void);
-	void	dronesAssingFishesToKickOut(void);
-	/*fishes-to-kick*/
-	
+	/*fishes-to-kick-evaluate*/
+
+	/*fishes-to-scan-evaluate*/
+	void	fishesEvaluatePossibleToScan(void);
+	/*fishes-to-scan-evaluate*/
+
+	/*drones-assignement+utils*/
+	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
+	void	dronesAssingFishesToKickOut(void); // for testing strategie
+
+	void	dronesAssignFishToScanWithType(int fishesType);
+	void	droneUpdateVelToScanTheTargetFish(Drone &drone);
+	void	dronesAssingFishesToScan(void); // for testing strategie
+	/*drones-assignement+utils*/
 
 	/*uglys-simulation*/
 	void		updateUglySpeed(Fish &ugly);
@@ -110,6 +124,7 @@ struct Game
 	void	debugScoring(void);
 	void	debugFishsToKickAssinment(void);
 	void	debugFishesPossibleToKick(void);
+	void	debugFishesPossibleToScan(void);
 	/*debugs-functions*/
 
 	void	solution();

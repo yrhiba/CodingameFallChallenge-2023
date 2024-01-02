@@ -97,6 +97,17 @@ void	Game::debugFishesPossibleToKick(void)
 	cerr << endl << endl;
 }
 
+void	Game::debugFishesPossibleToScan(void)
+{
+	cerr << "Fishes-Possible-To-Scan-Ids: " << endl;
+	for (int fishId : this->fishsPossibleToScan)
+	{
+		cerr << fishId << " ";
+	}
+	cerr << endl << endl;
+}
+
+
 // output the sved fishes + the current score | me and opponets
 void Game::debugSavedScore(void)
 {

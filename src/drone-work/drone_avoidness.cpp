@@ -118,7 +118,10 @@ bool	Game::goodDroneVelocty(Drone &drone)
 		if (!ugly.isVisible) continue;
 
 		if (isCoillisionBetwDroneUgly(drone, ugly))
+		{
+			drone.action.uglyToAvoid.insert(ugly.id);
 			return (false);
+		}
 
 		Drone	nextDrone;
 		Fish	nextUgly;
@@ -201,7 +204,7 @@ void	Game::dronesAvoidnes(Drone &drone)
 	if (!wayExist)
 	{
 		cerr << "noWay for drone: " << drone.id << endl;
-
+		drone.action.setMsg("No-Way-To-Avoid");
 		// go to top to win some time.
 		drone.velocty = EVector(0, -600);
 		drone.velocty.setMag(drone.maxSpeed);
@@ -209,6 +212,16 @@ void	Game::dronesAvoidnes(Drone &drone)
 	}
 	else
 	{
+		if (!(drone.action.uglyToAvoid.empty()))
+		{
+			drone.action.message += ",Avoid-Ugly-" + to_string(*(drone.action.uglyToAvoid.begin()));
+
+			if (drone.action.uglyToAvoid.size() > 1)
+			{
+				drone.action.message += "++";
+			}
+		}
+
 		if (secondVel.x == -1)
 		{
 			drone.velocty = firstVel;
