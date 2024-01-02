@@ -8,11 +8,12 @@
 
 void Game::solution()
 {
-	// Debugs Info
+	#if DEBUG
 	this->debugFishsVisibleSimulated();
 	this->debugVisibleSimulatedUglys();
 	this->debugFishesPossibleToScan();
 	this->debugFishesPossibleToKick();
+	#endif
 
 	// Assign fishes to drones for scan & kick
 	this->dronesAssingFishesToScan();
@@ -31,7 +32,7 @@ void Game::solution()
 		}
 		else
 		{
-			// update velocty
+			// update mission and velocty
 			this->droneUpdateVel(curDrone);
 			// avoid uglys
 			this->dronesAvoidnes(curDrone);
@@ -48,8 +49,9 @@ void Game::solution()
 		}
 	}
 
-	// debug drones descion
+	#if DEBUG
 	this->debugDronesActions();
+	#endif
 }
 
 /*
