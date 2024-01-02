@@ -2,6 +2,23 @@
 
 /*start*/
 
+void	Game::updateUglySpeed(Fish &ugly)
+{
+	EVector nextPos = ugly.pos + ugly.velocty;
+
+	if ((nextPos.x < 0 && nextPos.x < ugly.pos.x) || 
+		(nextPos.x > 9999 && nextPos.x > ugly.pos.x))
+	{
+		ugly.velocty.x *= -1;
+	}
+
+	if ((nextPos.y < 2500 && nextPos.y < ugly.pos.y) || 
+		(nextPos.y > 9999 && nextPos.y > ugly.pos.y))
+	{
+		ugly.velocty.y *= -1;
+	}
+}
+
 void	Game::snapUglyToZone(EVector &uglyPos)
 {
 	if (uglyPos.x < 0)
