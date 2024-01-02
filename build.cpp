@@ -63,8 +63,8 @@ vector<string> files =
 		/*game-updates-fishes-drone*/
 
 		/*game-simulation*/
-		"src/game-modules/4_game-simulation/fishes_simulation.cpp",
-		"src/game-modules/4_game-simulation/uglys_simulation.cpp",
+		"src/game-modules/4_game-simulation/fishesSimulation.cpp",
+		"src/game-modules/4_game-simulation/uglysSimulation.cpp",
 
 		/*game-utils-files*/
 		"src/game-modules/A_game-utils/game_geters.cpp",
