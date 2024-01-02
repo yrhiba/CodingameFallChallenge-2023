@@ -54,6 +54,10 @@ vector<string> files =
 		"src/game-modules/1_game-init-turn/initTurn.cpp",
 		/*game-turn-init*/
 
+		/*game-read-input*/
+		"src/game-modules/2_game-readinput/readTurnData.cpp",
+		/*game-read-input*/
+
 		/*game-simulation*/
 		"src/game-modules/4_game-simulation/fishes_simulation.cpp",
 		"src/game-modules/4_game-simulation/uglys_simulation.cpp",
