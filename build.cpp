@@ -51,7 +51,7 @@ vector<string> files =
 		/*game-setup*/
 
 		/*game-turn-init*/
-		"src/game-modules/1_game-init-turn/turn_setup.cpp",
+		"src/game-modules/1_game-init-turn/initTurn.cpp",
 		/*game-turn-init*/
 
 		/*game-simulation*/

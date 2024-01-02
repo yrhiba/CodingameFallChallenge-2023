@@ -2,12 +2,6 @@
 
 /*start*/
 
-void Game::initTurn( void )
-{
-	// initialize + update variballs of Game/Fishes/Uglys
-	this->initializeAndUpdateTurnData();
-}
-
 void Game::readScores( void )
 {
 	cin >> this->my_score >> this->op_score;

@@ -33,3 +33,9 @@ void	Game::initializeAndUpdateTurnData(void)
 		drone.initializeAndSetupTurnData();
 	}
 }
+
+void Game::initTurn( void )
+{
+	// initialize + update variballs of Game/Fishes/Uglys
+	this->initializeAndUpdateTurnData();
+}
