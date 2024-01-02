@@ -45,7 +45,7 @@ void Game::debugFishsVisibleSimulated(void)
 				}
 				else
 				{
-					cerr << "Estimated-Pos: " << fish.targetPointToScan;
+					cerr << "Estimated-Pos: " << fish.estimationPosition;
 				}
 
 				cerr << ", AvaillableToScan: " << (fish.availlableToscan?"yes":"no") << endl;
