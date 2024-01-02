@@ -10,9 +10,7 @@ void		Game::fishesSimulation(void)
 		if (fish.type == -1) continue;
 
 		// if fish not visible
-		if (!fish.isVisible) continue;
-
-
-		
+		if (fish.visibleAtTurn != this->game_turn)
+			fish.visibleAtTurn = -1;
 	}
 }

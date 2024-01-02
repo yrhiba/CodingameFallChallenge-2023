@@ -21,7 +21,6 @@ struct Fish
 	int		scannedByOp; // UPDATED EACH TURN
 	int		unsavedScanedByMe; // UPDATED EACH TURN
 	int		unsavedScanedByOP; // UPDATED EACH TURN
-	int		isVisible; // UPDATED EACH TURN
 	int		visibleAtTurn; // UPDATED EACH TURN
 	bool	availableToKick; // UPDATED EACH TURN
 	bool	availlableToscan; // UPDATED EACH TURN

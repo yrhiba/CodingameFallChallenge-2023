@@ -9,7 +9,7 @@ void Game::debugVisibleSimulatedUglys(void)
 	for (int i : this->typeFishes[-1])
 	{
 		Fish &ugly = this->getFishById(i);
-		if (!ugly.isVisible) continue;
+		if (ugly.visibleAtTurn == -1) continue;
 		if (!isAtLeastOne) cerr << endl;
 		isAtLeastOne = true;
 		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
@@ -39,7 +39,7 @@ void Game::debugFishsVisibleSimulated(void)
 			}
 			else
 			{
-				if (fish.isVisible)
+				if (fish.visibleAtTurn != -1)
 				{
 					cerr << "Pos" << fish.pos << ", Vel" << fish.velocty;
 				}

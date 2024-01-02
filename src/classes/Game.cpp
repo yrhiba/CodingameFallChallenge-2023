@@ -108,7 +108,6 @@ void Game::readVisibleCreatures( void )
 		Fish &fish = this->getFishById(creature_id);
 
 		fish.visibleAtTurn = this->game_turn;
-		fish.isVisible = true;
 		fish.pos = EVector(creature_x, creature_y);
 		fish.velocty = EVector(creature_vx, creature_vy);
 	}

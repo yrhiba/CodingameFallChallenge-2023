@@ -14,7 +14,7 @@ void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
 
 	EVector	targetPos;
 
-	if (targetFishToScan.isVisible)
+	if (targetFishToScan.visibleAtTurn != -1)
 	{
 		targetPos = targetFishToScan.pos;
 	}
@@ -56,7 +56,7 @@ void	Game::dronesAssignFishToScanWithType(int fishesType)
 				if (!(this->fishsPossibleToScan.count(fishId))) continue;
 				Fish	&fish = this->getFishById(fishId);
 				if (!fish.availlableToscan) continue;
-				double	curDistance = calcDistance((fish.isVisible ? fish.pos : fish.estimationPosition), drone.pos);
+				double	curDistance = calcDistance(((fish.visibleAtTurn != -1) ? fish.pos : fish.estimationPosition), drone.pos);
 				if (((fishResId == -1) || (curDistance < fishResDis)))
 				{
 					fishResId = fish.id;
@@ -83,7 +83,7 @@ void	Game::dronesAssignFishToScanWithType(int fishesType)
 			{
 				Drone &drone = this->getDroneById(droneId);
 				if (drone.assignedFishToScan || drone.emergency) continue;
-				double	curDistance = calcDistance((fish.isVisible ? fish.pos : fish.estimationPosition), drone.pos);
+				double	curDistance = calcDistance(((fish.visibleAtTurn != -1) ? fish.pos : fish.estimationPosition), drone.pos);
 				if ((droneResId == -1) || (curDistance < droneResDis))
 				{
 					droneResId = drone.id;

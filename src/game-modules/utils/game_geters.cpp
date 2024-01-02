@@ -10,7 +10,7 @@ int	Game::getClosestVisibleFishNotScannedYet(EVector pos)
 	for (auto &fish : this->allFishes)
 	{
 		if (fish.type == -1) continue;
-		if (!fish.isVisible) continue;
+		if (fish.visibleAtTurn == -1) continue;
 		if (fish.scannedByMe) continue;
 
 		double curDis = calcDistance(fish.pos, pos);
@@ -108,7 +108,7 @@ int	Game::getClosestUgly(EVector pos)
 	for (auto &fish : this->allFishes)
 	{
 		if (fish.type != -1) continue;
-		if (!fish.isVisible) continue;
+		if (fish.visibleAtTurn == -1) continue;
 
 		double curDis = calcDistance(fish.pos, pos);
 

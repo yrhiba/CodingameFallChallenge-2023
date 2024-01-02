@@ -115,7 +115,8 @@ void	Game::uglysSimulation(void)
 	{
 		Fish &ugly = this->getFishById(UglyId);
 
-		if (ugly.visibleAtTurn == -1) continue;
+		if ((ugly.visibleAtTurn == -1) || (ugly.visibleAtTurn == this->game_turn))
+			continue;
 
 		ugly.velocty.roundme();
 		ugly.pos += ugly.velocty;
@@ -125,12 +126,9 @@ void	Game::uglysSimulation(void)
 	for (int UglyId : allUglys)
 	{
 		Fish &ugly = this->getFishById(UglyId);
-		if (!ugly.isVisible) continue;
-		if (ugly.visibleAtTurn == -1)
-		{
-			ugly.visibleAtTurn = this->game_turn;
+
+		if ((ugly.visibleAtTurn == -1) || (ugly.visibleAtTurn == this->game_turn))
 			continue;
-		}
 
 		vector<int> dronesId = this->getDronesTargetForUgly(ugly);
 
@@ -151,6 +149,7 @@ void	Game::uglysSimulation(void)
 				if (!avoidDir.isZero())
 				{
 					avoidDir.setMag(200);
+					avoidDir.roundme();
 					ugly.velocty = avoidDir;
 				}
 			}

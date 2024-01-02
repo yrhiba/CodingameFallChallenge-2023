@@ -143,7 +143,6 @@ void	Fish::initializeSetupGameData(void)
 	this->scannedByOp = false;
 	this->unsavedScanedByMe = false;
 	this->unsavedScanedByOP = false;
-	this->isVisible = false;
 	this->visibleAtTurn = -1;
 	this->availableToKick = true;
 	this->availlableToscan = true;
