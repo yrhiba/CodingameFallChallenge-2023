@@ -18,8 +18,8 @@ void	Game::initializeAndUpdateTurnData(void)
 	// initialize Game object variable
 	this->clearGamePreviousTurnData();
 
+	// increment the count of the turn indicator
 	this->game_turn += 1;
-	this->creature_visible_count = 0;
 
 	// initialize + update fishes objects
 	for (auto &fish : this->allFishes)
@@ -27,10 +27,9 @@ void	Game::initializeAndUpdateTurnData(void)
 		fish.initializeAndSetupTurnData();
 	}
 
-	// TODO:
-	// initialize + update fishes objects
+	// initialize + update drones objects
 	for (auto &drone : this->allDrones)
 	{
-		// drone.initializeAndSetupTurnData();
+		drone.initializeAndSetupTurnData();
 	}
 }
