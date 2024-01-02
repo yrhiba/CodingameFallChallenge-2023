@@ -44,33 +44,33 @@ vector<string> files =
 
 	/*Game-Module-Files*/
 		/*game-setup*/
-		"src/game-modules/0_game-setup/readSetupCreatures.cpp",
-		"src/game-modules/0_game-setup/readSetupDrones.cpp",
+		"src/game-module/0_game-setup/readSetupCreatures.cpp",
+		"src/game-module/0_game-setup/readSetupDrones.cpp",
 		/*game-setup*/
 
 		/*game-turn-init*/
-		"src/game-modules/1_game-init-turn/initTurn.cpp",
+		"src/game-module/1_game-init-turn/initTurn.cpp",
 		/*game-turn-init*/
 
 		/*game-read-input*/
-		"src/game-modules/2_game-readinput/readTurnData.cpp",
+		"src/game-module/2_game-readinput/readTurnData.cpp",
 		/*game-read-input*/
 
 		/*game-updates-fishes-drone*/
-		"src/game-modules/3_game-updatefishesdrones/setFishesFlagsAndUpdates.cpp",
-		"src/game-modules/3_game-updatefishesdrones/setDronesFlagsAndUpdates.cpp",
+		"src/game-module/3_game-updatefishesdrones/setFishesFlagsAndUpdates.cpp",
+		"src/game-module/3_game-updatefishesdrones/setDronesFlagsAndUpdates.cpp",
 		/*game-updates-fishes-drone*/
 
 		/*game-simulation*/
-		"src/game-modules/4_game-simulation/fishesSimulation.cpp",
-		"src/game-modules/4_game-simulation/uglysSimulation.cpp",
+		"src/game-module/4_game-simulation/fishesSimulation.cpp",
+		"src/game-module/4_game-simulation/uglysSimulation.cpp",
 
 		/*game-utils-files*/
-		"src/game-modules/A_game-utils/game_geters.cpp",
+		"src/game-module/A_game-utils/game_geters.cpp",
 		/*game-utils-files*/
 
 		/*game-debugs-file*/
-		"src/game-modules/B_game-debugs/debugs.cpp",
+		"src/game-module/B_game-debugs/debugs.cpp",
 		/*game-debugs-file*/
 	/*Game-Module-Files*/
 
