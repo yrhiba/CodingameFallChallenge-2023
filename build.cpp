@@ -49,8 +49,8 @@ vector<string> files =
 		"src/game-modules/game-setup/turn_setup.cpp",
 		/*game-setup*/
 		/*simulations*/
-		"src/game-modules/simulations/fishes_simulation.cpp",
-		"src/game-modules/simulations/uglys_simulation.cpp",
+		"src/game-modules/game-simulation/fishes_simulation.cpp",
+		"src/game-modules/game-simulation/uglys_simulation.cpp",
 		/*evaluations*/
 		"src/game-modules/evaluations/scores_evaluate.cpp",
 		/*game-utils-files*/
