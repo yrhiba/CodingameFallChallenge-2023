@@ -22,26 +22,32 @@ int main()
 		/* Initialize Data */
 		game.initTurn();
 
-		/*read turn data*/
+		/* read turn data */
 		game.readTurnData();
 
-		/*fishes-updates-turn-data-and-set-flags*/
+		/* fishes-updates-turn-data-and-set-flags*/
 		game.setFishesFlagsAndUpdates(); // estimated postion + availlavilty to scan + kick //
 
-		// simulate the uglys
-		game.uglysSimulation(); // not code it yet
+		/* drones-updates-turn-data-and-set-flags*/
+		game.setDronesFlagsAndUpdates(); // check the mission state .. //
 
-		// simulate the fishes
+		// simulate the uglys //
+		game.uglysSimulation();
+
+		// simulate the fishes //
 		game.fishesSimulation();
 
-		// start of new Turn
-
+		// start of new Turn //
+		// ################ //
 		#if DEBUG
 		cerr << "Game-Turn: " << game.game_turn << endl << endl;
 		#endif
 
-		// puts the solution
+		// puts the solution //
 		game.solution();
+
+		// end of The Turn //
+		// ################ //
 	}
 
 	return (0);
