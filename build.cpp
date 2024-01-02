@@ -55,7 +55,7 @@ vector<string> files =
 		"src/game-modules/game-simulation/uglys_simulation.cpp",
 
 		/*game-utils-files*/
-		"src/game-modules/utils/game_geters.cpp",
+		"src/game-modules/game-utils/game_geters.cpp",
 		/*game-utils-files*/
 	/*Game-Modules-Files*/
 
