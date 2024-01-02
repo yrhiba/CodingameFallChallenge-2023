@@ -52,9 +52,6 @@ vector<string> files =
 		"src/game-modules/simulations/fishes_simulation.cpp",
 		"src/game-modules/simulations/uglys_simulation.cpp",
 		/*evaluations*/
-		"src/game-modules/evaluations/fihes_evaluate_target_positions.cpp",
-		"src/game-modules/evaluations/fishes_evaluate_to_scan.cpp",
-		"src/game-modules/evaluations/fishes_evaluate_to_kick.cpp",
 		"src/game-modules/evaluations/scores_evaluate.cpp",
 		/*game-utils-files*/
 		"src/game-modules/utils/game_geters.cpp",
