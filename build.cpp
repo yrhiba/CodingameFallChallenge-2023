@@ -23,23 +23,23 @@ vector<string> files =
 	"src/header.hpp",
 
 	/*includes files*/
-	"src/includes/EVector.hpp",
-	"src/includes/SingleLinePath.hpp",
-	"src/includes/Fish.hpp",
-	"src/includes/Actions.hpp",
-	"src/includes/Drone.hpp",
-	"src/includes/Game.hpp",
+	"src/A_includes/EVector.hpp",
+	"src/A_includes/SingleLinePath.hpp",
+	"src/A_includes/Fish.hpp",
+	"src/A_includes/Actions.hpp",
+	"src/A_includes/Drone.hpp",
+	"src/A_includes/Game.hpp",
 	/*includes files*/
 
 	/*Evector-Implm*/
-	"src/classes/EVector.cpp",
+	"src/B_classes/EVector.cpp",
 	/*SingleLine-Impl*/
-	"src/classes/SingleLinePath.cpp",
+	"src/B_classes/SingleLinePath.cpp",
 
 	/*Drone|Fish|Game|standart-Impl-File*/
-	"src/classes/Drone.cpp",
-	"src/classes/Fish.cpp",
-	"src/classes/Actions.cpp",
+	"src/B_classes/Drone.cpp",
+	"src/B_classes/Fish.cpp",
+	"src/B_classes/Actions.cpp",
 	/*Drone|Fish|Game|standart-Impl-File*/
 
 	/*Game-Module-Files*/
