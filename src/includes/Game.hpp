@@ -100,35 +100,29 @@ struct Game
 	void		fishesSimulation(void);
 	/*fishes-simulatio*/
 
-
 	/*scores-evaluation*/
 	void	scores_evaluate(void);
 	/*scores-evaluation*/
 
-
 	/*drone-avoidness*/
+	bool	isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly);
 	bool	goodDroneVelocty(Drone &drone);
 	void	dronesAvoidnes(Drone &drone);
-	bool	isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly);
 	/*drone-avoidness*/
-
 
 	/*drone-work*/
 	void	droneUpdateVel(Drone &drone);
 	void	droneLighEvaluateState(Drone &drone);
 	/*drone-work*/
 
-
 	/*debugs-functions*/
 	void	debugVisibleSimulatedUglys(void);
 	void	debugFishsVisibleSimulated(void);
 	void	debugMyDroneState(void);
-	void	debugSavedScore(void);
-	void	debugUnsavedScore(void);
-	void	debugScoring(void);
 	void	debugFishsToKickAssinment(void);
 	void	debugFishesPossibleToKick(void);
 	void	debugFishesPossibleToScan(void);
+	void	debugDronesActions(void);
 	/*debugs-functions*/
 
 	void	solution();

@@ -48,13 +48,8 @@ void Game::solution()
 		}
 	}
 
-	// For Drones debug descions.
-	cerr << "Drones-Turn-Result:" << endl;
-	for (auto &droneId : this->myDrones)
-	{
-		Drone &curDrone = this->getDroneById(droneId);
-		curDrone.action.debug(curDrone.id);
-	}
+	// debug drones descion
+	this->debugDronesActions();
 }
 
 /*

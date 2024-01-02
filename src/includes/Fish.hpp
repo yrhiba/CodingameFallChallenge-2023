@@ -10,10 +10,10 @@ struct Fish
 	int		type;
 
 	EVector	pos;
-	EVector	nextSimulatedPos;
+	EVector	nextSimulatedPos; // to calculate
 
 	EVector	velocty;
-	EVector	nextSimulatedVel;
+	EVector	nextSimulatedVel; // to calculate
 
 	int		scaned; // 0 : not-scanned || 1 : scanned
 	int		dead;  // 0 : still alive || 1 : dead fish
@@ -23,12 +23,12 @@ struct Fish
 	int		visibleAtTurn;
 
 	// evaluate-fish-target-members
-	bool					availableToKick;
-	bool					availlableToscan;
-	pair<EVector, EVector>	existZone; // carre first:top|left second:bottom|right
-	EVector					targetPointToScan;
-
+	bool								availableToKick;
+	bool								availlableToscan;
+	pair<EVector, EVector>				existZone;
+	EVector								targetPointToScan;
 	vector< pair<EVector, EVector> >	existZones;
+
 
 	Fish();
 

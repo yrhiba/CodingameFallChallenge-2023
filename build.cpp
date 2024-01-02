@@ -19,57 +19,60 @@ using namespace std;
 
 vector<string> files =
 {
+	/*header file*/
 	"src/header.hpp",
 
+	/*includes files*/
 	"src/includes/EVector.hpp",
-
 	"src/includes/SingleLinePath.hpp",
-
 	"src/includes/Fish.hpp",
-
 	"src/includes/Actions.hpp",
-
 	"src/includes/Drone.hpp",
-
 	"src/includes/Game.hpp",
+	/*includes files*/
 
+	/*Evector-Implm*/
+	"src/classes/EVector.cpp",
+	/*SingleLine-Impl*/
 	"src/classes/SingleLinePath.cpp",
 
+	/*Drone|Fish|Game|standart-Impl-File*/
 	"src/classes/Drone.cpp",
-
-	"src/classes/EVector.cpp",
-
 	"src/classes/Fish.cpp",
-
 	"src/classes/Game.cpp",
-
-	"src/game-modules/fihes_targtet_point.cpp",
-
-	"src/game-modules/ugly_simulation.cpp",
-
-	"src/game-modules/fishes_to_kick_evaluate.cpp",
-
-	"src/game-modules/scores_evaluate.cpp",
-
-	"src/game-modules/fishes_evaluate_toscan.cpp",
-
-	"src/drone-work/drone_update.cpp",
-
-	"src/drone-work/drone_avoidness.cpp",
-
-	"src/drone-work/light_evaluate.cpp",
-
-	"src/drone-work/drone_kick_out_fish.cpp",
-
-	"src/drone-work/drone_scan_fish.cpp",
-
-	"src/game-debugs/debugs.cpp",
-
 	"src/classes/Actions.cpp",
+	/*Drone|Fish|Game|standart-Impl-File*/
 
+	/*Game-Modules-Files*/
+		/*simulations*/
+		"src/game-modules/simulations/fishes_simulation.cpp",
+		"src/game-modules/simulations/uglys_simulation.cpp",
+		/*evaluations*/
+		"src/game-modules/evaluations/fihes_evaluate_target_positions.cpp",
+		"src/game-modules/evaluations/fishes_evaluate_to_scan.cpp",
+		"src/game-modules/evaluations/fishes_evaluate_to_kick.cpp",
+		"src/game-modules/evaluations/scores_evaluate.cpp",
+		/*game-utils-files*/
+		"src/game-modules/utils/game_geters.cpp",
+		/*game-utils-files*/
+	/*Game-Modules-Files*/
+
+	/*Drone-Work-Files*/
+	"src/drone-work/drone_update.cpp",
+	"src/drone-work/drone_avoidness.cpp",
+	"src/drone-work/drone_light_evaluate.cpp",
+	"src/drone-work/drone_kick_out_fish.cpp",
+	"src/drone-work/drone_scan_fish.cpp",
+	/*Drone-Work-Files*/
+
+	/*game-debugs-file*/
+	"src/game-debugs/debugs.cpp",
+	/*game-debugs-file*/
+
+	/*solution|main|files*/
 	"src/solutions/solution.cpp",
-
 	"src/main.cpp"
+	/*solution|main|files*/
 };
 
 

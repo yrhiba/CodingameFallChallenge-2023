@@ -107,18 +107,13 @@ void	Game::debugFishesPossibleToScan(void)
 	cerr << endl << endl;
 }
 
-
-// output the sved fishes + the current score | me and opponets
-void Game::debugSavedScore(void)
+void	Game::debugDronesActions(void)
 {
-}
-
-// output the currently fishes scanned by the drones but not saved Yet
-void Game::debugUnsavedScore(void)
-{
-}
-
-// output Resume of the score
-void Game::debugScoring(void)
-{
+	cerr << "Drones-Turn-Result:" << endl;
+	for (auto &droneId : this->myDrones)
+	{
+		Drone &curDrone = this->getDroneById(droneId);
+		curDrone.action.debug(curDrone.id);
+	}
+	cerr << endl;
 }
