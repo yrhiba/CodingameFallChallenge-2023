@@ -6,7 +6,7 @@
 #    By: yrhiba <yrhiba@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 16:59:00 by yrhiba            #+#    #+#              #
-#    Updated: 2023/12/21 17:06:16 by yrhiba           ###   ########.fr        #
+#    Updated: 2024/01/02 03:56:53 by yrhiba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ build :
 	g++ -std=c++17 $(FILES) -o $(SCRIPT)
 
 run : $(SCRIPT)
+	@mkdir -p prod
 	./$(SCRIPT)
 
 clean:
