@@ -22,30 +22,11 @@ int main()
 		/* Initialize Data */
 		game.initTurn();
 
-		/* Read Scores */
-		game.readScores();
+		/*read turn data*/
+		game.readTurnData();
 
-		/* Read Scanned Creatures (Me, Opponets) */
-		game.readScannedCreatures();
-
-		/* Read My Drones and Opponnets Drones */
-		if (game.game_turn == 0)
-		{
-			game.readSetupDrones();
-		}
-		else
-		{
-			game.readDrones();
-		}
-
-		/* Read Drones current creatures scann */ 
-		game.readDronesCurrentScan();
-
-		/* Creatures(fishes) Position */
-		game.readVisibleCreatures();
-
-		/* Read Creatures Radar Direction */
-		game.readRadarInfo();
+		/*fishes-updates-turn-data-and-set-flags*/
+		game.setFishesFlagsAndUpdates();
 
 		// simulate the uglys
 		game.uglysSimulation(); // not code it yet
@@ -58,15 +39,6 @@ int main()
 		#if DEBUG
 		cerr << "Game-Turn: " << game.game_turn << endl << endl;
 		#endif
-
-		/* FISHES EVAL MODUL */
-		// evaluate target point for remainig fishes //
-		game.evaluate_fishes_targets();
-		// evaluate fishes possible to kick them out //
-		game.fishesEvaluatePossibleToKick();
-		// evaluate fishes possible to scan them //
-		game.fishesEvaluatePossibleToScan();
-		/* FISHES EVAL MODUL */
 
 		// puts the solution
 		game.solution();
