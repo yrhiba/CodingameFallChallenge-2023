@@ -83,6 +83,15 @@ vector<string> files =
 		/*setup-Turn-data*/
 	/*Fish-Module*/
 
+	/*Drone-Module*/
+		/*setup-Game-data*/
+		"src/2_drone-module/initializeSetupGameData.cpp",
+		/*setup-Game-data*/
+		/*setup-Turn-data*/
+		"src/2_drone-module/initializeAndSetupTurnData.cpp",
+		/*setup-Turn-data*/
+	/*Drone-Module*/
+
 	/*Drone-Work-Files*/
 	"src/drone-work/drone_update.cpp",
 	"src/drone-work/drone_avoidness.cpp",
