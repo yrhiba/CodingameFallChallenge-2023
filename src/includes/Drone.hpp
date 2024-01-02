@@ -6,71 +6,84 @@
 
 struct Drone
 {
-	Actions	action;
+	int		id; // FIX THE HOLE TURNS
 
-	int		id;
-
-	int		mission; // || 0 scan fishes || 1 save fishes || 2 kick out fish || -1 nothing ||
-
-	/*for-update-drone-vel*/
-	EVector	TargetPos;
-
-	// target fish to scan
-	bool	assignedFishToScan; // true: must follow the target fish
-	int		TargetFishToScan;
-
-	// target fish to kick out
-	bool	assignedFishToKick; // true: must kick out the target fish
-	int		TargetFishToKick;
-
-	// mode explore or go top for save the fishes;
-	bool	mustGoToTop; // true need to go and save the fishes | false go to explore
-
+	/*UPDATED EACH TURN*/
 	EVector	pos;
 	EVector	velocty;
 	EVector	acceleration;
+	EVector	TargetPos;
+	/*UPDATED EACH TURN*/
 
-	int			emergency;
-	int			light;
-	int			battery;
+	int			emergency; // GIVEN EACH TURN
+	int			light; // GIVEN EACH TURN
+	int			battery; // GIVEN EACH TURN
+	int			isLightOn; // CALCULATED EACH TURN
 
-	bool	isLightOn;
+	int			myDrone; // FIX THE HOLE TURNS
+	int			opDrone; // FIX THE HOLE TURNS
 
-	int		myDrone;
-	int		opDrone;
+	int			maxSpeed; // FIX THE HOLE TURNS
+	double		maxForce; // FIX THE HOLE TURNS
 
-	int		maxSpeed;
-	double	maxForce;
+	double		wanderTheta; // FIX THE HOLE TURNS
 
-	double	wanderTheta;
+	vector<int>		scannedCreatures; // GIVEN EACH TURN 
 
-	SingleLinePath	single_line_path;
+	Actions		action; // GENRATE EACH TURN
 
-	vector<int>		scannedCreatures;
+	/*DRONE-MISSION*/
+	// TO UPDATE EACH TURN //
+	//#############//
+	int			mission;
+	deque<int>	queue_missions;
+	// target fish to scan
+	bool		assignedFishToScan;
+	int			TargetFishToScan;
+	// target fish to kick
+	bool		assignedFishToKick;
+	int			TargetFishToKick;
+	// target save current scanneds
+	bool		mustGoToTop;
+	//#############//
+	// TO UPDATE EACH TURN //
+	/*DRONE-MISSION*/
 
-	// creatureID : Direction
+	/*Ignored-for-the-moment-out-of-the-contest*/
 	vector< pair<int, string> >	creaturesDirection;
+	SingleLinePath				single_line_path;
+	/*Ignored-for-the-moment-out-of-the-contest*/
 
-	// constructer
-	Drone();
-
-	void	applyForce(EVector force);
-	void	edges(void);
+	/*drone-updates*/
 	void	updatePos(void);
+	void	edges(void);
 	void	snaptoDroneZone(void);
+	/*drone-updates*/
 
+	/*physique-engine|utils*/
+	void	applyForce(EVector force);
+	/*physique-engine|utils*/
+
+	/*physique-engine|steering-behaviors(customized-for-the-bot-needs)*/
 	EVector seekToPosForce(EVector target);
 	EVector fleeFromPosForce(EVector target);
 	EVector arriveToPosForce(EVector target, double radius);
 	EVector avoidUglyForce(Fish &ugly);
 	EVector wanderForce(void);
 	EVector followSingleLinePathForce(void);
+	/*phisique-engine|steering-behaviors*/
 
+	/*operators-overlod*/
 	bool operator<(const Drone &other) const;
 	bool operator<=(const Drone &other) const;
 	bool operator>(const Drone &other) const;
 	bool operator>=(const Drone &other) const;
 	bool operator==(const Drone &other) const;
+	/*operators-overlod*/
+
+	/*constructer*/
+	Drone();
+	/*constructer*/
 };
 
 istream &operator>>(istream &is, Drone &drone);

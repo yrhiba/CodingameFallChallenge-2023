@@ -5,8 +5,8 @@
 
 Fish::Fish():
 	id(-1), color(-1), type(-1), 
-	pos(-1, -1), nextSimulatedPos(-1, -1),
-	velocty(-1, -1), nextSimulatedVel(-1, -1),
+	pos(-1, -1),
+	velocty(-1, -1),
 	scaned(0), dead(0), 
 	scannedByMe(0), scannedByOp(0),
 	isVisible(0), visibleAtTurn(-1)
