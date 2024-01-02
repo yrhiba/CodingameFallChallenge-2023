@@ -96,6 +96,10 @@ struct Game
 	vector<int>	uglysDroneIdTarget(Fish &ugly);
 	/*uglys-simulation*/
 
+	/*fishes-simulatio*/
+	void		fishesSimulation(void);
+	/*fishes-simulatio*/
+
 
 	/*scores-evaluation*/
 	void	scores_evaluate(void);
