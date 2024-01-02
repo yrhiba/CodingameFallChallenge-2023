@@ -48,4 +48,4 @@ using namespace std;
 #define M_PI 3.14159265358979323846
 #endif
 
-# define DEBUG 0
+# define DEBUG 1

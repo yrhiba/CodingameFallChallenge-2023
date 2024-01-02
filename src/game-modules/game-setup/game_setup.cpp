@@ -9,7 +9,7 @@ void Game::readSetupCreatures( void )
 	this->allFishes.resize(this->creature_count);
 	for (auto &fish : this->allFishes)
 	{
-		fish.initializeAndSetupTurnData();
+		fish.initializeSetupGameData();
 
 		cin >> fish; cin.ignore();
 		this->typeFishes[fish.type].push_back(fish.id);
