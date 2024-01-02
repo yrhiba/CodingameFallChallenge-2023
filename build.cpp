@@ -44,6 +44,10 @@ vector<string> files =
 	/*Drone|Fish|Game|standart-Impl-File*/
 
 	/*Game-Modules-Files*/
+		/*game-setup*/
+		"src/game-modules/game-setup/game_setup.cpp",
+		"src/game-modules/game-setup/turn_setup.cpp",
+		/*game-setup*/
 		/*simulations*/
 		"src/game-modules/simulations/fishes_simulation.cpp",
 		"src/game-modules/simulations/uglys_simulation.cpp",

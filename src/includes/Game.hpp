@@ -7,77 +7,60 @@
 
 struct Game
 {
-	// Total creatures in the Map
-	int	game_turn;
+	int	game_turn; // INCREMENTED EACH TURN
 
-	int	creature_count;
-	int	creature_visible_count;
-	int	fishes_visible_notScanned_count;
-	int	fishes_visible_count;
-	int	uglys_visible_count;
+	int	creature_count; // FIX ALL THE GAME
+	int	creature_visible_count; // CALCULATED EACH TURN
 
-	int	my_score;
-	int	my_scan_count;
-	int	my_drone_count;
+	int	my_score; // GIVEN EACH TURN
+	int	my_scan_count; // GIVEN EACH TURN
+	int	my_drone_count; // FIX ALL THE GAME
 
-	int	op_score;
-	int	op_scan_count;
-	int	op_drone_count;
+	int	op_score; // GIVEN EACH TURN
+	int	op_scan_count; // GIVEN EACH TURN
+	int	op_drone_count; // FIX ALL THE GAME
 
 	// Fishes Informations
-	vector<Fish>				allFishes;
-	map<int, vector<int>>		typeFishes;
-	map<int, bool>				isScannedFish;
+	vector<Fish>				allFishes; // FIX ALL THE GAME
+	map<int, vector<int>>		typeFishes; // FIX ALL THE GAME
 
-	set<int>					fishsPossibleToKick;
-	set<int>					fishsPossibleToScan;
+	// Drones Informations
+	vector<Drone>				allDrones; // FIX ALL THE GAME
+	vector<int>					myDrones; // FIX ALL THE GAME
+	vector<int>					opponentsDrones; // FIX ALL THE GAME
 
-	set<int>					fishsPossibleToKickType[3]; // type 0 | 1 | 2
-	set<int>					fishsPossibleToScanType[3]; // type 0 | 1 | 2
+	// EVALUATED Informations - about the fishes
+	set<int>					fishsPossibleToKick; // CLEAR EACH TURN
+	set<int>					fishsPossibleToScan; // CLEAR EACH TURN
+	set<int>					fishsPossibleToKickType[3]; // CLEAR EACH TURN
+	set<int>					fishsPossibleToScanType[3]; // CLEAR EACH TURN
 
-	map<int, bool>				isScannedByMeFish;
-	map<int, bool>				isScannedByOpFish;
-	map<int, set<int> >			isDronesScannedByMeFish; // contain Ids for drone that currently scan the fish
-	map<int, set<int> >			isDronesScannedByOpFish;
-
-	map<int, bool>				isDeadFish;
-
-	// Drone Informations
-	vector<Drone>				allDrones;
-	vector<int>					myDrones;
-	vector<int>					opponentsDrones;
-
-	Game();
+	// FISHS FLAGS ANSERING QUESTION FOR DOUBLE SAVETY CHECK
+	map<int, bool>				isScannedFish; // CLEARED EACH TURN
+	map<int, bool>				isScannedByMeFish; // CLEARED EACH TURN
+	map<int, bool>				isScannedByOpFish;	// CLEARED EACH TURN
+	map<int, set<int> >			isDronesScannedByMeFish; // CLEARED EACH TURN
+	map<int, set<int> >			isDronesScannedByOpFish; // CLEARED EACH TURN
+	map<int, bool>				isDeadFish; // CLEARD EACH TURN
 
 	void initTurn( void );
 
-	// member function utilitys
-	void readCreatures( void );
-	void readScores( void );
-	void readScannedCreatures( void );
-	void readDrones( void );
-	void readDronesCurrentScan( void );
-	void readVisibleCreatures( void );
-	void readRadarInfo( void );
-
-	Fish &getFishById(int fishId);
-	Drone &getDroneById(int droneId);
-
-	int		getClosestUgly(EVector pos); // -1 if not found
-	int		getClosestVisibleFishNotScannedYet(EVector pos); // -1 if there is no visible fish
-	int		getClosestDroneIdFromPos(EVector pos); // -1 if not found
+	/*game-geters*/
+	Fish	&getFishById(int fishId);
+	Drone	&getDroneById(int droneId);
+	int		getClosestUgly(EVector pos);
+	int		getClosestDroneIdFromPos(EVector pos);
+	int		getClosestVisibleFishNotScannedYet(EVector pos);
+	/*game-geters*/
 
 	/*fishes-target-points*/
 	void	evaluate_fishes_targets(void);
 	/*fishes-target-points*/
 
-	/*fishes-to-kick-evaluate*/
+	/*fishes-to-scan/kick-evaluate*/
 	void	fishesEvaluatePossibleToKick(void);
-	/*fishes-to-kick-evaluate*/
-
-	/*fishes-to-scan-evaluate*/
 	void	fishesEvaluatePossibleToScan(void);
-	/*fishes-to-scan-evaluate*/
+	/*fishes-to-scan/kick-evaluate*/
 
 	/*drones-assignement+utils*/
 	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
@@ -125,6 +108,33 @@ struct Game
 	void	debugDronesActions(void);
 	/*debugs-functions*/
 
+	/*game-turn-clear*/
+	void	clearGamePreviousTurnData(void);
+	void	initializeAndUpdateTurnData(void);
+	void	initializeAndUpdateFishesTurnData(void);
+	/*game-turn-clear*/
+
+	/*game-reads-first-turn*/
+	void	readSetupCreatures(void);
+	void	readSetupDrones(void);
+	/*game-reads-first-turn*/
+
+	/*game-reads-each-turn*/
+	void readScores(void);
+	void readScannedCreatures( void );
+	void readDrones(void);
+	void readDronesCurrentScan( void );
+	void readVisibleCreatures( void );
+	void readRadarInfo(void);
+	/*game-reads-each-turn*/
+
 	void	solution();
+
+	/* constructer */
+	Game()
+	{
+		this->game_turn = -1;
+	}
+	/* constructer */
 };
 

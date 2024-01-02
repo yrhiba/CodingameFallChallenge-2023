@@ -14,7 +14,7 @@ int main()
 	Game game;
 
 	/* read Creatures */
-	game.readCreatures();
+	game.readSetupCreatures();
 
 	/* Game Loop */
 	while (true) 
@@ -29,7 +29,14 @@ int main()
 		game.readScannedCreatures();
 
 		/* Read My Drones and Opponnets Drones */
-		game.readDrones();
+		if (game.game_turn == 0)
+		{
+			game.readSetupDrones();
+		}
+		else
+		{
+			game.readDrones();
+		}
 
 		/* Read Drones current creatures scann */ 
 		game.readDronesCurrentScan();
@@ -40,15 +47,17 @@ int main()
 		/* Read Creatures Radar Direction */
 		game.readRadarInfo();
 
-		// simulate the next position of the visible uglys
-		// add a prediction futur pos for all the previous visible Uglys
+		// simulate the uglys
 		game.uglysSimulation();
 
-		// simulate the visible fishes
+		// simulate the fishes
 		game.fishesSimulation();
 
 		// start of new Turn
+
+		#if DEBUG
 		cerr << "Game-Turn: " << game.game_turn << endl << endl;
+		#endif
 
 		// evaluate the current score Table
 		game.scores_evaluate(); // ||| still do nothing for the moment.
