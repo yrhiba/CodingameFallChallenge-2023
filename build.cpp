@@ -102,11 +102,10 @@ vector<string> files =
 		/*Drone-Avoidness*/
 		"src/2_drone-module/dronesAvoidnes.cpp",
 		/*Drone-Avoidness*/
+		/*Drone-LightEvaluate*/
+		"src/2_drone-module/droneLighEvaluateState.cpp",
+		/*Drone-LightEvaluate*/
 	/*Drone-Module*/
-
-	/*Drone-Work-Files*/
-	"src/drone-work/drone_light_evaluate.cpp",
-	/*Drone-Work-Files*/
 
 	/*solution|main|files*/
 	"src/solutions/solution.cpp",
