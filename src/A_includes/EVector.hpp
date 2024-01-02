@@ -1,5 +1,5 @@
 #pragma once
-# include "../header.hpp"
+# include "header.hpp"
 
 /*start*/
 
@@ -47,4 +47,4 @@ EVector	pointProjection(EVector point, EVector lineStartPoint, EVector lineEndPo
 double	distanceBetweenPointAndLine(EVector point, EVector lineStartPoint, EVector lineEndPoint);
 pair<EVector, EVector>	calcTheIntersctionReactangle(vector<pair<EVector, EVector>> &rectangles);
 double	mapValue(double value, double fromLow, double fromHigh, double toLow, double toHigh);
-
+EVector	rotateVector(EVector vect, double angle);

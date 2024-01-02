@@ -223,3 +223,15 @@ double mapValue(double value, double fromLow, double fromHigh, double toLow, dou
 
 	return toLow + (scaledValue * toRange);
 }
+
+EVector	rotateVector(EVector vect, double angle)
+{
+	double x = vect.x;
+	double y = vect.y;
+
+	// Calculate rotated coordinates
+	double xRotated = x * cos(angle) - y * sin(angle);
+	double yRotated = x * sin(angle) + y * cos(angle);
+
+	return EVector(xRotated, yRotated);
+}

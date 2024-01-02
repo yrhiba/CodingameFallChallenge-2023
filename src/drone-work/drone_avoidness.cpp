@@ -1,4 +1,4 @@
-#include "../header.hpp"
+#include "header.hpp"
 
 /*start*/
 
@@ -6,12 +6,6 @@ struct Circle {
 	float m_radius;
 	float m_velocityX, m_velocityY;
 	float m_positionX, m_positionY;
-};
-
-struct CollisionResult {
-	bool isCollision;
-	float collisionTime;
-	float collisionPointX, collisionPointY;
 };
 
 bool checkCollision(const Circle& circleA, const Circle& circleB, float deltaTime)
@@ -51,18 +45,6 @@ bool checkCollision(const Circle& circleA, const Circle& circleB, float deltaTim
 	}
 
 	return false;
-}
-
-EVector	rotateVector(EVector vect, double angle)
-{
-	double x = vect.x;
-	double y = vect.y;
-
-	// Calculate rotated coordinates
-	double xRotated = x * cos(angle) - y * sin(angle);
-	double yRotated = x * sin(angle) + y * cos(angle);
-
-	return EVector(xRotated, yRotated);
 }
 
 bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly)
