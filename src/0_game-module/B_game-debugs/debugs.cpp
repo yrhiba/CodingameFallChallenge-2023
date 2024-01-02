@@ -1,4 +1,4 @@
-#include "../header.hpp"
+#include "header.hpp"
 
 /*start*/
 
@@ -9,10 +9,15 @@ void Game::debugVisibleSimulatedUglys(void)
 	for (int i : this->typeFishes[-1])
 	{
 		Fish &ugly = this->getFishById(i);
-		if (!ugly.isVisible) continue;
+		if (ugly.visibleAtTurn == -1) continue;
 		if (!isAtLeastOne) cerr << endl;
 		isAtLeastOne = true;
-		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << endl;
+		cerr << ugly.id << " " << ugly.pos << " " << ugly.velocty << " ";
+		if (ugly.visibleAtTurn == this->game_turn)
+			cerr << " 100%";
+		else
+			cerr << " 95%";
+		cerr << endl;
 	}
 	if (!isAtLeastOne)
 		cerr << " No-Information-Availlable";
@@ -39,13 +44,13 @@ void Game::debugFishsVisibleSimulated(void)
 			}
 			else
 			{
-				if (fish.isVisible)
+				if (fish.visibleAtTurn != -1)
 				{
 					cerr << "Pos" << fish.pos << ", Vel" << fish.velocty;
 				}
 				else
 				{
-					cerr << "Estimated-Pos: " << fish.targetPointToScan;
+					cerr << "Estimated-Pos: " << fish.estimationPosition;
 				}
 
 				cerr << ", AvaillableToScan: " << (fish.availlableToscan?"yes":"no") << endl;
@@ -107,18 +112,13 @@ void	Game::debugFishesPossibleToScan(void)
 	cerr << endl << endl;
 }
 
-
-// output the sved fishes + the current score | me and opponets
-void Game::debugSavedScore(void)
+void	Game::debugDronesActions(void)
 {
-}
-
-// output the currently fishes scanned by the drones but not saved Yet
-void Game::debugUnsavedScore(void)
-{
-}
-
-// output Resume of the score
-void Game::debugScoring(void)
-{
+	cerr << "Drones-Turn-Result:" << endl;
+	for (auto &droneId : this->myDrones)
+	{
+		Drone &curDrone = this->getDroneById(droneId);
+		curDrone.action.debug(curDrone.id);
+	}
+	cerr << endl;
 }

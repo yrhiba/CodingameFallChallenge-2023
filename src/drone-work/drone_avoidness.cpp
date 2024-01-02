@@ -115,7 +115,7 @@ bool	Game::goodDroneVelocty(Drone &drone)
 	{
 		Fish &ugly = this->getFishById(uglyId);
 
-		if (!ugly.isVisible) continue;
+		if (ugly.visibleAtTurn == -1) continue;
 
 		if (isCoillisionBetwDroneUgly(drone, ugly))
 		{

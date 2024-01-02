@@ -180,3 +180,46 @@ double distanceBetweenPointAndLine(EVector point, EVector lineStartPoint, EVecto
 	return (calcDistance(pointProjection(point, lineStartPoint, lineEndPoint), point));
 }
 
+pair<EVector, EVector> calcTheIntersctionReactangle(vector<pair<EVector, EVector>> &rectangles)
+{
+	if (rectangles.empty())
+	{
+		cerr << "No-information-for-that-fish." << endl;
+		return {EVector(0, 0), EVector(9999, 9999)};
+	}
+
+	double maxLeft = rectangles[0].first.x;
+	double maxTop = rectangles[0].first.y;
+	double minRight = rectangles[0].second.x;
+	double minBottom = rectangles[0].second.y;
+
+	// Iterate through the rectangles to find the intersection
+	for (const auto &rect : rectangles)
+	{
+		maxLeft = max(maxLeft, rect.first.x);
+		maxTop = max(maxTop, rect.first.y);
+		minRight = min(minRight, rect.second.x);
+		minBottom = min(minBottom, rect.second.y);
+	}
+
+	// Check if there is a valid intersection
+	if (maxLeft < minRight && maxTop < minBottom)
+	{
+		// Return the intersection rectangle
+		return {EVector(maxLeft, maxTop), EVector(minRight, minBottom)};
+	}
+	else
+	{
+		cerr << "there-is-something-wrong-with-radar." << endl;
+		return {EVector(0, 0), EVector(9999, 9999)};
+	}
+}
+
+double mapValue(double value, double fromLow, double fromHigh, double toLow, double toHigh)
+{
+	double fromRange = fromHigh - fromLow;
+	double toRange = toHigh - toLow;
+	double scaledValue = (value - fromLow) / fromRange;
+
+	return toLow + (scaledValue * toRange);
+}

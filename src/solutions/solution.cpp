@@ -1,18 +1,19 @@
-#include "../header.hpp"
-#include "../includes/Drone.hpp"
-#include "../includes/Fish.hpp"
-#include "../includes/Game.hpp"
-#include "../includes/Actions.hpp"
+#include "header.hpp"
+#include "Drone.hpp"
+#include "Fish.hpp"
+#include "Game.hpp"
+#include "Actions.hpp"
 
 /*start*/
 
 void Game::solution()
 {
-	// Debugs Info
+	#if DEBUG
 	this->debugFishsVisibleSimulated();
 	this->debugVisibleSimulatedUglys();
 	this->debugFishesPossibleToScan();
 	this->debugFishesPossibleToKick();
+	#endif
 
 	// Assign fishes to drones for scan & kick
 	this->dronesAssingFishesToScan();
@@ -31,7 +32,7 @@ void Game::solution()
 		}
 		else
 		{
-			// update velocty
+			// update mission and velocty
 			this->droneUpdateVel(curDrone);
 			// avoid uglys
 			this->dronesAvoidnes(curDrone);
@@ -48,13 +49,9 @@ void Game::solution()
 		}
 	}
 
-	// For Drones debug descions.
-	cerr << "Drones-Turn-Result:" << endl;
-	for (auto &droneId : this->myDrones)
-	{
-		Drone &curDrone = this->getDroneById(droneId);
-		curDrone.action.debug(curDrone.id);
-	}
+	#if DEBUG
+	this->debugDronesActions();
+	#endif
 }
 
 /*

@@ -15,14 +15,14 @@ void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 	EVector	targetPos;
 	double	range;
 
-	if (targetFishToKick.isVisible)
+	if (targetFishToKick.visibleAtTurn != -1)
 	{
 		targetPos = targetFishToKick.pos;
 		range = 1390;
 	}
 	else
 	{
-		targetPos = targetFishToKick.targetPointToScan;
+		targetPos = targetFishToKick.estimationPosition;
 		range = 600;
 	}
 
@@ -80,7 +80,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 			{
 				Fish	&fish = this->getFishById(fishId);
 				if (!fish.availableToKick) continue;
-				double	curDistance = calcDistance((fish.isVisible ? fish.pos : fish.targetPointToScan), drone.pos);
+				double	curDistance = calcDistance(((fish.visibleAtTurn != -1) ? fish.pos : fish.estimationPosition), drone.pos);
 				if (((fishResId == -1) || (curDistance < fishResDis)))
 				{
 					fishResId = fish.id;
@@ -107,7 +107,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 			{
 				Drone &drone = this->getDroneById(droneId);
 				if (drone.assignedFishToKick || drone.emergency) continue;
-				double	curDistance = calcDistance((fish.isVisible ? fish.pos : fish.targetPointToScan), drone.pos);
+				double	curDistance = calcDistance(((fish.visibleAtTurn != -1) ? fish.pos : fish.estimationPosition), drone.pos);
 				if ((droneResId == -1) || (curDistance < droneResDis))
 				{
 					droneResId = drone.id;

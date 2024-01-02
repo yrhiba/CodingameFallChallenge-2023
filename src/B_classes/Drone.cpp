@@ -1,30 +1,19 @@
 #include "../header.hpp"
-#include "../includes/Drone.hpp"
+#include "../A_includes/Drone.hpp"
 
 /*start*/
 
-Drone::Drone()
+void	Drone::snaptoDroneZone(void)
 {
-	/*init-data*/
+	if (this->pos.x < 0)
+		this->pos.x = 0;
+	if (this->pos.y < 0)
+		this->pos.y = 0;
 
-	/*data-related-to-update-drone*/
-	this->mission = 0;
-	this->TargetPos = EVector(0, 0);
-	this->assignedFishToScan = false;
-	this->TargetFishToScan = -1;
-	this->assignedFishToKick = false;
-	this->TargetFishToKick = -1;
-	this->mustGoToTop = false;
-	/*data-related-to-update-drone*/
-
-	this->emergency = 0;
-	this->light = 0;
-	this->velocty = EVector(0, 0);
-	this->acceleration = EVector(0, 0);
-	this->maxSpeed = 600;
-	this->maxForce = 1e9;
-	this->wanderTheta = ((M_PI * -1) / 2);
-	this->isLightOn = false;
+	if (this->pos.x > 9999)
+		this->pos.x = 9999;
+	if (this->pos.y > 9999)
+		this->pos.y = 9999;
 }
 
 void	Drone::applyForce(EVector force)
@@ -51,29 +40,15 @@ void	Drone::edges(void)
 	}
 }
 
-void	Drone::snaptoDroneZone(void)
-{
-	if (this->pos.x < 0)
-		this->pos.x = 0;
-	if (this->pos.y < 0)
-		this->pos.y = 0;
-
-	if (this->pos.x > 9999)
-		this->pos.x = 9999;
-	if (this->pos.y > 9999)
-		this->pos.y = 9999;
-}
-
 void	Drone::updatePos(void)
 {
 	this->acceleration.roundme();
+	this->acceleration.limit(this->maxForce);
 	this->velocty += this->acceleration;
-	this->velocty.setMag(this->maxSpeed);
+	this->velocty.limit(this->maxSpeed);
 	this->velocty.roundme();
 	this->pos += this->velocty;
 	this->snaptoDroneZone();
-	this->velocty *= 0;
-	this->acceleration *= 0;
 }
 
 EVector Drone::seekToPosForce(EVector target)
@@ -211,7 +186,6 @@ EVector Drone::followSingleLinePathForce(void)
 
 	return this->seekToPosForce(target);
 }
-
 
 /* Drone Comparison Operators OverLoads */
 bool Drone::operator<(const Drone &other) const

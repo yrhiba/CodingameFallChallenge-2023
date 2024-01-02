@@ -19,57 +19,92 @@ using namespace std;
 
 vector<string> files =
 {
+	/*header file*/
 	"src/header.hpp",
 
-	"src/includes/EVector.hpp",
+	/*includes files*/
+	"src/A_includes/EVector.hpp",
+	"src/A_includes/SingleLinePath.hpp",
+	"src/A_includes/Fish.hpp",
+	"src/A_includes/Actions.hpp",
+	"src/A_includes/Drone.hpp",
+	"src/A_includes/Game.hpp",
+	/*includes files*/
 
-	"src/includes/SingleLinePath.hpp",
+	/*Evector-Implm*/
+	"src/B_classes/EVector.cpp",
+	/*SingleLine-Impl*/
+	"src/B_classes/SingleLinePath.cpp",
 
-	"src/includes/Fish.hpp",
+	/*Drone|Fish|Game|standart-Impl-File*/
+	"src/B_classes/Drone.cpp",
+	"src/B_classes/Fish.cpp",
+	"src/B_classes/Actions.cpp",
+	/*Drone|Fish|Game|standart-Impl-File*/
 
-	"src/includes/Actions.hpp",
+	/*Game-Module-Files*/
+		/*game-setup*/
+		"src/0_game-module/0_game-setup/readSetupCreatures.cpp",
+		"src/0_game-module/0_game-setup/readSetupDrones.cpp",
+		/*game-setup*/
 
-	"src/includes/Drone.hpp",
+		/*game-turn-init*/
+		"src/0_game-module/1_game-init-turn/initTurn.cpp",
+		/*game-turn-init*/
 
-	"src/includes/Game.hpp",
+		/*game-read-input*/
+		"src/0_game-module/2_game-readinput/readTurnData.cpp",
+		/*game-read-input*/
 
-	"src/classes/SingleLinePath.cpp",
+		/*game-updates-fishes-drone*/
+		"src/0_game-module/3_game-updatefishesdrones/setFishesFlagsAndUpdates.cpp",
+		"src/0_game-module/3_game-updatefishesdrones/setDronesFlagsAndUpdates.cpp",
+		/*game-updates-fishes-drone*/
 
-	"src/classes/Drone.cpp",
+		/*game-simulation*/
+		"src/0_game-module/4_game-simulation/fishesSimulation.cpp",
+		"src/0_game-module/4_game-simulation/uglysSimulation.cpp",
 
-	"src/classes/EVector.cpp",
+		/*game-utils-files*/
+		"src/0_game-module/A_game-utils/game_geters.cpp",
+		/*game-utils-files*/
 
-	"src/classes/Fish.cpp",
+		/*game-debugs-file*/
+		"src/0_game-module/B_game-debugs/debugs.cpp",
+		/*game-debugs-file*/
+	/*Game-Module-Files*/
 
-	"src/classes/Game.cpp",
+	/*Fish-Module*/
+		/*setup-Game-data*/
+		"src/1_fish-module/initializeSetupGameData.cpp",
+		/*setup-Game-data*/
+		/*setup-Turn-data*/
+		"src/1_fish-module/initializeAndSetupTurnData.cpp",
+		/*setup-Turn-data*/
+	/*Fish-Module*/
 
-	"src/game-modules/fihes_targtet_point.cpp",
+	/*Drone-Module*/
+		/*setup-Game-data*/
+		"src/2_drone-module/initializeSetupGameData.cpp",
+		/*setup-Game-data*/
+		/*setup-Turn-data*/
+		"src/2_drone-module/initializeAndSetupTurnData.cpp",
+		/*setup-Turn-data*/
+	/*Drone-Module*/
 
-	"src/game-modules/ugly_simulation.cpp",
-
-	"src/game-modules/fishes_to_kick_evaluate.cpp",
-
-	"src/game-modules/scores_evaluate.cpp",
-
-	"src/game-modules/fishes_evaluate_toscan.cpp",
-
+	/*Drone-Work-Files*/
 	"src/drone-work/drone_update.cpp",
-
 	"src/drone-work/drone_avoidness.cpp",
-
-	"src/drone-work/light_evaluate.cpp",
-
+	"src/drone-work/drone_light_evaluate.cpp",
 	"src/drone-work/drone_kick_out_fish.cpp",
-
 	"src/drone-work/drone_scan_fish.cpp",
+	/*Drone-Work-Files*/
 
-	"src/game-debugs/debugs.cpp",
 
-	"src/classes/Actions.cpp",
-
+	/*solution|main|files*/
 	"src/solutions/solution.cpp",
-
 	"src/main.cpp"
+	/*solution|main|files*/
 };
 
 

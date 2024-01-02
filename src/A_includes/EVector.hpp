@@ -45,4 +45,6 @@ double	dotProduct(EVector a, EVector b);
 EVector	vectorProjection(EVector vect, EVector path);
 EVector	pointProjection(EVector point, EVector lineStartPoint, EVector lineEndPoint);
 double	distanceBetweenPointAndLine(EVector point, EVector lineStartPoint, EVector lineEndPoint);
+pair<EVector, EVector>	calcTheIntersctionReactangle(vector<pair<EVector, EVector>> &rectangles);
+double	mapValue(double value, double fromLow, double fromHigh, double toLow, double toHigh);
 
