@@ -1,8 +1,8 @@
-#include "../header.hpp"
-#include "../includes/Drone.hpp"
-#include "../includes/Fish.hpp"
-#include "../includes/Game.hpp"
-#include "../includes/Actions.hpp"
+#include "header.hpp"
+#include "Drone.hpp"
+#include "Fish.hpp"
+#include "Game.hpp"
+#include "Actions.hpp"
 
 /*start*/
 
