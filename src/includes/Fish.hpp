@@ -11,6 +11,7 @@ struct Fish
 
 	EVector	pos; // UPDATED EACH TURN
 	EVector	velocty; // UPDATED EACH TURN
+	EVector	nextPos; // UPDATED EACH TURN
 
 	/*fish-flags*/
 	int		scaned; // UPDATED EACH TURN
