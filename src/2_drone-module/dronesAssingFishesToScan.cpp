@@ -32,14 +32,6 @@ void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
 	drone.velocty.roundme();
 }
 
-/*
-future updates:
-	-	add wait cases when the motor maybe kick the fish
-		out of the map.
-	- control light battery saver if i am way far from the fish
-		and start lighting when i am close to a target
-*/
-
 void	Game::dronesAssignFishToScanWithType(int fishesType)
 {
 	// for assignement if drones more than fishes assigne each fish to the closest drone.

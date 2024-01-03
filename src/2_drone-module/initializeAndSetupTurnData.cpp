@@ -1,5 +1,5 @@
-#include "../header.hpp"
-#include "../A_includes/Drone.hpp"
+#include "header.hpp"
+#include "A_includes/Drone.hpp"
 
 /*start*/
 
@@ -8,6 +8,7 @@ void	Drone::initializeAndSetupTurnData(void)
 	this->velocty = EVector(0, 0);
 	this->acceleration = EVector(0, 0);
 	this->scannedCreatures.clear();
+	this->light = 0;
 	this->action = Actions();
 
 	/*data-related-to-update-drone*/

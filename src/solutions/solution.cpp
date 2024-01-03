@@ -16,7 +16,7 @@ void Game::solution()
 	#endif
 
 	// Assign fishes to drones for scan & kick
-	// this->dronesAssingFishesToScan();
+	this->dronesAssingFishesToScan();
 
 	for (auto &droneId : this->myDrones)
 	{
