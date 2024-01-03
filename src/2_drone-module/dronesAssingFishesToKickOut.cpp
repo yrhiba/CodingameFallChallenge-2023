@@ -6,5 +6,13 @@
 void	Game::dronesAssingFishesToKickOut(void)
 {
 
+	for (Fish &fish : this->allFishes)
+	{
+		if (fish.type == -1) continue;
+		if (fish.dead) continue;
+		if (!fish.availableToKick) continue;
+
+
+	}
 }
 

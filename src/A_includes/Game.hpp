@@ -42,10 +42,12 @@ struct Game
 	Fish		&getFishById(int fishId);
 	Drone		&getDroneById(int droneId);
 	int			getClosestUgly(EVector pos);
-	vector<int>	getClosestUglysIdFrom(Fish &ugly);
 	int			getClosestVisibleFishNotScannedYet(EVector pos);
 	int			getClosestDroneIdFromPos(EVector pos);
+	vector<int>	getClosestUglysIdFrom(Fish &ugly);
 	vector<int>	getDronesTargetForUgly(Fish &ugly);
+	vector<int>	getClosestDronesForFish(Fish &fish);
+	vector<int>	getClosestFishesFromFish(Fish &givenFish);
 	/*game-geters*/
 
 	/*drones-assignement+utils*/
@@ -57,7 +59,6 @@ struct Game
 	/*drones-assignement+utils*/
 
 	/*uglys-simulation*/
-	void		updateUglySpeed(Fish &ugly);
 	void		snapUglyToZone(EVector &uglyPos);
 	void		uglysSimulation(void);
 	/*uglys-simulation*/
