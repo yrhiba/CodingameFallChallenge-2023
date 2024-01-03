@@ -33,13 +33,6 @@ void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 	drone.velocty.roundme();
 }
 
-/*
-futur updates:
--	add fish simulation when it is in my range
-	for more optimazation and speed to kick it out
-	of the map and for best usage of the light.
-*/
-
 // this function is just for learn and debug purpos it not take part with the final strategie
 void	Game::dronesAssingFishesToKickOut(void)
 {
