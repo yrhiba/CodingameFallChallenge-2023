@@ -8,7 +8,12 @@ void Game::setFishesFlagsAndUpdates(void)
 	{
 		if (fish.type == -1) continue;
 
-		if (fish.dead) continue;
+		if (fish.dead || fish.deadNextTurn)
+		{
+			fish.availableToKick = false;
+			fish.availlableToscan = false;
+			continue;
+		}
 
 		fish.setAvaillabilty();
 		fish.extimatePossiblePosition();
@@ -19,7 +24,7 @@ void Game::setFishesFlagsAndUpdates(void)
 			this->fishsPossibleToScanType[fish.type].insert(fish.id);
 		}
 
-		if (fish.availableToKick)
+		if ((fish.visibleAtTurn != -1) && fish.availableToKick)
 		{
 			this->fishsPossibleToKick.insert(fish.id);
 			this->fishsPossibleToKickType[fish.type].insert(fish.id);

@@ -8,6 +8,8 @@
 
 void Game::solution()
 {
+	cerr << "Game-Turn: " << this->game_turn << endl;
+
 	#if DEBUG
 	this->debugFishsVisibleSimulated();
 	this->debugVisibleSimulatedUglys();
@@ -16,6 +18,7 @@ void Game::solution()
 	#endif
 
 	// Assign fishes to drones for scan & kick
+	this->dronesAssingFishesToKickOut();
 	this->dronesAssingFishesToScan();
 
 	for (auto &droneId : this->myDrones)
@@ -39,6 +42,9 @@ void Game::solution()
 			this->dronesAvoidnes(curDrone);
 			// light desion on/off based on target fishes to scan and invisible uglys estimation distance + battery state.
 			this->droneLighEvaluateState(curDrone);
+			// debug movement
+			cerr << "Drone: " << curDrone.id << ", Pos" << curDrone.pos;
+			cerr << ", Vel" << curDrone.velocty << " Speed:" << curDrone.velocty.magnitude() << endl;
 			// update position
 			curDrone.updatePos();
 			// output the reult action

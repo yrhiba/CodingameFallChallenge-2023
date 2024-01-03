@@ -16,7 +16,7 @@ void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
 
 	if (targetFishToScan.visibleAtTurn != -1)
 	{
-		targetPos = targetFishToScan.pos;
+		targetPos = targetFishToScan.pos + targetFishToScan.velocty;
 	}
 	else
 	{
@@ -28,7 +28,7 @@ void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
 	targetPos.roundme();
 
 	drone.velocty = targetPos - drone.pos;
-	drone.velocty.setMag(drone.maxSpeed);
+	drone.velocty.limit(drone.maxSpeed);
 	drone.velocty.roundme();
 }
 
@@ -47,7 +47,7 @@ void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 
 	if (targetFishToKick.visibleAtTurn != -1)
 	{
-		targetPos = targetFishToKick.pos;
+		targetPos = targetFishToKick.pos + targetFishToKick.velocty;
 		range = 1390;
 	}
 	else
@@ -59,7 +59,7 @@ void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 	targetPos.x += (range * ((targetPos.x < 5e3) ? 1 : -1));
 
 	drone.velocty = targetPos - drone.pos;
-	drone.velocty.setMag(drone.maxSpeed);
+	drone.velocty.limit(drone.maxSpeed);
 	drone.velocty.roundme();
 }
 
