@@ -48,12 +48,12 @@ void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 	if (targetFishToKick.visibleAtTurn != -1)
 	{
 		targetPos = targetFishToKick.pos + targetFishToKick.velocty;
-		range = 1390;
+		range = 800;
 	}
 	else
 	{
 		targetPos = targetFishToKick.estimationPosition;
-		range = 600;
+		range = 10;
 	}
 
 	targetPos.x += (range * ((targetPos.x < 5e3) ? 1 : -1));
