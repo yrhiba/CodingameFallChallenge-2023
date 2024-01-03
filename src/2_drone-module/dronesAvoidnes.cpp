@@ -129,16 +129,12 @@ bool	Game::goodDroneVelocty(Drone &drone)
 void	Game::dronesAvoidnes(Drone &drone)
 {
 	if (drone.emergency) return ;
-
 	double angle = 0;
 	double shift = (2 * M_PI) / 3000;
-
 	EVector	firstVel = EVector(-1, -1);
 	EVector	secondVel = EVector(-1, -1);
-
 	EVector	originVel = drone.velocty;
 	bool	wayExist = false;
-
 	while (angle < 3.15)
 	{
 		drone.velocty = rotateVector(originVel, angle);
@@ -159,9 +155,7 @@ void	Game::dronesAvoidnes(Drone &drone)
 
 		angle += shift;
 	}
-
 	angle = 0;
-
 	while (angle < 3.15)
 	{
 		drone.velocty = rotateVector(originVel, angle * -1);
@@ -182,28 +176,31 @@ void	Game::dronesAvoidnes(Drone &drone)
 
 		angle += shift;
 	}
-
 	if (!wayExist)
 	{
-		cerr << "noWay for drone: " << drone.id << endl;
-		drone.action.setMsg("No-Way-To-Avoid");
-		// go to top to win some time.
-		drone.velocty = EVector(0, -600);
-		drone.velocty.setMag(drone.maxSpeed);
-		drone.velocty.roundme();
+		if (abs(drone.velocty.magnitude() - 600) > 0.5)
+		{
+			if (drone.velocty.isZero()) drone.velocty = EVector((rand()%10)+1, (rand()%10)+1);
+			drone.velocty.setMag(drone.maxSpeed);
+			drone.velocty.roundme();
+			this->dronesAvoidnes(drone);
+		}
+		else
+		{
+			drone.action.setMsg("No-Way-To-Avoid");
+			// go to top to win some time.
+			drone.velocty = EVector(0, -600);
+			drone.velocty.setMag(drone.maxSpeed);
+			drone.velocty.roundme();
+		}
 	}
 	else
 	{
 		if (!(drone.action.uglyToAvoid.empty()))
 		{
 			drone.action.message += ",Avoid-Ugly-" + to_string(*(drone.action.uglyToAvoid.begin()));
-
-			if (drone.action.uglyToAvoid.size() > 1)
-			{
-				drone.action.message += "++";
-			}
+			if (drone.action.uglyToAvoid.size() > 1) drone.action.message += "++";
 		}
-
 		if (secondVel.x == -1)
 		{
 			drone.velocty = firstVel;
@@ -215,7 +212,6 @@ void	Game::dronesAvoidnes(Drone &drone)
 		else
 		{
 			EVector target = drone.pos + originVel;
-
 			if (calcDistance(target, drone.pos + firstVel)
 				<= calcDistance(target, drone.pos + secondVel))
 			{
