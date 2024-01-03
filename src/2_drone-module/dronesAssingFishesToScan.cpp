@@ -2,36 +2,6 @@
 
 /*start*/
 
-void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
-{
-	if (!(drone.assignedFishToScan) || drone.emergency)
-	{
-		cerr << "droneId: " << drone.id << " Not assigned to scan any fish." << endl;
-		return ;
-	}
-
-	Fish &targetFishToScan = this->getFishById(drone.TargetFishToScan);
-
-	EVector	targetPos;
-
-	if (targetFishToScan.visibleAtTurn != -1)
-	{
-		targetPos = targetFishToScan.pos;
-	}
-	else
-	{
-		targetPos = targetFishToScan.estimationPosition;
-	}
-
-	targetPos.y += (700 * ((drone.pos.y <= targetPos.y) ? -1 : +0.5));
-
-	targetPos.roundme();
-
-	drone.velocty = targetPos - drone.pos;
-	drone.velocty.setMag(drone.maxSpeed);
-	drone.velocty.roundme();
-}
-
 void	Game::dronesAssignFishToScanWithType(int fishesType)
 {
 	// for assignement if drones more than fishes assigne each fish to the closest drone.

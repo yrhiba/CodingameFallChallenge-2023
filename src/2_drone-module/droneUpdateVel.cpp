@@ -2,6 +2,67 @@
 
 /*start*/
 
+void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
+{
+	if (!(drone.assignedFishToScan) || drone.emergency)
+	{
+		cerr << "droneId: " << drone.id << " Not assigned to scan any fish." << endl;
+		return ;
+	}
+
+	Fish &targetFishToScan = this->getFishById(drone.TargetFishToScan);
+
+	EVector	targetPos;
+
+	if (targetFishToScan.visibleAtTurn != -1)
+	{
+		targetPos = targetFishToScan.pos;
+	}
+	else
+	{
+		targetPos = targetFishToScan.estimationPosition;
+	}
+
+	targetPos.y += (700 * ((drone.pos.y <= targetPos.y) ? -1 : +0.5));
+
+	targetPos.roundme();
+
+	drone.velocty = targetPos - drone.pos;
+	drone.velocty.setMag(drone.maxSpeed);
+	drone.velocty.roundme();
+}
+
+void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
+{
+	if (!(drone.assignedFishToKick) || drone.emergency)
+	{
+		cerr << "droneId: " << drone.id << " Not assigned to kick out any fish." << endl;
+		return ;
+	}
+
+	Fish &targetFishToKick = this->getFishById(drone.TargetFishToKick);
+
+	EVector	targetPos;
+	double	range;
+
+	if (targetFishToKick.visibleAtTurn != -1)
+	{
+		targetPos = targetFishToKick.pos;
+		range = 1390;
+	}
+	else
+	{
+		targetPos = targetFishToKick.estimationPosition;
+		range = 600;
+	}
+
+	targetPos.x += (range * ((targetPos.x < 5e3) ? 1 : -1));
+
+	drone.velocty = targetPos - drone.pos;
+	drone.velocty.setMag(drone.maxSpeed);
+	drone.velocty.roundme();
+}
+
 void Game::droneUpdateVel(Drone &drone)
 {
 	/*

@@ -2,37 +2,6 @@
 
 /*start*/
 
-void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
-{
-	if (!(drone.assignedFishToKick) || drone.emergency)
-	{
-		cerr << "droneId: " << drone.id << " Not assigned to kick out any fish." << endl;
-		return ;
-	}
-
-	Fish &targetFishToKick = this->getFishById(drone.TargetFishToKick);
-
-	EVector	targetPos;
-	double	range;
-
-	if (targetFishToKick.visibleAtTurn != -1)
-	{
-		targetPos = targetFishToKick.pos;
-		range = 1390;
-	}
-	else
-	{
-		targetPos = targetFishToKick.estimationPosition;
-		range = 600;
-	}
-
-	targetPos.x += (range * ((targetPos.x < 5e3) ? 1 : -1));
-
-	drone.velocty = targetPos - drone.pos;
-	drone.velocty.setMag(drone.maxSpeed);
-	drone.velocty.roundme();
-}
-
 // this function is just for learn and debug purpos it not take part with the final strategie
 void	Game::dronesAssingFishesToKickOut(void)
 {
