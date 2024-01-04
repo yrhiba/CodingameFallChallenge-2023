@@ -34,8 +34,6 @@ void Game::solution()
 		}
 		else
 		{
-			// updatint the target position of the drone
-			// this->droneUpdateTarget(curDrone);
 			// update mission and velocty
 			this->droneUpdateVel(curDrone);
 			// update the velocty if uglys/edges coillision detected
