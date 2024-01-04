@@ -1,8 +1,7 @@
 #include "header.hpp"
 
 /*start*/
-
-void	Game::dronesExploreFishesAndTheMap(void)
+void	Game::setDronesDefaultFishesAndPriorityzFishes(void)
 {
 	for (int droneId:this->myDrones)
 	{
@@ -38,5 +37,11 @@ void	Game::dronesExploreFishesAndTheMap(void)
 			}
 		}
 	}
+}
+
+void	Game::dronesExploreFishesAndTheMap(void)
+{
+	this->setDronesDefaultFishesAndPriorityzFishes();
+	
 }
 
