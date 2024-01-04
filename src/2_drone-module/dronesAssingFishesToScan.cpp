@@ -38,5 +38,41 @@ void	Game::dronesAssingFishesToScan(void)
 			}
 		}
 	}
+	for (int droneId:this->myDrones)
+	{
+		Drone	&drone=this->getDroneById(droneId);
+		int		fishToScan=-1;
+		if (!(drone.priorityzeFishesToScan.empty()))
+		{
+			for (int type = 2; type >= 0; type--)
+			{
+				for (int fishId:this->typeFishes[type])
+					if (drone.priorityzeFishesToScan.count(fishId))
+					{
+						fishToScan = fishId;
+						break;
+					}
+				if (fishToScan != -1) break;
+			}
+		}
+		if (fishToScan==-1 && drone.scannedCreatures.empty())
+		{
+			for (int type=2; type>=0; type--)
+			{
+				for (int fishId:this->typeFishes[type])
+					if (this->getFishById(fishId).availlableToscan
+						/*&& drone.defaultFishesToScan.count(fishId)*/)
+					{
+						fishToScan = fishId;
+						break;
+					}
+				if (fishToScan != -1) break;
+			}
+		}
+		if (fishToScan == -1) continue;
+		drone.assignedFishToScan = true;
+		drone.TargetFishToScan = fishToScan;
+		this->getFishById(fishToScan).availlableToscan=false;
+	}
 }
 
