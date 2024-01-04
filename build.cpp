@@ -91,7 +91,7 @@ vector<string> files =
 		"src/2_drone-module/initializeAndSetupTurnData.cpp",
 		/*setup-Turn-data*/
 		/*Fishes-Scan-Assignment*/
-		"src/2_drone-module/dronesAssingFishesToScan.cpp",
+		"src/2_drone-module/dronesExploreFishesAndTheMap.cpp",
 		/*Fishes-Scan-Assignment*/
 		/*Fishes-Kick-Assignment*/
 		"src/2_drone-module/dronesAssingFishesToKickOut.cpp",

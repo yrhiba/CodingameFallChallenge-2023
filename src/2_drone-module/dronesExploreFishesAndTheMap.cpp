@@ -2,7 +2,7 @@
 
 /*start*/
 
-void	Game::dronesAssingFishesToScan(void)
+void	Game::dronesExploreFishesAndTheMap(void)
 {
 	for (int droneId:this->myDrones)
 	{

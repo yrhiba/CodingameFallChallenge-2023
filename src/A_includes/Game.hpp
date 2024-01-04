@@ -54,7 +54,7 @@ struct Game
 	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
 	void	dronesAssingFishesToKickOut(void); // for testing strategie
 	void	droneUpdateVelToScanTheTargetFish(Drone &drone);
-	void	dronesAssingFishesToScan(void); // for testing strategie
+	void	dronesExploreFishesAndTheMap(void); // for testing strategie
 	/*drones-assignement+utils*/
 
 	/*uglys-simulation*/
