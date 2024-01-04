@@ -16,12 +16,12 @@
 #include <cstdlib>
 #include <fstream>
 
-#include "includes/SingleLinePath.hpp"
-#include "includes/Actions.hpp"
-#include "includes/EVector.hpp"
-#include "includes/Drone.hpp"
-#include "includes/Fish.hpp"
-#include "includes/Game.hpp"
+#include "SingleLinePath.hpp"
+#include "Actions.hpp"
+#include "EVector.hpp"
+#include "Drone.hpp"
+#include "Fish.hpp"
+#include "Game.hpp"
 
 /*start*/
 #include <iostream>
