@@ -35,7 +35,7 @@ void	Fish::setStandardFishZone(void)
 
 void	Fish::setAvaillabilty(void)
 {
-	if ((this->type == -1) || this->dead)
+	if ((this->type == -1) || this->dead || this->deadNextTurn)
 	{
 		this->availableToKick = false;
 		this->availlableToscan = false;
@@ -74,11 +74,11 @@ void	Fish::snapToZone(void)
 	maxx = this->existZones.front().second.x;
 	maxy = this->existZones.front().second.y;
 
-	if (this->pos.x < minx)
-		this->pos.x = minx;
+	// if (this->pos.x < minx)
+	// 	this->pos.x = minx;
 
-	if (this->pos.x > maxx)
-		this->pos.x = maxx;
+	// if (this->pos.x > maxx)
+	// 	this->pos.x = maxx;
 
 	if (this->pos.y < miny)
 		this->pos.y = miny;

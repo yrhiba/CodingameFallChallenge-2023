@@ -1,4 +1,4 @@
-#include "../header.hpp"
+#include "header.hpp"
 
 /*start*/
 
@@ -122,3 +122,142 @@ int	Game::getClosestUgly(EVector pos)
 	return (fishId);
 }
 
+vector<int>	Game::getClosestUglysIdFrom(Fish &ugly)
+{
+	vector<int>	uglyIds;
+	double		uglyDis = -1;
+
+	vector<int> &allUglys = this->typeFishes[-1];
+
+	for (int &curUglyId : allUglys)
+	{
+		if (curUglyId == ugly.id)	continue;
+
+		Fish &curUgly = this->getFishById(curUglyId);
+
+		double range = 600;
+		double distance = calcDistance(curUgly.pos, ugly.pos);
+
+		if (distance <= range)
+		{
+			if (uglyDis == -1)
+			{
+				uglyIds.push_back(curUgly.id);
+				uglyDis = distance;
+			}
+			else if (distance < uglyDis)
+			{
+				uglyIds = vector<int>(1, curUgly.id);
+				uglyDis = distance;
+			}
+			else if (distance == uglyDis)
+			{
+				uglyIds.push_back(curUgly.id);
+			}
+		}
+	}
+
+	return (uglyIds);
+}
+
+vector<int>		Game::getDronesTargetForUgly(Fish &ugly)
+{
+	vector<int>	droneIds;
+	int			droneDis = -1;
+
+	for (Drone &drone : this->allDrones)
+	{
+		if (drone.emergency) continue;
+
+		double range = drone.isLightOn ? 2000 : 800;
+		double distance =	(drone.pos.x - ugly.pos.x) * (drone.pos.x - ugly.pos.x) +
+							(drone.pos.y - ugly.pos.y) * (drone.pos.y - ugly.pos.y);
+
+		if (distance <= (range * range))
+		{
+			if (droneDis == -1)
+			{
+				droneIds.push_back(drone.id);
+				droneDis = distance;
+			}
+			else if (distance < droneDis)
+			{
+				droneIds = vector<int>(1, drone.id);
+				droneDis = distance;
+			}
+			else if (distance == droneDis)
+			{
+				droneIds.push_back(drone.id);
+			}
+		}
+	}
+
+	return (droneIds);
+}
+
+vector<int>	Game::getClosestDronesForFish(Fish &fish)
+{
+	vector<int>	droneIds;
+	int			droneDis = -1;
+
+	for (Drone &drone : this->allDrones)
+	{
+		if (drone.emergency) continue;
+
+		double range = 1400;
+		double distance =	(drone.pos.x - fish.pos.x) * (drone.pos.x - fish.pos.x) +
+							(drone.pos.y - fish.pos.y) * (drone.pos.y - fish.pos.y);
+
+		if (distance <= (range * range))
+		{
+			if (droneDis == -1)
+			{
+				droneIds.push_back(drone.id);
+				droneDis = distance;
+			}
+			else if (distance < droneDis)
+			{
+				droneIds = vector<int>(1, drone.id);
+				droneDis = distance;
+			}
+			else if (distance == droneDis)
+			{
+				droneIds.push_back(drone.id);
+			}
+		}
+	}
+	return (droneIds);
+}
+
+vector<int>	Game::getClosestFishesFromFish(Fish &givenFish)
+{
+	vector<int>	fishIds;
+	double		fishDis = -1;
+
+	for (Fish &curfish : this->allFishes)
+	{
+		if (curfish.id == givenFish.id)	continue;
+
+		double range = 600;
+		double distance = calcDistance(curfish.pos, givenFish.pos);
+
+		if (distance <= range)
+		{
+			if (fishDis == -1)
+			{
+				fishIds.push_back(curfish.id);
+				fishDis = distance;
+			}
+			else if (distance < fishDis)
+			{
+				fishIds = vector<int>(1, curfish.id);
+				fishDis = distance;
+			}
+			else if (distance == fishDis)
+			{
+				fishIds.push_back(curfish.id);
+			}
+		}
+	}
+	return (fishIds);
+}

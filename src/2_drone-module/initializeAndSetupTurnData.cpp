@@ -1,5 +1,5 @@
 #include "header.hpp"
-#include "A_includes/Drone.hpp"
+#include "Drone.hpp"
 
 /*start*/
 
@@ -10,6 +10,10 @@ void	Drone::initializeAndSetupTurnData(void)
 	this->scannedCreatures.clear();
 	this->light = 0;
 	this->action = Actions();
+
+	this->priorityzeFishesToScan.clear();
+	this->rightDrone = false;
+	this->leftDrone = false;
 
 	/*data-related-to-update-drone*/
 	// this->mission = 0;
