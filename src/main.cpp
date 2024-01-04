@@ -55,6 +55,11 @@ void	GameOutputTurnActions(void)
 	game.solution();
 }
 
+void GameScoringEvaluation(void)
+{
+	// Evaluate score i have vs opponent
+}
+
 int main()
 {
 	/* Initialize Random Generation */
@@ -72,6 +77,8 @@ int main()
 		GameUpdateFishesDrones();
 
 		GameSimulation();
+
+		GameScoringEvaluation();
 
 		GameOutputTurnActions();
 	}
