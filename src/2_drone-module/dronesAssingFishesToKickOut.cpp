@@ -20,7 +20,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 	{
 		Fish &fish = this->getFishById(fishID);
 		if (!(fish.availableToKick))continue;
-		double range = 1000;
+		double range = 700;
 		if (abs(fish.visibleAtTurn - this->game_turn) <= 1
 		&& (fish.pos.x <= range || (1e4 - fish.pos.x) <= range))
 			fishesNeedToKick.insert(fish.id);
@@ -37,7 +37,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 		Fish	&fish = this->getFishById(fishId);
 		int		droneToAssign = -1;
 		double	distance = -1;
-		double	range = 5000;
+		double	range = 1000;
 		for (int droneId:this->myDrones)
 		{
 			Drone &drone = this->getDroneById(droneId);
