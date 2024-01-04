@@ -79,17 +79,14 @@ void Game::droneUpdateVel(Drone &drone)
 		this->droneUpdateVelToScanTheTargetFish(drone);
 	}
 	// Go to save If Currently Sacnned fihes and don't have work to do
-	else if (drone.scannedCreatures.size() > 0)
-	{
-		// move to Top
-		drone.action.setMsg("Going-To-Save");
-		drone.velocty = EVector(0, -600);
-	}
-	// must go to top | save the scanned fishes
 	else
 	{
-		// Do Nothing
-		drone.action.setMsg("Nothing-To-Do");
-		drone.velocty = EVector(0, 0);
+		// move to Top
+		drone.action.setMsg("Going-To-Top");
+		EVector target = EVector(drone.pos.x, 499);
+		drone.velocty = target - drone.pos;
+		drone.velocty.limit(drone.maxSpeed);
+		drone.velocty.roundme();
+		if (drone.velocty.isZero())	drone.action.setMsg("Satying-Save");
 	}
 }
