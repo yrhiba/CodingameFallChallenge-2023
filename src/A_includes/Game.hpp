@@ -53,7 +53,6 @@ struct Game
 	/*drones-assignement+utils*/
 	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
 	void	dronesAssingFishesToKickOut(void); // for testing strategie
-	void	dronesAssignFishToScanWithType(int fishesType);
 	void	droneUpdateVelToScanTheTargetFish(Drone &drone);
 	void	dronesAssingFishesToScan(void); // for testing strategie
 	/*drones-assignement+utils*/
