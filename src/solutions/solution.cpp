@@ -52,9 +52,9 @@ void Game::solution()
 
 			this->dronesAvoidnes(curDrone);
 
-			if (this->game_turn > 4 && curDrone.battery >= 5 && curDrone.pos.y > 3000)
+			if (this->game_turn > 4 && curDrone.battery >= 5 && curDrone.pos.y > 2500)
 			{
-				curDrone.light = (this->game_turn % 2) ? 1 : 0;
+				curDrone.light = (this->game_turn % 3) ? 1 : 0;
 			}
 
 			cerr << "drone: " << curDrone.id << " Pos" << curDrone.pos << " Vel" << curDrone.velocty;
