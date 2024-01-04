@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../header.hpp"
+#include "header.hpp"
 
 /*start*/
 
@@ -52,7 +52,7 @@ struct Drone
 	EVector		TargetPos;
 	//#############//
 	set<int>	priorityzeFishesToScan; // calculated each turn
-	set<int>	defaultFishesToScan;//used when no fishes found.
+	set<int>	defaultFishesToScan; //used when no fishes found.
 	// TO UPDATE EACH TURN //
 	/*DRONE-MISSION*/
 
