@@ -14,6 +14,9 @@ struct Drone
 	EVector	acceleration;
 	/*UPDATED EACH TURN*/
 
+	bool	rightDrone;
+	bool	leftDrone;
+
 	int			emergency; // GIVEN EACH TURN
 	int			light; // GIVEN EACH TURN
 	int			battery; // GIVEN EACH TURN
@@ -48,6 +51,8 @@ struct Drone
 	// on the mission.
 	EVector		TargetPos;
 	//#############//
+	set<int>	priorityzeFishesToScan; // calculated each turn
+	set<int>	defaultFishesToScan;//used when no fishes found.
 	// TO UPDATE EACH TURN //
 	/*DRONE-MISSION*/
 

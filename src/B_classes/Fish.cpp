@@ -35,7 +35,7 @@ void	Fish::setStandardFishZone(void)
 
 void	Fish::setAvaillabilty(void)
 {
-	if ((this->type == -1) || this->dead)
+	if ((this->type == -1) || this->dead || this->deadNextTurn)
 	{
 		this->availableToKick = false;
 		this->availlableToscan = false;
