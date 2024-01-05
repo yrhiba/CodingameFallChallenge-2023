@@ -41,49 +41,5 @@ void	Game::setDronesDefaultFishesAndPriorityzFishes(void)
 
 void	Game::dronesExploreFishesAndTheMap(void)
 {
-	if (this->game_turn==0)
-	{
-		this->setDronesDefaultFishesAndPriorityzFishes();
-		for (int droneId:this->myDrones)
-		{
-			Drone &drone = this->getDroneById(droneId);
-			drone.needToReachTargetPos = true;
-			for (int fishId:this->typeFishes[2])
-				if (drone.defaultFishesToScan.count(fishId))
-				{
-					drone.TargetPos = this->getFishById(fishId).estimationPosition;
-					break;
-				}
-		}
-	}
-	for (int droneId:this->myDrones)
-	{
-		Drone &drone = this->getDroneById(droneId);
-		vector<int> orderedFishes;
-		for (int type=2; type>=0; type--)
-			for (int fishId:this->typeFishes[type])
-				if (drone.defaultFishesToScan.count(fishId) && this->getFishById(fishId).availlableToscan)
-					orderedFishes.push_back(fishId);
-		if (orderedFishes.empty())
-		{
-			drone.needToReachTargetPos = false;
-			drone.TargetPos = EVector(0, 0);
-			if (drone.scannedCreatures.size())
-				drone.mustGoToTop = true;
-		}
-		else if (drone.needToReachTargetPos) continue;
-		else
-		{
-			drone.assignedFishToScan = true;
-			drone.TargetFishToScan = orderedFishes.front();
-		}
-	}
+
 }
-
-
-/*
-first: assign a target position to reach
-second: if the position is reach see the avillabilty to go top
-		or tareget other fishes to scan or kick.
-
-*/
