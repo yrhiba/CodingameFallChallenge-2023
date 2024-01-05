@@ -49,6 +49,8 @@ struct Drone
 	bool		mustGoToTop;
 	// target position to calculate based
 	// on the mission.
+	bool		needToReachTargetPos;
+	bool		reachedTargetPos;
 	EVector		TargetPos;
 	//#############//
 	set<int>	priorityzeFishesToScan; // calculated each turn
