@@ -111,7 +111,7 @@ bool	Game::goodDroneVelocty(Drone &drone)
 		nextDrone.pos = drone.pos + drone.velocty;
 		nextUgly.pos = ugly.pos + ugly.velocty;
 
-		nextDrone.velocty = nextUgly.velocty = nextUgly.pos - nextDrone.pos;
+		nextDrone.velocty = nextUgly.velocty = nextDrone.pos - nextUgly.pos;
 
 		nextDrone.velocty.setMag(600);
 		nextUgly.velocty.setMag(540);
