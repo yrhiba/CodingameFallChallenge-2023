@@ -53,13 +53,6 @@ void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 
 void Game::droneUpdateVel(Drone &drone)
 {
-	/*
-		have the highest highest priority and if it true
-		that mean that's the last mission that i need to do
-		to win the game.
-		set it true after evaluated the possibilty	of winning
-		without wasting time with other missions 
-	*/
 	if (drone.mustGoToTop)
 	{
 		// move to Top
@@ -72,6 +65,14 @@ void Game::droneUpdateVel(Drone &drone)
 		drone.action.setMsg("Kick-Fish-" + to_string(drone.TargetFishToKick));
 		this->droneUpdateVelToKickOutTheTargetFish(drone);
 	}
+	else if (drone.needToReachTargetPos)
+	{
+		drone.action.setMsg("Explore-Fishes");
+		drone.velocty = drone.TargetPos - drone.pos;
+		drone.velocty.limit(drone.maxSpeed);
+		drone.velocty.roundme();
+		if (drone.velocty.isZero()) drone.action.message += "Bad-Move";
+	}
 	// must go to scan a fish : Second Priority
 	else if (drone.assignedFishToScan)
 	{
@@ -83,7 +84,7 @@ void Game::droneUpdateVel(Drone &drone)
 	{
 		// move to Top
 		drone.action.setMsg("Going-To-Top");
-		EVector target = EVector(drone.pos.x, 499);
+		EVector target = EVector(drone.pos.x, 500);
 		drone.velocty = target - drone.pos;
 		drone.velocty.limit(drone.maxSpeed);
 		drone.velocty.roundme();

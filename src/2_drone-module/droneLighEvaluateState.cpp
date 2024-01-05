@@ -33,19 +33,24 @@ void	Game::droneLighEvaluateState(Drone &drone)
 	// 	drone.light = false;
 	// 	return ;
 	// }
-	// else
-	if ((drone.battery < 5) || (this->game_turn < 5))
+
+	if ((drone.battery < 5) || (this->game_turn < 5) || (drone.mustGoToTop) || (drone.emergency) || (drone.assignedFishToKick))
 	{
 		drone.light = false;
 		return ;
 	}
 
-	if ((drone.velocty.y > 0) && (drone.pos.y + drone.velocty.y) > 7900)
+	int	r = 3;
+
+	if (drone.needToReachTargetPos && calcDistance(drone.pos+drone.velocty, drone.TargetPos) < 1500)
 	{
-		drone.light = true;
+		r = 2;
 	}
-	else if (this->game_turn > 4 && drone.pos.y > 2500)
+	else if ((drone.assignedFishToScan)
+		&& (calcDistance(drone.pos+drone.velocty, this->getFishById(drone.TargetFishToScan).estimationPosition) < 2000))
 	{
-		drone.light = (this->game_turn%3==0);
+		r = 2;
 	}
+
+	drone.light = (this->game_turn%r==0);
 }

@@ -30,11 +30,15 @@ void	Game::setDronesFlagsAndUpdates(void)
 		}
 		if (drone.needToReachTargetPos && !(drone.reachedTargetPos))
 		{
-			if (calcDistance(drone.pos,drone.TargetPos) < 100)
+			if (calcDistance(drone.pos,drone.TargetPos) < 800)
 			{
 				drone.reachedTargetPos = true;
 				drone.needToReachTargetPos = false;
 			}
+		}
+		if (drone.mustGoToTop)
+		{
+			if (drone.pos.y <= 500) drone.mustGoToTop = false;
 		}
 	}
 }
