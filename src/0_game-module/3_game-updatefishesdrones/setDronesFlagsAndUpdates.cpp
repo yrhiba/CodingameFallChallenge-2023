@@ -28,5 +28,13 @@ void	Game::setDronesFlagsAndUpdates(void)
 			drone.assignedFishToKick = false;
 			drone.TargetFishToKick = -1;
 		}
+		if (drone.needToReachTargetPos && !(drone.reachedTargetPos))
+		{
+			if (calcDistance(drone.pos,drone.TargetPos) < 100)
+			{
+				drone.reachedTargetPos = true;
+				drone.needToReachTargetPos = false;
+			}
+		}
 	}
 }
