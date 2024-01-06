@@ -68,9 +68,9 @@ struct Game
 	/*fishes-simulatio*/
 
 	/*drone-avoidness*/
-	bool	isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly);
-	bool	goodDroneVelocty(Drone &drone);
-	void	dronesAvoidnes(Drone &drone);
+	bool	isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly, double range);
+	bool	goodDroneVelocty(Drone &drone, double range);
+	bool	dronesAvoidnes(Drone &drone, double range);
 	/*drone-avoidness*/
 
 	/*drone-work*/

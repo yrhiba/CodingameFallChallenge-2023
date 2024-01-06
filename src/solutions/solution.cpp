@@ -37,7 +37,17 @@ void Game::solution()
 			// update mission and velocty
 			this->droneUpdateVel(curDrone);
 			// update the velocty if uglys/edges coillision detected
-			this->dronesAvoidnes(curDrone);
+			bool wayExist = false;
+			for (double range = 500; range <= 550; range+=10)
+				if (this->dronesAvoidnes(curDrone, range))
+				{
+					wayExist = true;
+					break;
+				}
+			if (wayExist)
+				curDrone.action.message += ", Avoid-Ola";
+			else
+				curDrone.action.setMsg("No-Way-To-Avoid");
 			// light desion on/off based on target fishes to scan and invisible uglys estimation distance + battery state.
 			this->droneLighEvaluateState(curDrone);
 			// update position
