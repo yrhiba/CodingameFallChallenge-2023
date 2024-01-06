@@ -37,7 +37,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 		Fish	&fish = this->getFishById(fishId);
 		int		droneToAssign = -1;
 		double	distance = -1;
-		double	range = 1000;
+		double	range = 2000;
 		for (int droneId:this->myDrones)
 		{
 			Drone &drone = this->getDroneById(droneId);
