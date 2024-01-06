@@ -11,8 +11,8 @@ void Game::solution()
 	cerr << "Game-Turn: " << this->game_turn << endl;
 
 	#if DEBUG
-	this->debugFishsVisibleSimulated();
 	this->debugVisibleSimulatedUglys();
+	this->debugFishsVisibleSimulated();
 	this->debugFishesPossibleToScan();
 	this->debugFishesPossibleToKick();
 	#endif
