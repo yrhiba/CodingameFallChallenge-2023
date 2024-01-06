@@ -39,7 +39,7 @@ void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 	if (targetFishToKick.visibleAtTurn != -1)
 	{
 		targetPos = targetFishToKick.pos + targetFishToKick.velocty;
-		range = 800;
+		range = 1100;
 	}
 	else
 	{
@@ -53,17 +53,17 @@ void	Game::droneUpdateVelToKickOutTheTargetFish(Drone &drone)
 
 void Game::droneUpdateVel(Drone &drone)
 {
-	if (drone.mustGoToTop)
+	// must go to kick a fish out of the map : Highest Priority
+	if (drone.assignedFishToKick)
+	{
+		drone.action.setMsg("Kick-Fish-" + to_string(drone.TargetFishToKick));
+		this->droneUpdateVelToKickOutTheTargetFish(drone);
+	}
+	else if (drone.mustGoToTop)
 	{
 		// move to Top
 		drone.action.setMsg("Going-To-Top");
 		drone.velocty = EVector(0, -600);
-	}
-	// must go to kick a fish out of the map : Highest Priority
-	else if (drone.assignedFishToKick)
-	{
-		drone.action.setMsg("Kick-Fish-" + to_string(drone.TargetFishToKick));
-		this->droneUpdateVelToKickOutTheTargetFish(drone);
 	}
 	else if (drone.needToReachTargetPos)
 	{
