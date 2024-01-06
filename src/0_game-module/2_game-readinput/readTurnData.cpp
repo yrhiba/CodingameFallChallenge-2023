@@ -1,4 +1,4 @@
-#include "../../includes/Game.hpp"
+#include "Game.hpp"
 
 /*start*/
 
