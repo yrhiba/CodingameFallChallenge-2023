@@ -46,7 +46,7 @@ void	Game::dronesExploreFishesAndTheMap(void)
 		for (int droneId:this->myDrones)
 		{
 			Drone &drone = this->getDroneById(droneId);
-			drone.TargetPos = EVector((drone.leftDrone?4500:5500), 8500);
+			drone.TargetPos = EVector((drone.leftDrone?1500:8500), 7900);
 			drone.needToReachTargetPos = true;
 			drone.reachedTargetPos = false;
 		}
@@ -58,12 +58,6 @@ void	Game::dronesExploreFishesAndTheMap(void)
 		for (int droneId:this->myDrones)
 		{
 			Drone &drone = this->getDroneById(droneId);
-
-			if (drone.scannedCreatures.size()>4)
-			{
-				drone.mustGoToTop = true;
-				continue;
-			}
 
 			if (drone.needToReachTargetPos) continue;
 			if (drone.assignedFishToScan) continue;
