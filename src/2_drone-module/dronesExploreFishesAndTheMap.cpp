@@ -41,62 +41,78 @@ void	Game::setDronesDefaultFishesAndPriorityzFishes(void)
 
 void	Game::dronesExploreFishesAndTheMap(void)
 {
+	this->setDronesDefaultFishesAndPriorityzFishes();
+
 	if (this->game_turn==0)
 	{
 		for (int droneId:this->myDrones)
 		{
 			Drone &drone = this->getDroneById(droneId);
-			drone.TargetPos = EVector((drone.leftDrone?1500:8500), 7900);
-			drone.needToReachTargetPos = true;
-			drone.reachedTargetPos = false;
+			for (int fishId:this->typeFishes[-1])
+				if (drone.defaultFishesToScan.count(fishId))
+				{
+					drone.assignedFishToScan = true;
+					drone.TargetFishToScan = fishId;
+					this->getFishById(fishId).availlableToscan = false;
+					break;
+				}
 		}
 	}
-	else
+
+	for (int droneId:this->myDrones)
 	{
-		this->setDronesDefaultFishesAndPriorityzFishes();
+		Drone &drone = this->getDroneById(droneId);
 
-		for (int droneId:this->myDrones)
+		int closestFish = -1;
+		double distance = -1;
+		for (int fishId : drone.priorityzeFishesToScan)
 		{
-			Drone &drone = this->getDroneById(droneId);
-
-			if (drone.needToReachTargetPos) continue;
-			if (drone.assignedFishToScan) continue;
-
-			int		fishIdToScan = -1;
-			double	distance = -1;
-
-			if (drone.priorityzeFishesToScan.size())
-				for (int type=2; type>=0; type--)
-				{
-					for (int fishId:this->typeFishes[type])
-						if (drone.priorityzeFishesToScan.count(fishId)
-							&& this->getFishById(fishId).availlableToscan)
-						{
-							fishIdToScan = fishId;
-							break;
-						}
-					if (fishIdToScan != -1) break;
-				}
-
-			if (fishIdToScan == -1)
+			Fish &fish = this->getFishById(fishId);
+			double curDis = calcDistance(drone.pos, fish.estimationPosition);
+			if ((closestFish == -1) || (curDis < distance))
 			{
-				for (Fish &fish:this->allFishes)
-				{
-					double curDis = calcDistance(drone.pos, fish.estimationPosition);
-					if ((fish.availlableToscan) && ((distance == -1) || (curDis < distance)))
-					{
-						fishIdToScan = fish.id;
-						distance = curDis;
-					}
-				}
-			}
-
-			if (fishIdToScan != -1)
-			{
-				drone.assignedFishToScan = true;
-				drone.TargetFishToScan = fishIdToScan;
-				this->getFishById(fishIdToScan).availlableToscan = false;
+				closestFish = fish.id;
+				distance = curDis;
 			}
 		}
 	}
 }
+
+// if (drone.needToReachTargetPos) continue;
+// if (drone.assignedFishToScan) continue;
+
+// int		fishIdToScan = -1;
+// double	distance = -1;
+
+// if (drone.priorityzeFishesToScan.size())
+// 	for (int type=2; type>=0; type--)
+// 	{
+// 		for (int fishId:this->typeFishes[type])
+// 			if (drone.priorityzeFishesToScan.count(fishId)
+// 				&& this->getFishById(fishId).availlableToscan)
+// 			{
+// 				fishIdToScan = fishId;
+// 				break;
+// 			}
+// 		if (fishIdToScan != -1) break;
+// 	}
+
+// if (fishIdToScan == -1)
+// {
+// 	for (Fish &fish:this->allFishes)
+// 	{
+// 		double curDis = calcDistance(drone.pos, fish.estimationPosition);
+// 		if ((fish.availlableToscan) && ((distance == -1) || (curDis < distance)))
+// 		{
+// 			fishIdToScan = fish.id;
+// 			distance = curDis;
+// 		}
+// 	}
+// }
+
+// if (fishIdToScan != -1)
+// {
+// 	drone.assignedFishToScan = true;
+// 	drone.TargetFishToScan = fishIdToScan;
+// 	this->getFishById(fishIdToScan).availlableToscan = false;
+// }

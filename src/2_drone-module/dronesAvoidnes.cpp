@@ -47,12 +47,10 @@ bool checkCollision(const Circle& circleA, const Circle& circleB, float deltaTim
 	return false;
 }
 
-bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly)
+bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly, double range = 540)
 {
 	double distance = ((drone.pos.x - ugly.pos.x) * (drone.pos.x - ugly.pos.x))
 					+ ((drone.pos.y - ugly.pos.y) * (drone.pos.y - ugly.pos.y));
-
-	double range = 540;
 
 	if (distance <= range * range)
 		return true;
@@ -89,7 +87,7 @@ bool	Game::isCoillisionBetwDroneUgly(Drone &drone, Fish &ugly)
 	return (checkCollision(a, b, 1.0));
 }
 
-bool	Game::goodDroneVelocty(Drone &drone)
+bool	Game::goodDroneVelocty(Drone &drone, double range = 540)
 {
 	vector<int> &uglysId = this->typeFishes[-1];
 
@@ -99,7 +97,7 @@ bool	Game::goodDroneVelocty(Drone &drone)
 
 		if (ugly.visibleAtTurn == -1) continue;
 
-		if (isCoillisionBetwDroneUgly(drone, ugly))
+		if (isCoillisionBetwDroneUgly(drone, ugly, range))
 		{
 			drone.action.uglyToAvoid.insert(ugly.id);
 			return (false);
@@ -119,16 +117,16 @@ bool	Game::goodDroneVelocty(Drone &drone)
 		nextDrone.velocty.roundme();
 		nextUgly.velocty.roundme();
 
-		if (isCoillisionBetwDroneUgly(nextDrone, nextUgly))
+		if (isCoillisionBetwDroneUgly(nextDrone, nextUgly, range))
 			return (false);
 	}
 
 	return (true);
 }
 
-void	Game::dronesAvoidnes(Drone &drone)
+bool	Game::dronesAvoidnes(Drone &drone, double range = 540)
 {
-	if (drone.emergency) return ;
+	if (drone.emergency) return (false);
 	double angle = 0;
 	double shift = (2 * M_PI) / 3000;
 	EVector	firstVel = EVector(-1e9, -1e9);
@@ -145,7 +143,7 @@ void	Game::dronesAvoidnes(Drone &drone)
 
 		if (nx >= 0 && nx <= 9999 && ny >= 0 && ny <= 9999)
 		{
-			if (this->goodDroneVelocty(drone))
+			if (this->goodDroneVelocty(drone, range))
 			{
 				firstVel = drone.velocty;
 				wayExist = true;
@@ -166,7 +164,7 @@ void	Game::dronesAvoidnes(Drone &drone)
 
 		if (nx >= 0 && nx <= 9999 && ny >= 0 && ny <= 9999)
 		{
-			if (this->goodDroneVelocty(drone))
+			if (this->goodDroneVelocty(drone, range))
 			{
 				secondVel = drone.velocty;
 				wayExist = true;
@@ -186,24 +184,19 @@ void	Game::dronesAvoidnes(Drone &drone)
 			}
 			drone.velocty.setMag(drone.maxSpeed);
 			drone.velocty.roundme();
-			this->dronesAvoidnes(drone);
+			return (this->dronesAvoidnes(drone, range));
 		}
 		else
 		{
-			drone.action.setMsg("No-Way-To-Avoid");
 			// go to top to win some time.
 			drone.velocty = EVector(0, -600);
 			drone.velocty.setMag(drone.maxSpeed);
 			drone.velocty.roundme();
+			return (false);
 		}
 	}
 	else
 	{
-		if (!(drone.action.uglyToAvoid.empty()))
-		{
-			drone.action.message += ",Avoid-Ugly-" + to_string(*(drone.action.uglyToAvoid.begin()));
-			if (drone.action.uglyToAvoid.size() > 1) drone.action.message += "++";
-		}
 		if (secondVel.x == -1e9)
 		{
 			drone.velocty = firstVel;
@@ -226,4 +219,5 @@ void	Game::dronesAvoidnes(Drone &drone)
 			}
 		}
 	}
+	return (true);
 }
