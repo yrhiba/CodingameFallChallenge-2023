@@ -22,6 +22,10 @@ void	Game::setDronesFlagsAndUpdates(void)
 				drone.assignedFishToScan = false;
 				drone.TargetFishToScan = -1;
 			}
+			else
+			{
+				fish.availlableToscan = false;
+			}
 		}
 		if (drone.assignedFishToKick)
 		{
@@ -30,6 +34,10 @@ void	Game::setDronesFlagsAndUpdates(void)
 			{
 				drone.assignedFishToKick = false;
 				drone.TargetFishToKick = -1;
+			}
+			else
+			{
+				fish.availableToKick = false;
 			}
 		}
 		if (drone.needToReachTargetPos && !(drone.reachedTargetPos))
