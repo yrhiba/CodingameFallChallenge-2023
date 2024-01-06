@@ -38,7 +38,7 @@ void Game::solution()
 			this->droneUpdateVel(curDrone);
 			// update the velocty if uglys/edges coillision detected
 			bool wayExist = false;
-			for (double range = 500; range <= 550; range+=10)
+			for (double range = 540; range >= 500; range-=10)
 				if (this->dronesAvoidnes(curDrone, range))
 				{
 					wayExist = true;
