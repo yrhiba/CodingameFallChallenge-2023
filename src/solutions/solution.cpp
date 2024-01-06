@@ -8,8 +8,6 @@
 
 void Game::solution()
 {
-	cerr << "Game-Turn: " << this->game_turn << endl;
-
 	#if DEBUG
 	this->debugVisibleSimulatedUglys();
 	this->debugFishsVisibleSimulated();
