@@ -111,7 +111,7 @@ bool	Game::goodDroneVelocty(Drone &drone)
 		nextDrone.pos = drone.pos + drone.velocty;
 		nextUgly.pos = ugly.pos + ugly.velocty;
 
-		nextDrone.velocty = nextUgly.velocty = nextUgly.pos - nextDrone.pos;
+		nextDrone.velocty = nextUgly.velocty = nextDrone.pos - nextUgly.pos;
 
 		nextDrone.velocty.setMag(600);
 		nextUgly.velocty.setMag(540);
@@ -131,8 +131,8 @@ void	Game::dronesAvoidnes(Drone &drone)
 	if (drone.emergency) return ;
 	double angle = 0;
 	double shift = (2 * M_PI) / 3000;
-	EVector	firstVel = EVector(-1, -1);
-	EVector	secondVel = EVector(-1, -1);
+	EVector	firstVel = EVector(-1e9, -1e9);
+	EVector	secondVel = EVector(-1e9, -1e9);
 	EVector	originVel = drone.velocty;
 	bool	wayExist = false;
 	while (angle < 3.15)
@@ -180,7 +180,10 @@ void	Game::dronesAvoidnes(Drone &drone)
 	{
 		if (abs(drone.velocty.magnitude() - 600) > 0.5)
 		{
-			if (drone.velocty.isZero()) drone.velocty = EVector((rand()%10)+1, (rand()%10)+1);
+			if (drone.velocty.isZero()) 
+			{
+				drone.velocty = EVector((rand()%10)+1, (rand()%10)+1);
+			}
 			drone.velocty.setMag(drone.maxSpeed);
 			drone.velocty.roundme();
 			this->dronesAvoidnes(drone);
@@ -201,11 +204,11 @@ void	Game::dronesAvoidnes(Drone &drone)
 			drone.action.message += ",Avoid-Ugly-" + to_string(*(drone.action.uglyToAvoid.begin()));
 			if (drone.action.uglyToAvoid.size() > 1) drone.action.message += "++";
 		}
-		if (secondVel.x == -1)
+		if (secondVel.x == -1e9)
 		{
 			drone.velocty = firstVel;
 		}
-		else if (firstVel.x == -1)
+		else if (firstVel.x == -1e9)
 		{
 			drone.velocty = secondVel;
 		}

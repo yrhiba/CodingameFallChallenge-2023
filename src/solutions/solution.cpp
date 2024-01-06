@@ -11,15 +11,15 @@ void Game::solution()
 	cerr << "Game-Turn: " << this->game_turn << endl;
 
 	#if DEBUG
-	this->debugFishsVisibleSimulated();
 	this->debugVisibleSimulatedUglys();
+	this->debugFishsVisibleSimulated();
 	this->debugFishesPossibleToScan();
 	this->debugFishesPossibleToKick();
 	#endif
 
 	// Assign fishes to drones for scan & kick
 	this->dronesAssingFishesToKickOut();
-	this->dronesAssingFishesToScan();
+	this->dronesExploreFishesAndTheMap();
 
 	for (auto &droneId : this->myDrones)
 	{
@@ -34,8 +34,6 @@ void Game::solution()
 		}
 		else
 		{
-			// updatint the target position of the drone
-			// this->droneUpdateTarget(curDrone);
 			// update mission and velocty
 			this->droneUpdateVel(curDrone);
 			// update the velocty if uglys/edges coillision detected

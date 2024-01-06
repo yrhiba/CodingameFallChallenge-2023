@@ -4,8 +4,13 @@
 
 void	Game::droneLighEvaluateState(Drone &drone)
 {
-	if (this->game_turn > 4 && drone.battery >= 5 && drone.pos.y > 3000)
+	if ((drone.battery < 5) || (this->game_turn < 3) || (drone.pos.y < 3000)
+		|| (drone.mustGoToTop) || (drone.emergency) || (drone.assignedFishToKick))
 	{
-		drone.light = (this->game_turn % 2) ? 1 : 0;
+		drone.light = false;
+		return ;
 	}
+
+
+	drone.light = (this->game_turn%2);
 }

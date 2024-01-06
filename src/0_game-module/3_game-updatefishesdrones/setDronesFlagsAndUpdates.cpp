@@ -17,16 +17,40 @@ void	Game::setDronesFlagsAndUpdates(void)
 		if (drone.assignedFishToScan)
 		{
 			Fish &fish = this->getFishById(drone.TargetFishToScan);
-			if (fish.availlableToscan) continue;
-			drone.assignedFishToScan = false;
-			drone.TargetFishToScan = -1;
+			if (!(fish.availlableToscan))
+			{
+				drone.assignedFishToScan = false;
+				drone.TargetFishToScan = -1;
+			}
+			else
+			{
+				fish.availlableToscan = false;
+			}
 		}
 		if (drone.assignedFishToKick)
 		{
 			Fish &fish = this->getFishById(drone.TargetFishToKick);
-			if (fish.availableToKick) continue;
-			drone.assignedFishToKick = false;
-			drone.TargetFishToKick = -1;
+			if (!(fish.availableToKick))
+			{
+				drone.assignedFishToKick = false;
+				drone.TargetFishToKick = -1;
+			}
+			else
+			{
+				fish.availableToKick = false;
+			}
+		}
+		if (drone.needToReachTargetPos && !(drone.reachedTargetPos))
+		{
+			if (calcDistance(drone.pos,drone.TargetPos) < 800)
+			{
+				drone.reachedTargetPos = true;
+				drone.needToReachTargetPos = false;
+			}
+		}
+		if (drone.mustGoToTop)
+		{
+			if (drone.pos.y <= 500) drone.mustGoToTop = false;
 		}
 	}
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../header.hpp"
+#include "header.hpp"
 #include "Drone.hpp";
 #include "Fish.hpp"
 
@@ -54,7 +54,8 @@ struct Game
 	void	droneUpdateVelToKickOutTheTargetFish(Drone &drone);
 	void	dronesAssingFishesToKickOut(void); // for testing strategie
 	void	droneUpdateVelToScanTheTargetFish(Drone &drone);
-	void	dronesAssingFishesToScan(void); // for testing strategie
+	void	setDronesDefaultFishesAndPriorityzFishes(void);
+	void	dronesExploreFishesAndTheMap(void); // for testing strategie
 	/*drones-assignement+utils*/
 
 	/*uglys-simulation*/
