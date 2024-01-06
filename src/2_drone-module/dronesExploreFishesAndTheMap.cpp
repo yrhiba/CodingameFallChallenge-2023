@@ -41,5 +41,68 @@ void	Game::setDronesDefaultFishesAndPriorityzFishes(void)
 
 void	Game::dronesExploreFishesAndTheMap(void)
 {
+	if (this->game_turn==0)
+	{
+		for (int droneId:this->myDrones)
+		{
+			Drone &drone = this->getDroneById(droneId);
+			drone.TargetPos = EVector((drone.leftDrone?4500:5500), 8500);
+			drone.needToReachTargetPos = true;
+			drone.reachedTargetPos = false;
+		}
+	}
+	else
+	{
+		this->setDronesDefaultFishesAndPriorityzFishes();
 
+		for (int droneId:this->myDrones)
+		{
+			Drone &drone = this->getDroneById(droneId);
+
+			if (drone.scannedCreatures.size()>4)
+			{
+				drone.mustGoToTop = true;
+				continue;
+			}
+
+			if (drone.needToReachTargetPos) continue;
+			if (drone.assignedFishToScan) continue;
+
+			int		fishIdToScan = -1;
+			double	distance = -1;
+
+			if (drone.priorityzeFishesToScan.size())
+				for (int type=2; type>=0; type--)
+				{
+					for (int fishId:this->typeFishes[type])
+						if (drone.priorityzeFishesToScan.count(fishId)
+							&& this->getFishById(fishId).availlableToscan)
+						{
+							fishIdToScan = fishId;
+							break;
+						}
+					if (fishIdToScan != -1) break;
+				}
+
+			if (fishIdToScan == -1)
+			{
+				for (Fish &fish:this->allFishes)
+				{
+					double curDis = calcDistance(drone.pos, fish.estimationPosition);
+					if ((fish.availlableToscan) && ((distance == -1) || (curDis < distance)))
+					{
+						fishIdToScan = fish.id;
+						distance = curDis;
+					}
+				}
+			}
+
+			if (fishIdToScan != -1)
+			{
+				drone.assignedFishToScan = true;
+				drone.TargetFishToScan = fishIdToScan;
+				this->getFishById(fishIdToScan).availlableToscan = false;
+			}
+		}
+	}
 }

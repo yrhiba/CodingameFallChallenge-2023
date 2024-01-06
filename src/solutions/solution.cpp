@@ -18,8 +18,8 @@ void Game::solution()
 	#endif
 
 	// Assign fishes to drones for scan & kick
-	// this->dronesAssingFishesToKickOut();
-	// this->dronesExploreFishesAndTheMap();
+	this->dronesAssingFishesToKickOut();
+	this->dronesExploreFishesAndTheMap();
 
 	for (auto &droneId : this->myDrones)
 	{

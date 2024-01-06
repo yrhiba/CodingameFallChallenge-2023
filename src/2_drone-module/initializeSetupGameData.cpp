@@ -11,6 +11,7 @@ void	Drone::initializeSetupGameData(void)
 	this->acceleration = EVector(0, 0);
 	this->TargetPos = EVector(0, 0);
 	this->reachedTargetPos = false;
+	this->needToReachTargetPos =false;
 	this->emergency = 0;
 	this->light = 0;
 	this->battery = 0;

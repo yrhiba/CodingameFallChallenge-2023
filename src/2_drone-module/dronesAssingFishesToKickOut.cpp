@@ -20,7 +20,7 @@ void	Game::dronesAssingFishesToKickOut(void)
 	{
 		Fish &fish = this->getFishById(fishID);
 		if (!(fish.availableToKick))continue;
-		double range = 700;
+		double range = 1500;
 		if (abs(fish.visibleAtTurn - this->game_turn) <= 1
 		&& (fish.pos.x <= range || (1e4 - fish.pos.x) <= range))
 			fishesNeedToKick.insert(fish.id);

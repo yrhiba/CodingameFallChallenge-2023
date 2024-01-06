@@ -19,7 +19,7 @@ void	Game::droneUpdateVelToScanTheTargetFish(Drone &drone)
 	{
 		targetPos = targetFishToScan.estimationPosition;
 	}
-	targetPos.y += (700 * ((drone.pos.y <= targetPos.y) ? -1 : +0.5));
+	// targetPos.y += (700 * ((drone.pos.y <= targetPos.y) ? -1 : +0.5));
 	targetPos.roundme();
 	drone.velocty = targetPos - drone.pos;
 	drone.velocty.limit(drone.maxSpeed);
@@ -56,7 +56,7 @@ void Game::droneUpdateVel(Drone &drone)
 	if (drone.mustGoToTop)
 	{
 		// move to Top
-		drone.action.setMsg("Going-To-Win");
+		drone.action.setMsg("Going-To-Top");
 		drone.velocty = EVector(0, -600);
 	}
 	// must go to kick a fish out of the map : Highest Priority
