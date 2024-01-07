@@ -31,3 +31,11 @@ List Of Bots Available and History:
         Description: Drones start by targeting fishes at the bottom (type:2), then scan the fishes above 
         to the top and save them. It also handles collision avoidance. Once all fishes are scanned, the 
         drones kick out the remaining fishes that opponents have not scanned yet.
+
+# Gold:
+    Branch-Name: "master"
+        Description: Drones focus on reaching a distant location, where they then systematically search for any remaining
+        unscanned fish. Additionally, the drones assess the potential to displace some fish within the mapped area.
+
+# Legend:
+    Still-Not-Availlable-Yet.(in-Working-Progress)
